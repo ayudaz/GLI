@@ -1,8 +1,7 @@
-/**
- * 
- */
-package v1;
+package v2;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,22 +9,28 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-public class ZoneDeDessin extends JPanel {
+public class Dessin extends JPanel {
 	
-	private Point debut = new Point();
-	private Point fin = new Point();
-	private Dessin d;
+	private Color maCouleur;
+	private Point position;
 	
-	public ZoneDeDessin(){
+	public Dessin() {
+		// TODO Auto-generated constructor stub
 		super();
-		this.setVisible(true);
+		maCouleur = Color.ORANGE;
+		this.setOpaque(false);
+		this.setForeground(maCouleur);
 		this.addMouseListener(new MyMouseListener());
-		this.addMouseMotionListener(new MyMouseMotionListener());
-		this.setLayout(null);
+		this.addMouseMotionListener(new MyMouseMotionListerner(this));
+		
+	}
+
+	public void paint(Graphics g){
+		super.paint(g);
+		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 	
-	
-	class MyMouseListener implements MouseListener {
+	class MyMouseListener implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -48,9 +53,7 @@ public class ZoneDeDessin extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			debut = e.getPoint();
-			d = new Dessin();
-			add(d,0);
+			position = e.getPoint();
 		}
 
 		@Override
@@ -61,22 +64,25 @@ public class ZoneDeDessin extends JPanel {
 		
 	}
 	
-	class MyMouseMotionListener implements MouseMotionListener{
+	class MyMouseMotionListerner implements MouseMotionListener{
+		private Dessin dessin;
+		
+		public MyMouseMotionListerner(Dessin dessin) {
+			// TODO Auto-generated constructor stub
+			this.dessin = dessin;
+		}
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			// TODO Auto-generated method stub
-			fin = e.getPoint();
-			d.setBounds((int)Math.min(debut.getX(), fin.getX()), (int)Math.min(debut.getY(), fin.getY()), (int)Math.abs(debut.getX()-fin.getX()), (int)Math.abs(debut.getY()-fin.getY()));
+			dessin.setLocation((int)(e.getX()-dessin.position.getX()+dessin.getX()),(int)(e.getY()-dessin.position.getY()+dessin.getY()));
 		}
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 		
 	}
+
 }
-
-

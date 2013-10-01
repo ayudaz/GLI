@@ -1,7 +1,7 @@
 /**
  * 
  */
-package v1;
+package v2;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -14,6 +14,9 @@ public class ZoneDeDessin extends JPanel {
 	
 	private Point debut = new Point();
 	private Point fin = new Point();
+	/**
+	 * Current_state of pattern State
+	 */
 	private Dessin d;
 	
 	public ZoneDeDessin(){
@@ -22,9 +25,18 @@ public class ZoneDeDessin extends JPanel {
 		this.addMouseListener(new MyMouseListener());
 		this.addMouseMotionListener(new MyMouseMotionListener());
 		this.setLayout(null);
+		d = new FilledRectangle();
 	}
 	
 	
+	/**
+	 * @param d the d to set
+	 */
+	public void setD(Dessin d) {
+		this.d = d;
+	}
+
+
 	class MyMouseListener implements MouseListener {
 
 		@Override
@@ -49,7 +61,6 @@ public class ZoneDeDessin extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			debut = e.getPoint();
-			d = new Dessin();
 			add(d,0);
 		}
 
