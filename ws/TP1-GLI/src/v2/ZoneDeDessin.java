@@ -17,6 +17,7 @@ public class ZoneDeDessin extends JPanel {
 	/**
 	 * Current_state of pattern State
 	 */
+	private CreateurDessin cd;
 	private Dessin d;
 	
 	public ZoneDeDessin(){
@@ -25,15 +26,14 @@ public class ZoneDeDessin extends JPanel {
 		this.addMouseListener(new MyMouseListener());
 		this.addMouseMotionListener(new MyMouseMotionListener());
 		this.setLayout(null);
-		d = new FilledRectangle();
 	}
 	
 	
 	/**
 	 * @param d the d to set
 	 */
-	public void setD(Dessin d) {
-		this.d = d;
+	public void setCD(CreateurDessin cd) {
+		this.cd = cd;
 	}
 
 
@@ -61,6 +61,8 @@ public class ZoneDeDessin extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
 			debut = e.getPoint();
+			d = cd.creerDessin();
+			cd.setForeground(getForeground());
 			add(d,0);
 		}
 

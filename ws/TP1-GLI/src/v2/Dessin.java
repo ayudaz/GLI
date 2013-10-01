@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-public class Dessin extends JPanel {
+public abstract class Dessin extends JPanel {
 	
 	private Color maCouleur;
 	private Point position;
@@ -23,11 +23,6 @@ public class Dessin extends JPanel {
 		this.addMouseListener(new MyMouseListener());
 		this.addMouseMotionListener(new MyMouseMotionListerner(this));
 		
-	}
-
-	public void paint(Graphics g){
-		super.paint(g);
-		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 	
 	class MyMouseListener implements MouseListener{
