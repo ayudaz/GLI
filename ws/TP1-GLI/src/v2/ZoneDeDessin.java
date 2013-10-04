@@ -3,6 +3,7 @@
  */
 package v2;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -34,8 +35,13 @@ public class ZoneDeDessin extends JPanel {
 	 */
 	public void setCD(CreateurDessin cd) {
 		this.cd = cd;
+		firePropertyChange("forme", "we don't care", cd);
 	}
 
+
+	public CreateurDessin getCreateurDessin(){
+		return cd;
+	}
 
 	class MyMouseListener implements MouseListener {
 
@@ -62,7 +68,7 @@ public class ZoneDeDessin extends JPanel {
 			// TODO Auto-generated method stub
 			debut = e.getPoint();
 			d = cd.creerDessin();
-			cd.setForeground(getForeground());
+			d.setForeground(getForeground());
 			add(d,0);
 		}
 

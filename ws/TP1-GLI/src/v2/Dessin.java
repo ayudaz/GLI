@@ -11,15 +11,12 @@ import javax.swing.JPanel;
 
 public abstract class Dessin extends JPanel {
 	
-	private Color maCouleur;
 	private Point position;
 	
 	public Dessin() {
 		// TODO Auto-generated constructor stub
 		super();
-		maCouleur = Color.ORANGE;
 		this.setOpaque(false);
-		this.setForeground(maCouleur);
 		this.addMouseListener(new MyMouseListener());
 		this.addMouseMotionListener(new MyMouseMotionListerner(this));
 		
