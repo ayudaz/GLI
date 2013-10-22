@@ -1,21 +1,28 @@
 package controle;
 
 import presentation.PTasDeCartes;
+import solitaire.application.Carte;
+import solitaire.application.TasDeCartes;
 
 public class CTasDeCartes extends TasDeCartes {
 		
-		private PTasDeCartes pTasDeCartes;
+		private PTasDeCartes presentation;
 		
 		public CTasDeCartes(String nom, CUsine u){
 			super(nom, u);
-			pTasDeCartes = new PTasDeCartes(this);
+			presentation = new PTasDeCartes(this);
 		}
 		
 		public void empiler (Carte carte){
 			if(isEmpilable(carte)){
 				super.empiler(carte);
-				if(carte == getSommet()){
-					//pTasDeCartes.empiler((CCarte)carte)).getPresentation();
+				try {
+					if(carte == getSommet()){
+						//pTasDeCartes.empiler((CCarte)carte)).getPresentation();
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
@@ -23,9 +30,14 @@ public class CTasDeCartes extends TasDeCartes {
 		// /!\ DOIT LEVER UNE EXCEPTION /!\
 		//public void depiler() throws Exception{
 		public void depiler(){	
-			Carte carte = getSommet();
-			super.depiler();
-			//pTasDeCartes.depiler((CCarte)carte).getPresentation());
+			try {
+				Carte carte = getSommet();
+				super.depiler();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			presentation.depiler((CCarte)carte).getPresentation());
 		}
 		
 }

@@ -1,59 +1,69 @@
 package controle;
 
-import presentation.PSabot;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
 
-public class CSabot extends Sabot{
-		private PSabot pSabot;
-		private CCarte enTransit;
-		
-		public CSabot(String nom, CUsine u){
-			super(nom,u);
-			//p = new PSabot((CTasDeCartes)cachees).getPresentation()), ((CTasDeCartes)visibiles).getPresenation());
+import presentation.PSabot;
+import solitaire.application.Sabot;
+import solitaire.application.Tas;
+
+public class CSabot extends Sabot {
+	private PSabot presentation;
+	private CCarte enTransit;
+
+	public CSabot(String nom, CUsine u){
+		super(nom,u);
+		//p = new PSabot((CTasDeCartes)cachees).getPresentation()), ((CTasDeCartes)visibiles).getPresenation());
+	}
+
+	// ICI ?????
+	public void setReserve(Tas t){
+		super.setReserve(t);
+		if(isRetournable()){
+			presentation.activerRetournerCarte();
 		}
-		
-		// ICI ?????
-		public void setReserve(Tas t){
-			super.setReserve(t);
+		else{
+			presentation.desactiverRetournerCarte();
+
 			if(isRetournable()){
-				pSabot.activerRetournerCarte();
+				presentation.activerRetournerSabot();
 			}
 			else{
-				pSabot.desactiverRetournerCarte();
-				
-				if(isRetournable()){
-					pSabot.activerRetournerSabot();
-				}
-				else{
-					pSabot.desactiverRetournerSabot();
-				}
+				presentation.desactiverRetournerSabot();
 			}
 		}
-			
-		public void retourner(){
+	}
+
+	public void retourner(){
+		try {
 			super.retourner();
-			pSabot.desactiverRetournerSabot();
-			if(isRetournable()){
-				pSabot.activerRetournerCarte();
-			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		public void depiler(){
+		presentation.desactiverRetournerSabot();
+		if(isRetournable()){
+			presentation.activerRetournerCarte();
+		}
+	}
+
+	public void depiler(){
+		try {
 			super.depiler();
-			if(!isRetournable()){
-				pSabot.desactiverRetournerSabot();
-			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		public void empiler(CCarte cc){
-			//TODO à FAIRE !!!
+		if(!isRetournable()){
+			presentation.desactiverRetournerSabot();
 		}
-		
-		public CCarte getSommet(){
-			//TODO c'est pas bon !!!!
-			return new CCarte(0, 0);
-		}
-		
-		public void p2c_debutDnD(CCarte cc){
+	}
+
+
+	public void p2c_debutDnD(CCarte cc){
+		try {
 			if(cc == getSommet()){
 				depiler();
 				enTransit = cc;
@@ -62,12 +72,15 @@ public class CSabot extends Sabot{
 			else{
 				presentation.c2p_debutDnDKO(cc.getPresentation());
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		public void p2c_finDnD(boolean s){
-			if(!s){
-				empiler(enTransit);
-			}
+	}
+
+	public void p2c_finDnD(boolean s){
+		if(!s){
+			empiler(enTransit);
 		}
-		
+	}
 }
