@@ -30,9 +30,8 @@ public class PCarte extends JPanel implements Transferable {
    * initialiser une carte
    * @param chaine : nom de la carte (exemple "3H" = 3 Heart)
    */
-  public PCarte (final String chaine) {
-//  public PCarte (final String chaine, final CCarte controle) {
-//	this.controle = controle;
+  public PCarte (final String chaine, final CCarte controle) {
+	this.controle = controle;
 
 	// image de la face 
 	icone = new ImageIcon(ClassLoader.getSystemResource("cartes/" + chaine + ".gif"));

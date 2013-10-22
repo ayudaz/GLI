@@ -1,5 +1,10 @@
 package presentation;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controle.CCarte;
@@ -7,19 +12,24 @@ import controle.CTasDeCartes;
 
 public class PTasDeCartes extends JPanel {
 
+	private int dx;
+	private int dy;
+	private CTasDeCartes controle;
+
 	public PTasDeCartes(CTasDeCartes cTasDeCartes) {
-		// TODO Auto-generated constructor stub
-	}
+		this.controle = cTasDeCartes;		
 
-	public void empiler() {
-		// TODO Auto-generated method stub
-		
+		// le JPanel
+		setLayout (null) ;
+		setBackground (Color.yellow) ;
+		setOpaque (true);
+		Dimension d = new Dimension(PCarte.largeur, PCarte.hauteur);
+		setSize (d) ;
+		setPreferredSize(getSize());
 	}
-
 	
-	public Object empiler(CCarte carte) {
-		// TODO Auto-generated method stub
-		return null;
+	public void empiler(PCarte carte) {
+		this.add(carte);
 	}
 	
 	/*
@@ -28,7 +38,11 @@ public class PTasDeCartes extends JPanel {
 	 * - Bas pour la colonne
 	 */	
 	public void setDxDy(int dx, int dy){
-		
+		this.dx = dx;
+		this.dy = dy;
+		Dimension d = new Dimension(PCarte.largeur + controle.getNombre()* dx, PCarte.hauteur + controle.getNombre()*dy);
+		setSize (d) ;
+		repaint();
 	}
 
 }

@@ -13,6 +13,13 @@ public class CTasDeCartes extends TasDeCartes {
 			presentation = new PTasDeCartes(this);
 		}
 		
+		/**
+		 * @return the presentation
+		 */
+		public PTasDeCartes getPresentation() {
+			return presentation;
+		}
+
 		public void empiler (Carte carte){
 			if(isEmpilable(carte)){
 				super.empiler(carte);
@@ -39,5 +46,6 @@ public class CTasDeCartes extends TasDeCartes {
 			}
 //			presentation.depiler((CCarte)carte).getPresentation());
 		}
+		
 		
 }

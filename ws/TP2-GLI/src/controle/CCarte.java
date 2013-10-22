@@ -9,8 +9,8 @@ public class CCarte  extends Carte implements ICCarte {
 	public CCarte(int valeur, int couleur){
 		super(Math.min(Carte.NbCartesParCouleur, Math.max(1,valeur)), Math.min(Carte.NbCouleurs, Math.max(1,couleur)));
 		
-		//pCarte = new PCarte (this, Carte.valeurs[getValeur()-1] + Carte.couleurs[getCouleur()-1]);
-		//p.setFaceVisible(isFaceVisible());
+		presentation = new PCarte (Carte.valeurs[getValeur()-1] + Carte.couleurs[getCouleur()-1], this);
+		presentation.setFaceVisible(isFaceVisible());
 	}
 
 	/**
@@ -18,5 +18,5 @@ public class CCarte  extends Carte implements ICCarte {
 	 */
 	public PCarte getPresentation() {
 		return presentation;
-	}	
+	}
 }
