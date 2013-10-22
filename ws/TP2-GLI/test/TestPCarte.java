@@ -24,12 +24,12 @@ public class TestPCarte {
 		f.getContentPane ().setBackground(new Color(143, 143, 195)); // violet pâle
 
 		// une carte visible
-		PCarte pc = new PCarte ("QH", null);
+		PCarte pc = new PCarte ("QH");
 		pc.setFaceVisible(true);
 		f.getContentPane ().add(pc) ;
 
 		// une carte cachée
-		pc = new PCarte("1D", null);
+		pc = new PCarte("1D");
 		pc.setFaceVisible(false);
 		f.getContentPane ().add(pc) ;
 

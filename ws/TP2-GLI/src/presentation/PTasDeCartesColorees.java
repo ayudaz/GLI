@@ -1,10 +1,12 @@
 package presentation;
 
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
+import java.io.IOException;
 
 import controle.CTasDeCartes;
 import controle.CTasDeCartesColorees;
@@ -50,7 +52,15 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		@Override
 		public void dragEnter(DropTargetDragEvent e) {
 			// TODO Vérifier que pc est pas null !!!!!!!!
-			pc = (PCarte)e.getTransferable().getTransferData(...);
+			try {
+				pc = (PCarte)e.getTransferable().getTransferData(null);
+			} catch (UnsupportedFlavorException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			controle.p2c_dragEnter(pc.getControle());
 		}
 

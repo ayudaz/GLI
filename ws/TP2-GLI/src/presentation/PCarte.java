@@ -30,11 +30,12 @@ public class PCarte extends JPanel implements Transferable {
    * initialiser une carte
    * @param chaine : nom de la carte (exemple "3H" = 3 Heart)
    */
-  public PCarte (final String chaine, final CCarte controle) {
-	this.controle = controle;
+  public PCarte (final String chaine) {
+//  public PCarte (final String chaine, final CCarte controle) {
+//	this.controle = controle;
 
 	// image de la face 
-	icone = new ImageIcon(ClassLoader.getSystemResource("cartesCSHD/" + chaine + ".gif"));
+	icone = new ImageIcon(ClassLoader.getSystemResource("cartes/" + chaine + ".gif"));
 	face = new JLabel (icone) ;
 	add (face) ;
 	face.setLocation (0, 0) ;
@@ -76,7 +77,7 @@ public class PCarte extends JPanel implements Transferable {
      initialiser l'image du dos et les dimensions d'une PCarte
   */
   static {
-	iconeDos = new ImageIcon(ClassLoader.getSystemResource("cartesCSHD/dos.jpg")) ;
+	iconeDos = new ImageIcon(ClassLoader.getSystemResource("cartes/dos.jpg")) ;
 	largeur = iconeDos.getIconWidth () + 4;
 	hauteur = iconeDos.getIconHeight () + 4;
   }
