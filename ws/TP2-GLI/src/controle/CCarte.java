@@ -12,6 +12,15 @@ public class CCarte  extends Carte implements ICCarte {
 		presentation = new PCarte (Carte.valeurs[getValeur()-1] + Carte.couleurs[getCouleur()-1], this);
 		presentation.setFaceVisible(isFaceVisible());
 	}
+	
+	/**
+	   * changer la visibilité de la carte
+	   * @param faceVisible : vrai si la face est visible, faux sinon
+	   */
+	public void setFaceVisible (boolean faceVisible) {
+		super.setFaceVisible(faceVisible);
+		presentation.setFaceVisible(faceVisible);
+	}
 
 	/**
 	 * @return the presentation

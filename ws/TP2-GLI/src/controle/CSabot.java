@@ -1,5 +1,6 @@
 package controle;
 
+import java.awt.Component;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
@@ -8,17 +9,24 @@ import java.awt.dnd.DragSourceListener;
 import presentation.PSabot;
 import solitaire.application.Sabot;
 import solitaire.application.Tas;
+import solitaire.application.Usine;
 
 public class CSabot extends Sabot {
 	private PSabot presentation;
 	private CCarte enTransit;
 
-	public CSabot(String nom, CUsine u){
-		super(nom,u);
-		//p = new PSabot((CTasDeCartes)cachees).getPresentation()), ((CTasDeCartes)visibiles).getPresenation());
+	public CSabot(String nom, Usine usine){
+		super(nom,usine);
+		presentation = new PSabot(this, ((CTasDeCartes)cachees).getPresentation(), ((CTasDeCartes)visibles).getPresentation());
 	}
 
-	// ICI ?????
+	/**
+	 * @return the presentation
+	 */
+	public PSabot getPresentation() {
+		return presentation;
+	}
+
 	public void setReserve(Tas t){
 		super.setReserve(t);
 		if(isRetournable()){

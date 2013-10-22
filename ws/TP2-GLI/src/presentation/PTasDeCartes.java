@@ -3,11 +3,8 @@ package presentation;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controle.CCarte;
 import controle.CTasDeCartes;
 
 public class PTasDeCartes extends JPanel {
@@ -29,7 +26,13 @@ public class PTasDeCartes extends JPanel {
 	}
 	
 	public void empiler(PCarte carte) {
-		this.add(carte);
+		this.add(carte, 0);
+		int deplacementX = (controle.getNombre() - 1) * dx;
+		int deplacementY = (controle.getNombre() - 1) * dy;
+		if(controle.getNombre() > 1)
+			setBounds(getBounds().x, getBounds().y, getBounds().width + dx, getBounds().height + dy);
+		setPreferredSize(getSize());
+		carte.setLocation(carte.getBounds().x + deplacementX, carte.getBounds().y + deplacementY);
 	}
 	
 	/*
@@ -40,9 +43,6 @@ public class PTasDeCartes extends JPanel {
 	public void setDxDy(int dx, int dy){
 		this.dx = dx;
 		this.dy = dy;
-		Dimension d = new Dimension(PCarte.largeur + controle.getNombre()* dx, PCarte.hauteur + controle.getNombre()*dy);
-		setSize (d) ;
-		repaint();
 	}
 
 }

@@ -3,13 +3,14 @@ package controle;
 import presentation.PTasDeCartes;
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartes;
+import solitaire.application.Usine;
 
 public class CTasDeCartes extends TasDeCartes {
 		
 		private PTasDeCartes presentation;
 		
-		public CTasDeCartes(String nom, CUsine u){
-			super(nom, u);
+		public CTasDeCartes(String nom, Usine usine){
+			super(nom, usine);
 			presentation = new PTasDeCartes(this);
 		}
 		
@@ -25,10 +26,9 @@ public class CTasDeCartes extends TasDeCartes {
 				super.empiler(carte);
 				try {
 					if(carte == getSommet()){
-						//pTasDeCartes.empiler((CCarte)carte)).getPresentation();
+						presentation.empiler(((CCarte)carte).getPresentation());
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

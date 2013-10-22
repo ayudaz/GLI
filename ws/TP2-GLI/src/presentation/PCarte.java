@@ -1,17 +1,14 @@
 package presentation;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import controle.CCarte;
 
@@ -77,8 +74,8 @@ public class PCarte extends JPanel implements Transferable {
   */
   static {
 	iconeDos = new ImageIcon(ClassLoader.getSystemResource("cartes/dos.jpg")) ;
-	largeur = iconeDos.getIconWidth () + 4;
-	hauteur = iconeDos.getIconHeight () + 4;
+	largeur = iconeDos.getIconWidth () ;
+	hauteur = iconeDos.getIconHeight () ;
   }
 
 @Override

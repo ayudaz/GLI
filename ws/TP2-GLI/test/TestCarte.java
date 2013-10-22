@@ -7,9 +7,9 @@ import javax.swing.WindowConstants;
 import presentation.PCarte;
 
 
-public class TestPCarte {
+public class TestCarte {
 
-	public TestPCarte() {
+	public TestCarte() {
 		// TODO Auto-generated constructor stub
 	}
 
