@@ -1,7 +1,9 @@
 package controle;
 
 import presentation.PSolitaire;
+import solitaire.application.Colonne;
 import solitaire.application.Solitaire;
+import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 
 public class CSolitaire extends Solitaire {
@@ -15,8 +17,15 @@ public class CSolitaire extends Solitaire {
 	
 	public void initialiser(){
 		super.initialiser();
-		//this.presentation.initialiser(((CSabot)this.sabot).getPresentation(), 
-				//((CTasDeCartesAlternees)this.pilesAlternees)., this.pilesColorees);
+		
+		presentation.setSabot(((CSabot)this.sabot).getPresentation());
+		
+		for(TasDeCartesColorees tas : this.pilesColorees){
+			presentation.addPileColorees(((CTasDeCartesColorees)tas).getPresentation());
+		}
+		
+		for(Colonne col : this.pilesAlternees){
+			presentation.addColonne(((CColonne)col).getPresentation());
+		}
 	}
-
 }

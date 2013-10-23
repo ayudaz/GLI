@@ -4,16 +4,19 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
-
-import controle.CTasDeCartes;
+import controle.ICTasDeCartes;
 
 public class PTasDeCartes extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2655838145894512078L;
 	private int dx;
 	private int dy;
-	private CTasDeCartes controle;
+	private ICTasDeCartes controle;
 
-	public PTasDeCartes(CTasDeCartes cTasDeCartes) {
+	public PTasDeCartes(ICTasDeCartes cTasDeCartes) {
 		this.controle = cTasDeCartes;		
 
 		// le JPanel

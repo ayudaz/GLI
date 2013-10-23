@@ -17,7 +17,11 @@ import controle.CCarte;
 */
 public class PCarte extends JPanel implements Transferable {
 
-  protected CCarte controle ;		// contrôleur associé
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8803764380933046718L;
+protected CCarte controle ;		// contrôleur associé
   protected JLabel face, dos ;
   protected ImageIcon icone ;			// image de la face
   protected static ImageIcon iconeDos;	// image du dos

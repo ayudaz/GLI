@@ -13,6 +13,10 @@ import controle.CTasDeCartesColorees;
 
 public class PTasDeCartesColorees extends PTasDeCartes {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 487458044886830072L;
 	private DropTarget dt;
 	private DropTargetDropEvent theFinalEvent;
 	private CTasDeCartesColorees controle;
