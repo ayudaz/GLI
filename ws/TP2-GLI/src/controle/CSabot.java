@@ -1,11 +1,5 @@
 package controle;
 
-import java.awt.Component;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
-
 import presentation.PSabot;
 import solitaire.application.Sabot;
 import solitaire.application.Tas;

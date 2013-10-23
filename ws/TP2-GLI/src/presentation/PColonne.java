@@ -1,5 +1,7 @@
 package presentation;
 
-public class PColonne {
+import javax.swing.JPanel;
+
+public class PColonne extends JPanel {
 
 }

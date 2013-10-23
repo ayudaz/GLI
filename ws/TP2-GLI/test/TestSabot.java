@@ -4,7 +4,9 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import controle.CCarte;
 import controle.CSabot;
+import controle.CTasDeCartes;
 import controle.CUsine;
 
 
@@ -20,8 +22,14 @@ public class TestSabot {
 		f.setLayout(new FlowLayout()); // au lieu de BorderLayout par défaut
 		f.getContentPane ().setBackground(new Color(143, 143, 195)); // violet pâle
 
-		CSabot sabot = new CSabot("Test", new CUsine());
-		
+		CUsine usine = new CUsine();
+		CSabot sabot = new CSabot("Test", usine);
+		sabot.empiler(new CCarte(1, 1));
+		CTasDeCartes tas = new CTasDeCartes("Tas", usine);
+		tas.empiler(new CCarte(1,1));
+		tas.empiler(new CCarte(2,1));
+		sabot.setReserve(tas);
+		System.out.println(sabot.getNombre());
 		
 		f.getContentPane ().add(sabot.getPresentation()) ;
 		f.pack ();		// dimensionner le cadre

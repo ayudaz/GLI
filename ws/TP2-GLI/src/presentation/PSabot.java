@@ -17,6 +17,10 @@ import controle.CCarte;
 import controle.CSabot;
 
 public class PSabot extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1595830508186217340L;
 	private CSabot controle;
 	private PTasDeCartes cachees;
 	private PTasDeCartes visibles;
