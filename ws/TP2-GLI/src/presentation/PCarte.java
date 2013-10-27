@@ -77,7 +77,7 @@ protected CCarte controle ;		// contrôleur associé
      initialiser l'image du dos et les dimensions d'une PCarte
   */
   static {
-	iconeDos = new ImageIcon(ClassLoader.getSystemResource("cartes/dos.jpg")) ;
+	iconeDos = new ImageIcon(ClassLoader.getSystemResource("cartes/dos.gif")) ;
 	largeur = iconeDos.getIconWidth () ;
 	hauteur = iconeDos.getIconHeight () ;
   }

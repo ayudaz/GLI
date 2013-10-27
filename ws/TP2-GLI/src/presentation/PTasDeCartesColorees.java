@@ -8,8 +8,8 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
 
-import controle.CTasDeCartes;
 import controle.CTasDeCartesColorees;
+import controle.ICTasDeCartes;
 
 public class PTasDeCartesColorees extends PTasDeCartes {
 	
@@ -22,9 +22,8 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	private CTasDeCartesColorees controle;
 	private	PCarte pc;
 
-	public PTasDeCartesColorees(CTasDeCartes cTasDeCartes) {
+	public PTasDeCartesColorees(ICTasDeCartes cTasDeCartes) {
 		super(cTasDeCartes);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void c2p_finDnDOK(){

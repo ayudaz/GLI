@@ -4,13 +4,13 @@ import presentation.PTasDeCartesColorees;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 
-public class CTasDeCartesColorees extends TasDeCartesColorees {
+public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTasDeCartes {
 	
 	private PTasDeCartesColorees presentation;
 	
-	public CTasDeCartesColorees(String arg0, int arg1, Usine arg2) {
-		super(arg0, arg1, arg2);
-		// TODO Auto-generated constructor stub
+	public CTasDeCartesColorees(String nom, int couleur, Usine usine) {
+		super(nom, couleur, usine);
+		this.presentation = new PTasDeCartesColorees(this);
 	}
 
 	/**

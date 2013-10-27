@@ -15,6 +15,14 @@ public class CSolitaire extends Solitaire {
 		this.presentation = new PSolitaire(this);
 	}
 	
+	/**
+	 * @return the presentation
+	 */
+	public PSolitaire getPresentation() {
+		return presentation;
+	}
+
+	@Override
 	public void initialiser(){
 		super.initialiser();
 		

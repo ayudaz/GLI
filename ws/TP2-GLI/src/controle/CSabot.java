@@ -23,7 +23,7 @@ public class CSabot extends Sabot {
 
 	public void setReserve(Tas t){
 		super.setReserve(t);
-		if(isRetournable()){
+		if(isCarteRetournable()){
 			presentation.activerRetournerCarte();
 		}
 		else{

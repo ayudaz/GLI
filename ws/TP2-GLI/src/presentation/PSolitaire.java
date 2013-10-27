@@ -3,6 +3,8 @@
  */
 package presentation;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import controle.CSolitaire;
@@ -18,7 +20,7 @@ public class PSolitaire extends JPanel {
 	 */
 	private static final long serialVersionUID = 4769739927354638675L;
 	
-	private PSabot sabot;
+	private JPanel sabot;
 	private JPanel pilesAlternees;
 	private JPanel pilesColorees;
 	
@@ -27,16 +29,21 @@ public class PSolitaire extends JPanel {
 	public PSolitaire(CSolitaire controle){
 		this.controle = controle;
 		pilesAlternees = new JPanel();
+		pilesAlternees.setBackground(Color.CYAN);
 		pilesColorees = new JPanel();
-		this.add(pilesAlternees);
+		pilesColorees.setBackground(Color.MAGENTA);
+		sabot = new JPanel();
+		sabot.setBackground(Color.PINK);
+		this.add(sabot);
 		this.add(pilesColorees);
+		this.add(pilesAlternees);
 	}
 
 	/**
 	 * @param sabot the sabot to set
 	 */
 	public void setSabot(PSabot sabot) {
-		this.sabot = sabot;
+		this.sabot.add(sabot);
 	}
 
 	public void addColonne(PColonne pileAlternees) {

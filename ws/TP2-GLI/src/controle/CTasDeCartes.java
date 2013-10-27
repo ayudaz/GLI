@@ -35,16 +35,15 @@ public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
 		}
 		
 		// /!\ DOIT LEVER UNE EXCEPTION /!\
-		//public void depiler() throws Exception{
 		public void depiler(){	
+			Carte carte;
 			try {
-				Carte carte = getSommet();
+				carte = getSommet();
 				super.depiler();
+				presentation.depiler(((CCarte)carte).getPresentation());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			presentation.depiler((CCarte)carte).getPresentation());
 		}
 		
 		

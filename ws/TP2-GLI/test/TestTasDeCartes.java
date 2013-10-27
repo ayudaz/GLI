@@ -46,6 +46,7 @@ public class TestTasDeCartes {
 		tas.empiler(c4);
 		tas.empiler(c5);
 		tas.empiler(c6);
+		tas.depiler();
 		f.getContentPane ().add(tas.getPresentation()) ;
 
 		f.pack () ;		// dimensionner le cadre

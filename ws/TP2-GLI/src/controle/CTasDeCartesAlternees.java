@@ -1,6 +1,7 @@
 package controle;
 
 import presentation.PTasDeCartesAlternees;
+import solitaire.application.Carte;
 import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 
@@ -20,4 +21,8 @@ public class CTasDeCartesAlternees extends TasDeCartesAlternees implements ICTas
 		return presentation;
 	}
 
+	public void empiler (Carte carte){
+			super.empiler(carte);
+			presentation.empiler(((CCarte)carte).getPresentation());
+	}
 }
