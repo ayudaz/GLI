@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 
 import controle.CCarte;
 import controle.CSabot;
@@ -24,6 +25,7 @@ public class PSabot extends JPanel{
 	private CSabot controle;
 	private PTasDeCartes cachees;
 	private PTasDeCartes visibles;
+	private SpringLayout layout;
 	private DragSource ds;
 	private DragGestureEvent theInitialEvent;
 	private DragSourceListener myDSL;
@@ -33,11 +35,29 @@ public class PSabot extends JPanel{
 	public PSabot(CSabot c, PTasDeCartes cachees, PTasDeCartes visibles){
 		controle = c;
 		this.cachees = cachees;
-		add(cachees);
-		cachees.setDxDy(0, 0);
 		this.visibles = visibles;
+		
+		// Création et assignation du layout manager
+		layout = new SpringLayout();
+		this.setLayout(layout);
+		
+		// Ajout des tas cachées et visibles au panel
+		add(cachees);
 		add(visibles);
-		visibles.setDxDy(20, 0);
+		cachees.setDxDy(0, 0);
+		visibles.setDxDy(0, 0);
+		
+		// Contraintes d'affichage du Sabot
+		layout.putConstraint(SpringLayout.NORTH, cachees, 0, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.NORTH, visibles, 0, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, cachees, 0, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.WEST, visibles, 25, SpringLayout.EAST, cachees);
+		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, visibles);
+		layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, visibles);
+		
+		// Pour que le fond du jeu soit visible
+		setOpaque(false);
+		
 		myDSL = new MyDragSourceListener();
 		ds = new DragSource();
 		ds.createDefaultDragGestureRecognizer(visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener());

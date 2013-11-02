@@ -37,6 +37,9 @@ public class PColonne extends JPanel {
 		layout.putConstraint(SpringLayout.NORTH, visibles, -86, SpringLayout.SOUTH, cachees);
 		layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, cachees);
 		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, visibles);
+		
+		// Pour que le fond du jeu soit visible
+		setOpaque(false);
 	}
 
 	public void cacherCachees() {

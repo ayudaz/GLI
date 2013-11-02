@@ -8,6 +8,11 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.border.EtchedBorder;
+
 import controle.CTasDeCartesColorees;
 import controle.ICTasDeCartes;
 
@@ -21,9 +26,14 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	private DropTargetDropEvent theFinalEvent;
 	private CTasDeCartesColorees controle;
 	private	PCarte pc;
+	private JLabel fond;
 
-	public PTasDeCartesColorees(ICTasDeCartes cTasDeCartes) {
+	public PTasDeCartesColorees(ICTasDeCartes cTasDeCartes, final String chaine) {
 		super(cTasDeCartes);
+		ImageIcon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/" + chaine + ".png"));
+		fond = new JLabel (icone) ;
+		add(fond);
+		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 	}
 	
 	public void c2p_finDnDOK(){

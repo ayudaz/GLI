@@ -20,15 +20,18 @@ public class PTasDeCartes extends JPanel {
 	private SpringLayout layout;
 
 	public PTasDeCartes(ICTasDeCartes cTasDeCartes) {
-		this.controle = cTasDeCartes;		
+		this.controle = cTasDeCartes;
+		
+		// Création et assignation du layout manager
 		layout = new SpringLayout();
-		// le JPanel
-		setLayout (layout) ;
-		setBackground (Color.yellow) ;
+		setLayout(layout) ;
 		
 		// un tas de carte soit avoir au minimum la taille d'une carte
 		layout.putConstraint(SpringLayout.EAST, this, PCarte.largeur, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.SOUTH, this, PCarte.hauteur, SpringLayout.NORTH, this);
+		
+		// Pour que le fond du jeu soit visible
+		setOpaque(false);
 	}
 	
 	public void empiler(PCarte carte) {
