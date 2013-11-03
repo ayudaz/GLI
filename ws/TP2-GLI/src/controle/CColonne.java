@@ -20,10 +20,7 @@ public class CColonne extends Colonne {
 	
 	@Override
 	public void retournerCarte() throws Exception{
-		System.out.println(isCarteRetournable());
-		System.out.println("avant = " + cachees.getNombre() + ":" + visibles.getNombre());
 		super.retournerCarte();
-		System.out.println("après = " + cachees.getNombre() + ":" + visibles.getNombre());
 		if(this.cachees.isVide()){
 			presentation.cacherCachees();
 		}

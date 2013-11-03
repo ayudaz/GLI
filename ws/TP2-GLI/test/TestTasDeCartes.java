@@ -46,7 +46,12 @@ public class TestTasDeCartes {
 		tas.empiler(c4);
 		tas.empiler(c5);
 		tas.empiler(c6);
-		tas.depiler();
+		try {
+			tas.depiler();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		f.getContentPane ().add(tas.getPresentation()) ;
 
 		f.pack () ;		// dimensionner le cadre

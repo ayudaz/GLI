@@ -16,6 +16,7 @@ public class PTasDeCartes extends JPanel {
 	private static final long serialVersionUID = 2655838145894512078L;
 	private int dx;
 	private int dy;
+	private int nbVisibles;
 	private ICTasDeCartes controle;
 	private SpringLayout layout;
 
@@ -36,8 +37,16 @@ public class PTasDeCartes extends JPanel {
 	
 	public void empiler(PCarte carte) {
 		this.add(carte, 0);
-		int deplacementX = (controle.getNombre() - 1) * dx;
-		int deplacementY = (controle.getNombre() - 1) * dy;
+		int deplacementX, deplacementY;
+		if(nbVisibles != 0){
+			deplacementX = ((controle.getNombre() - 1) % nbVisibles) * dx;
+			deplacementY = ((controle.getNombre() - 1) % nbVisibles) * dy;
+		}
+		else{
+			deplacementX = (controle.getNombre() - 1) * dx;
+			deplacementY = (controle.getNombre() - 1) * dy;
+		}
+		
 		layout.putConstraint(SpringLayout.WEST, carte, deplacementX, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, carte, deplacementY, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, carte);
@@ -65,5 +74,9 @@ public class PTasDeCartes extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setNbVisibles(int nbVisibles) {
+		this.nbVisibles = nbVisibles;
 	}
 }

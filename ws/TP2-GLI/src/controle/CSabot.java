@@ -1,6 +1,7 @@
 package controle;
 
 import presentation.PSabot;
+import solitaire.application.Carte;
 import solitaire.application.Sabot;
 import solitaire.application.Tas;
 import solitaire.application.Usine;

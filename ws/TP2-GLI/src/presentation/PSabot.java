@@ -45,7 +45,8 @@ public class PSabot extends JPanel{
 		add(cachees);
 		add(visibles);
 		cachees.setDxDy(0, 0);
-		visibles.setDxDy(0, 0);
+		visibles.setDxDy(15, 0);
+		visibles.setNbVisibles(3);
 		
 		// Contraintes d'affichage du Sabot
 		layout.putConstraint(SpringLayout.NORTH, cachees, 0, SpringLayout.NORTH, this);
@@ -234,5 +235,4 @@ public class PSabot extends JPanel{
 		}
 
 	}
-
 }

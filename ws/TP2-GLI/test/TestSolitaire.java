@@ -23,6 +23,8 @@ public class TestSolitaire {
 		f.pack();		// dimensionner le cadre
 		f.setLocation(200,100);	// le positionner
 		f.setVisible (true) ;	// et le rendre visible
+
+		solitaire.jouer();
 	}
 
 }
