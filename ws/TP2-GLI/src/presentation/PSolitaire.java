@@ -4,6 +4,7 @@
 package presentation;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -13,6 +14,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
@@ -53,6 +55,7 @@ public class PSolitaire extends JPanel {
 		sabot.setOpaque(false);
 		pilesColorees.setOpaque(false);
 		pilesAlternees.setOpaque(false);
+//		pilesAlternees.setBackground(Color.CYAN);
 		
 		// Création des layout manager SpringLayout
 		layoutSolitaire = new SpringLayout();
@@ -72,22 +75,39 @@ public class PSolitaire extends JPanel {
 		this.add(pilesAlternees);
 		
 		// Contraintes sur l'afichage du solitaire
-		setLayout();
+		setConstraintes();
 		
 		// Fond du jeu
 		this.bgImg = this.toBufferedImage(Toolkit.getDefaultToolkit().getImage("src/ressources/bg.jpg"));
 		this.bgTexture = new TexturePaint(bgImg,new Rectangle(0, 0, bgImg.getWidth(), bgImg.getHeight()));
 	}
 	
-	public void setLayout(){
+	public void setConstraintes(){
 		layoutSolitaire.putConstraint(SpringLayout.NORTH, sabot, 0, SpringLayout.NORTH, this);
-		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesColorees, 0, SpringLayout.NORTH, this);
-		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesAlternees, 20, SpringLayout.SOUTH, sabot);
+		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesColorees, 20, SpringLayout.SOUTH, sabot);
+		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesAlternees, 20, SpringLayout.SOUTH, pilesColorees);
 		layoutSolitaire.putConstraint(SpringLayout.WEST, sabot, 0, SpringLayout.WEST, this);
 		layoutSolitaire.putConstraint(SpringLayout.WEST, pilesAlternees, 0, SpringLayout.WEST, this);
-		layoutSolitaire.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, pilesAlternees);
+		layoutSolitaire.putConstraint(SpringLayout.SOUTH, this, 20, SpringLayout.SOUTH, pilesAlternees);
 		layoutSolitaire.putConstraint(SpringLayout.EAST, pilesColorees, 0, SpringLayout.EAST, this);
 		layoutSolitaire.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, pilesAlternees);
+		PColonne colMax = null;
+		for (int i = 0; i < pilesAlternees.getComponents().length; i++) {
+			PColonne col = (PColonne) pilesAlternees.getComponents()[i];
+			if(colMax == null || col.getPreferredSize().getHeight() > colMax.getPreferredSize().getHeight()){
+				colMax = col;
+			}
+		}
+		layoutAlternees.putConstraint(SpringLayout.SOUTH, pilesAlternees, 15, SpringLayout.SOUTH, colMax);
+		// répercution des setContraintes
+		if(this.sabot.getComponentCount() > 0)
+			((PSabot)this.sabot.getComponent(0)).setContraintes();
+		for (Component col : pilesAlternees.getComponents()) {
+			((PColonne)col).setContraintes();
+		}
+		for (Component col : pilesColorees.getComponents()) {
+			((PTasDeCartesColorees)col).setContraintes();
+		}
 	}
 	
 	public void paintComponent(Graphics g){

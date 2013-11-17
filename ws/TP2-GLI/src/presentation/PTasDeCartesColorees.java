@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
 import controle.CTasDeCartesColorees;
-import controle.ICTasDeCartes;
+import controle.ICTas;
 
 public class PTasDeCartesColorees extends PTasDeCartes {
 	
@@ -28,7 +28,7 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	private	PCarte pc;
 	private JLabel fond;
 
-	public PTasDeCartesColorees(ICTasDeCartes cTasDeCartes, final String chaine) {
+	public PTasDeCartesColorees(ICTas cTasDeCartes, final String chaine) {
 		super(cTasDeCartes);
 		ImageIcon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/" + chaine + ".png"));
 		fond = new JLabel (icone) ;

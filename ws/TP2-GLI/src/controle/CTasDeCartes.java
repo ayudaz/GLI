@@ -1,11 +1,12 @@
 package controle;
 
+import presentation.IPTas;
 import presentation.PTasDeCartes;
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
 
-public class CTasDeCartes extends TasDeCartes implements ICTasDeCartes {
+public class CTasDeCartes extends TasDeCartes implements ICTas {
 		
 		private PTasDeCartes presentation;
 		

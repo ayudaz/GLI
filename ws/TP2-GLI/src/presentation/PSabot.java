@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Color;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -31,6 +32,7 @@ public class PSabot extends JPanel{
 	private DragSourceListener myDSL;
 	private RetournerSabotListener rsl = new RetournerSabotListener();
 	private RetournerCarteListener rcl = new RetournerCarteListener();
+	private static final int DECALVISIBLE = 15;
 	
 	public PSabot(CSabot c, PTasDeCartes cachees, PTasDeCartes visibles){
 		controle = c;
@@ -45,23 +47,29 @@ public class PSabot extends JPanel{
 		add(cachees);
 		add(visibles);
 		cachees.setDxDy(0, 0);
-		visibles.setDxDy(15, 0);
-		visibles.setNbVisibles(3);
+		visibles.setDxDy(DECALVISIBLE, 0);
 		
 		// Contraintes d'affichage du Sabot
+		setContraintes();
+		
+		// Pour que le fond du jeu soit visible
+		setOpaque(false);
+//		setBackground(Color.BLACK);
+		
+		myDSL = new MyDragSourceListener();
+		ds = new DragSource();
+		ds.createDefaultDragGestureRecognizer(visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener());
+	}
+	
+	public void setContraintes() {
+		cachees.setContraintes();
+		visibles.setContraintes();
 		layout.putConstraint(SpringLayout.NORTH, cachees, 0, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.NORTH, visibles, 0, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, cachees, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.WEST, visibles, 25, SpringLayout.EAST, cachees);
 		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, visibles);
 		layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, visibles);
-		
-		// Pour que le fond du jeu soit visible
-		setOpaque(false);
-		
-		myDSL = new MyDragSourceListener();
-		ds = new DragSource();
-		ds.createDefaultDragGestureRecognizer(visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener());
 	}
 	
 	public void activerRetournerSabot(){
@@ -234,5 +242,5 @@ public class PSabot extends JPanel{
 
 		}
 
-	}
+	}	
 }

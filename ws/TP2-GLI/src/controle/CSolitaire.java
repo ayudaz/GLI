@@ -36,4 +36,11 @@ public class CSolitaire extends Solitaire {
 			presentation.addColonne(((CColonne)col).getPresentation());
 		}
 	}
+	
+	public void traiterJeu(char paramChar){
+		super.traiterJeu(paramChar);
+		presentation.setConstraintes();
+		presentation.validate();
+		presentation.repaint();
+	}
 }
