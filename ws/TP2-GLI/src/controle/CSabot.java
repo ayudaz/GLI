@@ -39,17 +39,17 @@ public class CSabot extends Sabot {
 		}
 	}
 
-	public void retourner(){
-		try {
-			super.retourner();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void retourner() throws Exception{
+		super.retourner();
 		presentation.desactiverRetournerSabot();
 		if(isRetournable()){
 			presentation.activerRetournerCarte();
 		}
+	}
+	
+	public void retournerCarte() throws Exception{
+		super.retournerCarte();
+		presentation.retournerCarte();
 	}
 
 	public void depiler(){

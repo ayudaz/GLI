@@ -53,13 +53,17 @@ public class PSabot extends JPanel{
 		setContraintes();
 		
 		// Pour que le fond du jeu soit visible
-		setOpaque(false);
-//		setBackground(Color.BLACK);
+//		setOpaque(false);
+		setBackground(Color.BLACK);
 		
 		myDSL = new MyDragSourceListener();
 		ds = new DragSource();
 		ds.createDefaultDragGestureRecognizer(visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener());
 	}
+	
+	public void retournerCarte() {
+		setContraintes();
+	}	
 	
 	public void setContraintes() {
 		cachees.setContraintes();
@@ -69,7 +73,7 @@ public class PSabot extends JPanel{
 		layout.putConstraint(SpringLayout.WEST, cachees, 0, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.WEST, visibles, 25, SpringLayout.EAST, cachees);
 		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, visibles);
-		layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, visibles);
+		layout.putConstraint(SpringLayout.EAST, this, 20, SpringLayout.EAST, visibles);
 	}
 	
 	public void activerRetournerSabot(){
@@ -176,7 +180,12 @@ public class PSabot extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			controle.retourner();
+			try {
+				controle.retourner();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		@Override
@@ -209,11 +218,11 @@ public class PSabot extends JPanel{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			try {
 				controle.retournerCarte();
+				controle.retournerCarte();
+				controle.retournerCarte();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -242,5 +251,7 @@ public class PSabot extends JPanel{
 
 		}
 
-	}	
+	}
+
+	
 }
