@@ -23,7 +23,7 @@ public class PTasDeCartes extends JPanel implements IPTas {
 	public PTasDeCartes(ICTas cTasDeCartes) {
 		this.controle = cTasDeCartes;
 		
-		// Création et assignation du layout manager
+		// Crï¿½ation et assignation du layout manager
 		layout = new SpringLayout();
 		setLayout(layout) ;
 		
@@ -31,8 +31,8 @@ public class PTasDeCartes extends JPanel implements IPTas {
 		setContraintes();
 		
 		// Pour que le fond du jeu soit visible
-//		setOpaque(false);
-		setBackground(Color.BLUE);
+		setOpaque(false);
+//		setBackground(Color.BLUE);
 	}
 	
 	public void setContraintes() {

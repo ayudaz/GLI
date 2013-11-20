@@ -2,6 +2,8 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -33,6 +35,9 @@ public class PColonne extends JPanel {
 		this.cachees.setDxDy(0, DECALY);
 		this.add(visibles,0);
 		this.visibles.setDxDy(0, DECALY);
+		
+		//ajout du listener de retournement des cartes
+		this.addMouseListener(new RetournerCarteListener());
 		
 		// ajoute les contraintes sur la colonne
 		setContraintes();
@@ -94,6 +99,8 @@ public class PColonne extends JPanel {
 		if(cacheesVide){
 			cacherCachees();
 		}
+		validate();
+		repaint();
 	}
 	
 	public void cacherCachees() {
@@ -104,7 +111,43 @@ public class PColonne extends JPanel {
 		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, cachees);
 	}
 
-	
+	public class RetournerCarteListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			try {
+				controle.retournerCarte();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 
 	
 

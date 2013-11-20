@@ -9,6 +9,7 @@ import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DragSourceMotionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -28,6 +29,7 @@ public class PSabot extends JPanel{
 	private PTasDeCartes visibles;
 	private SpringLayout layout;
 	private DragSource ds;
+	private MyDragSourceListener myDragSourceListener;
 	private DragGestureEvent theInitialEvent;
 	private DragSourceListener myDSL;
 	private RetournerSabotListener rsl = new RetournerSabotListener();
@@ -39,11 +41,11 @@ public class PSabot extends JPanel{
 		this.cachees = cachees;
 		this.visibles = visibles;
 		
-		// Création et assignation du layout manager
+		// Crï¿½ation et assignation du layout manager
 		layout = new SpringLayout();
 		this.setLayout(layout);
 		
-		// Ajout des tas cachées et visibles au panel
+		// Ajout des tas cachï¿½es et visibles au panel
 		add(cachees);
 		add(visibles);
 		cachees.setDxDy(0, 0);
@@ -56,9 +58,21 @@ public class PSabot extends JPanel{
 //		setOpaque(false);
 		setBackground(Color.BLACK);
 		
-		myDSL = new MyDragSourceListener();
-		ds = new DragSource();
-		ds.createDefaultDragGestureRecognizer(visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener());
+		myDragSourceListener = new MyDragSourceListener();
+		ds = new DragSource(); 
+		ds.createDefaultDragGestureRecognizer (
+				visibles, 
+				DnDConstants.ACTION_MOVE,
+				new MyDragGestureListener ());
+		
+		ds.addDragSourceMotionListener (
+				new MyDragSourceMotionListener ());
+		
+		//dropTarget = new DropTarget (this, new MyDropTargetListener ()) ;
+				
+		//myDSL = new MyDragSourceListener();
+//		ds = new DragSource();
+//		ds.createDefaultDragGestureRecognizer(visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener());
 	}
 	
 	public void retournerCarte() {
@@ -102,6 +116,8 @@ public class PSabot extends JPanel{
 	
 	public void c2p_debutDnDOK(PCarte pc){
 		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pc, myDSL);
+		System.out.println("Debut DnDOK");
+		repaint();
 	}
 	
 	class MyDragGestureListener implements DragGestureListener {
@@ -113,8 +129,6 @@ public class PSabot extends JPanel{
 			
 		}
 		
-		
-
 		/**
 		 * @return the theInitialEvent
 		 */
@@ -122,26 +136,28 @@ public class PSabot extends JPanel{
 			return theInitialEvent;
 		}
 
-
-
 		/* (non-Javadoc)
 		 * @see java.awt.dnd.DragGestureListener#dragGestureRecognized(java.awt.dnd.DragGestureEvent)
 		 */
 		@Override
 		public void dragGestureRecognized(DragGestureEvent e) {
-			// TODO Auto-generated method stub
 			theInitialEvent = e;
 			PCarte pc = null;
 			CCarte cc = null;
 			try{
 				pc = (PCarte)visibles.getComponentAt(e.getDragOrigin());
 				cc = pc.getControle();
-			}catch(Exception ex){
-				controle.p2c_debutDnD(cc);
-			}
+			}catch(Exception ex){}
+			controle.p2c_debutDnD(cc);
 		}
 
 	}
+	
+	protected class MyDragSourceMotionListener implements DragSourceMotionListener {
+		public void dragMouseMoved (DragSourceDragEvent event) {
+			setLocation (event.getLocation ().x - getRootPane ().getParent ().getX (), event.getLocation ().y - getRootPane ().getParent ().getY ()) ; 
+		} 
+	}// MyDragSourceMotionListener
 	
 	public class MyDragSourceListener implements DragSourceListener {
 
@@ -153,8 +169,7 @@ public class PSabot extends JPanel{
 
 		@Override
 		public void dragEnter(DragSourceDragEvent e) {
-			// TODO Auto-generated method stub
-
+			System.out.println("DragEnter");
 		}
 
 		@Override
