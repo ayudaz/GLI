@@ -55,6 +55,7 @@ public class CSabot extends Sabot {
 	}
 
 	public void p2c_debutDnD(CCarte cc){
+		System.out.println("Ok");
 		try {
 			if(cc == getSommet()){
 				depiler();

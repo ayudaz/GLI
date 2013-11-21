@@ -19,7 +19,7 @@ public class PTasDeCartes extends JPanel implements IPTas {
 	public PTasDeCartes(ICTas cTasDeCartes) {
 		this.controle = cTasDeCartes;
 		
-		// Création et assignation du layout manager
+		// Crï¿½ation et assignation du layout manager
 		layout = new SpringLayout();
 		setLayout(layout) ;
 		
