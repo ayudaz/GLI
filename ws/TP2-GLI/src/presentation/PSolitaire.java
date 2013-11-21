@@ -5,6 +5,7 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -83,14 +84,14 @@ public class PSolitaire extends JPanel {
 	}
 	
 	public void setConstraintes(){
-		layoutSolitaire.putConstraint(SpringLayout.NORTH, sabot, 0, SpringLayout.NORTH, this);
-		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesColorees, 20, SpringLayout.SOUTH, sabot);
+		layoutSolitaire.putConstraint(SpringLayout.NORTH, sabot, 20, SpringLayout.NORTH, this);
+		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesColorees, 20, SpringLayout.NORTH, this);
 		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesAlternees, 20, SpringLayout.SOUTH, pilesColorees);
-		layoutSolitaire.putConstraint(SpringLayout.WEST, sabot, 0, SpringLayout.WEST, this);
-		layoutSolitaire.putConstraint(SpringLayout.WEST, pilesAlternees, 0, SpringLayout.WEST, this);
+		layoutSolitaire.putConstraint(SpringLayout.WEST, sabot, 20, SpringLayout.WEST, this);
+		layoutSolitaire.putConstraint(SpringLayout.WEST, pilesColorees, 0, SpringLayout.EAST, sabot);
+		layoutSolitaire.putConstraint(SpringLayout.WEST, pilesAlternees, 65, SpringLayout.WEST, this);
 		layoutSolitaire.putConstraint(SpringLayout.SOUTH, this, 20, SpringLayout.SOUTH, pilesAlternees);
-		layoutSolitaire.putConstraint(SpringLayout.EAST, pilesColorees, 0, SpringLayout.EAST, this);
-		layoutSolitaire.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, pilesAlternees);
+		layoutSolitaire.putConstraint(SpringLayout.EAST, this, 20, SpringLayout.EAST, pilesColorees);
 		PColonne colMax = null;
 		for (int i = 0; i < pilesAlternees.getComponents().length; i++) {
 			PColonne col = (PColonne) pilesAlternees.getComponents()[i];
@@ -124,11 +125,13 @@ public class PSolitaire extends JPanel {
 		layoutSabot.putConstraint(SpringLayout.NORTH, sabot, 20, SpringLayout.NORTH, this.sabot);
 		layoutSabot.putConstraint(SpringLayout.WEST, sabot, 30, SpringLayout.WEST, this.sabot);
 		layoutSabot.putConstraint(SpringLayout.SOUTH, this.sabot, 15, SpringLayout.SOUTH, sabot);
-		layoutSabot.putConstraint(SpringLayout.EAST, this.sabot, 30, SpringLayout.EAST, sabot);
+		layoutSabot.putConstraint(SpringLayout.EAST, this.sabot, 0, SpringLayout.EAST, sabot);
+		Dimension dSabot = new Dimension(this.sabot.getPreferredSize().width+15*23, this.sabot.getPreferredSize().height);
+		this.sabot.setPreferredSize(dSabot);
 	}
 
 	public void addColonne(PColonne pileAlternees) {
-		int paddingLeft = 30 + pilesAlternees.getComponentCount() * (PCarte.largeur + 30);
+		int paddingLeft = 50 + pilesAlternees.getComponentCount() * (PCarte.largeur + 50);
 		layoutAlternees.putConstraint(SpringLayout.WEST, pileAlternees, paddingLeft, SpringLayout.WEST, pilesAlternees);
 		layoutAlternees.putConstraint(SpringLayout.NORTH, pileAlternees, 20, SpringLayout.NORTH, pilesAlternees);
 		layoutAlternees.putConstraint(SpringLayout.EAST, pilesAlternees, 30, SpringLayout.EAST, pileAlternees);

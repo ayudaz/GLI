@@ -1,6 +1,6 @@
 package presentation;
 
-import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -9,12 +9,14 @@ import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+import listener.RetournerCarteListener;
+import listener.RetournerSabotListener;
 import controle.CCarte;
 import controle.CSabot;
 
@@ -30,14 +32,16 @@ public class PSabot extends JPanel{
 	private DragSource ds;
 	private DragGestureEvent theInitialEvent;
 	private DragSourceListener myDSL;
-	private RetournerSabotListener rsl = new RetournerSabotListener();
-	private RetournerCarteListener rcl = new RetournerCarteListener();
+	private RetournerSabotListener rsl;
+	private RetournerCarteListener rcl;
 	private static final int DECALVISIBLE = 15;
 	
 	public PSabot(CSabot c, PTasDeCartes cachees, PTasDeCartes visibles){
-		controle = c;
+		this.controle = c;
 		this.cachees = cachees;
 		this.visibles = visibles;
+		this.rcl = new RetournerCarteListener(c);
+		this.rsl = new RetournerSabotListener(c);
 		
 		// Création et assignation du layout manager
 		layout = new SpringLayout();
@@ -53,8 +57,15 @@ public class PSabot extends JPanel{
 		setContraintes();
 		
 		// Pour que le fond du jeu soit visible
-//		setOpaque(false);
-		setBackground(Color.BLACK);
+		setOpaque(false);
+//		setBackground(Color.BLACK);
+		
+		this.cachees.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		// ajout d'une image de fond sur le tas de carte cachees
+		ImageIcon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/fond_sabot.png"));
+		JLabel fond = new JLabel(icone) ;
+		cachees.add(fond);
 		
 		myDSL = new MyDragSourceListener();
 		ds = new DragSource();
@@ -63,7 +74,11 @@ public class PSabot extends JPanel{
 	
 	public void retournerCarte() {
 		setContraintes();
-	}	
+	}
+	
+	public void retourner(){
+		setContraintes();
+	}
 	
 	public void setContraintes() {
 		cachees.setContraintes();
@@ -85,13 +100,11 @@ public class PSabot extends JPanel{
 	}
 
 	public void desactiverRetournerSabot() {
-		// TODO Auto-generated method stub
-		
+		cachees.removeMouseListener(rsl);		
 	}
 
 	public void desactiverRetournerCarte() {
-		// TODO Auto-generated method stub
-		
+		cachees.removeMouseListener(rcl);
 	}
 	
 	
@@ -175,83 +188,9 @@ public class PSabot extends JPanel{
 
 		}
 	}
-	public class RetournerSabotListener implements MouseListener {
+	
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			try {
-				controle.retourner();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
-
-	public class RetournerCarteListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			try {
-				controle.retournerCarte();
-				controle.retournerCarte();
-				controle.retournerCarte();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
+	
 
 	
 }

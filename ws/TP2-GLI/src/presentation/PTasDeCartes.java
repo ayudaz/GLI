@@ -1,12 +1,8 @@
 package presentation;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import controle.CCarte;
-import controle.CTasDeCartes;
 import controle.ICTas;
 
 public class PTasDeCartes extends JPanel implements IPTas {
@@ -31,8 +27,8 @@ public class PTasDeCartes extends JPanel implements IPTas {
 		setContraintes();
 		
 		// Pour que le fond du jeu soit visible
-//		setOpaque(false);
-		setBackground(Color.BLUE);
+		setOpaque(false);
+//		setBackground(Color.BLUE);
 	}
 	
 	public void setContraintes() {

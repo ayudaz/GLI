@@ -1,7 +1,6 @@
 package controle;
 
 import presentation.PSabot;
-import solitaire.application.Carte;
 import solitaire.application.Sabot;
 import solitaire.application.Tas;
 import solitaire.application.Usine;
@@ -41,29 +40,19 @@ public class CSabot extends Sabot {
 
 	public void retourner() throws Exception{
 		super.retourner();
+		presentation.retourner();
 		presentation.desactiverRetournerSabot();
-		if(isRetournable()){
-			presentation.activerRetournerCarte();
-		}
+		presentation.activerRetournerCarte();
 	}
 	
 	public void retournerCarte() throws Exception{
 		super.retournerCarte();
 		presentation.retournerCarte();
-	}
-
-	public void depiler(){
-		try {
-			super.depiler();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(!isRetournable()){
-			presentation.desactiverRetournerSabot();
+		if(!isCarteRetournable()){
+			presentation.desactiverRetournerCarte();
+			presentation.activerRetournerSabot();
 		}
 	}
-
 
 	public void p2c_debutDnD(CCarte cc){
 		try {

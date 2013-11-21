@@ -49,8 +49,8 @@ protected CCarte controle ;		// contrôleur associé
 
 	// le JPanel
 	setLayout (null) ;
-	setBackground (Color.yellow) ;
-	setOpaque (true);
+//	setBackground (Color.yellow) ;
+	setOpaque(false);
 	setSize (face.getSize ()) ;
 	setPreferredSize (getSize ()) ;
 	setFaceVisible(false);
