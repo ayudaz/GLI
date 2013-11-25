@@ -13,15 +13,16 @@ import javax.swing.JPanel;
 import controle.CCarte;
 
 /**
- * Composant Prï¿½sentation d'une carte
+ * Composant Présentation d'une carte
  */
 public class PCarte extends JPanel implements Transferable {
 
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8803764380933046718L;
-	protected CCarte controle; // contrï¿½leur associï¿½
+	protected CCarte controle; // contrôleur associé
 	protected JLabel face, dos;
 	protected ImageIcon icone; // image de la face
 	protected static ImageIcon iconeDos; // image du dos
