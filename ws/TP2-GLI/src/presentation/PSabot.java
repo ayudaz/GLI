@@ -1,6 +1,10 @@
 package presentation;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Frame;
+import java.awt.Point;
+import java.awt.Window;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -13,6 +17,7 @@ import java.awt.dnd.DragSourceMotionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
@@ -28,12 +33,18 @@ public class PSabot extends JPanel{
 	private PTasDeCartes cachees;
 	private PTasDeCartes visibles;
 	private SpringLayout layout;
-	private DragSource ds;
-	private MyDragSourceListener myDragSourceListener;
-	private DragGestureEvent theInitialEvent;
-	private DragSourceListener myDSL;
 	private RetournerSabotListener rsl = new RetournerSabotListener();
 	private RetournerCarteListener rcl = new RetournerCarteListener();
+	
+	private MyDragSourceListener myDragSourceListener;
+	private MyDragGestureListener myDragGestureListener;
+	private MyDragSourceMotionListener myDragMotionListener;
+
+	private DragSource ds;
+	private DragGestureEvent theInitialEvent;
+	
+	private JFrame dragFrame;
+	
 	private static final int DECALVISIBLE = 15;
 	
 	public PSabot(CSabot c, PTasDeCartes cachees, PTasDeCartes visibles){
@@ -55,24 +66,17 @@ public class PSabot extends JPanel{
 		setContraintes();
 		
 		// Pour que le fond du jeu soit visible
-//		setOpaque(false);
+		//setOpaque(true);
 		setBackground(Color.BLACK);
 		
 		myDragSourceListener = new MyDragSourceListener();
+		myDragGestureListener = new MyDragGestureListener();
+		myDragMotionListener = new MyDragSourceMotionListener();
+		
 		ds = new DragSource(); 
-		ds.createDefaultDragGestureRecognizer (
-				visibles, 
-				DnDConstants.ACTION_MOVE,
-				new MyDragGestureListener ());
+		ds.createDefaultDragGestureRecognizer (visibles,DnDConstants.ACTION_MOVE,myDragGestureListener);		
+		ds.addDragSourceMotionListener(myDragMotionListener);
 		
-		ds.addDragSourceMotionListener (
-				new MyDragSourceMotionListener ());
-		
-		//dropTarget = new DropTarget (this, new MyDropTargetListener ()) ;
-				
-		//myDSL = new MyDragSourceListener();
-//		ds = new DragSource();
-//		ds.createDefaultDragGestureRecognizer(visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener());
 	}
 	
 	public void retournerCarte() {
@@ -114,10 +118,18 @@ public class PSabot extends JPanel{
 		
 	}
 	
-	public void c2p_debutDnDOK(PCarte pc){
-		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, pc, myDSL);
-		System.out.println("Debut DnDOK");
+	public void c2p_debutDnDOK(PTasDeCartes ptas){
+		dragFrame = new JFrame();
+		dragFrame.setExtendedState(JFrame.NORMAL);
+		dragFrame.setUndecorated(true);
+		dragFrame.add(ptas);
+		dragFrame.setVisible(true);
+		dragFrame.pack();
+		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, ptas, myDragSourceListener);
+		validate();
 		repaint();
+
+		System.out.println("Debut DnDOK");
 	}
 	
 	class MyDragGestureListener implements DragGestureListener {
@@ -125,10 +137,7 @@ public class PSabot extends JPanel{
 		/**
 		 * 
 		 */
-		public MyDragGestureListener() {
-			
-		}
-		
+
 		/**
 		 * @return the theInitialEvent
 		 */
@@ -145,9 +154,10 @@ public class PSabot extends JPanel{
 			PCarte pc = null;
 			CCarte cc = null;
 			try{
-				pc = (PCarte)visibles.getComponentAt(e.getDragOrigin());
+				pc = (PCarte) visibles.getComponentAt(e.getDragOrigin());
 				cc = pc.getControle();
 			}catch(Exception ex){}
+			
 			controle.p2c_debutDnD(cc);
 		}
 
@@ -155,7 +165,12 @@ public class PSabot extends JPanel{
 	
 	protected class MyDragSourceMotionListener implements DragSourceMotionListener {
 		public void dragMouseMoved (DragSourceDragEvent event) {
-			setLocation (event.getLocation ().x - getRootPane ().getParent ().getX (), event.getLocation ().y - getRootPane ().getParent ().getY ()) ; 
+			int eventX = event.getLocation().x+160;
+			int parentX = getRootPane().getParent().getX();			
+			int eventY = event.getLocation().y+45;
+			int parentY = getRootPane().getParent().getY();
+			dragFrame.setLocation(eventX - parentX, eventY - parentY );
+			repaint();
 		} 
 	}// MyDragSourceMotionListener
 	
@@ -163,8 +178,13 @@ public class PSabot extends JPanel{
 
 		@Override
 		public void dragDropEnd(DragSourceDropEvent e) {
-			// TODO Auto-generated method stub
+			// TODO Auto-generated method stub			
 			controle.p2c_finDnD(e.getDropSuccess());
+			System.out.println("DropSucess ? [true/false]"+e.getDropSuccess());
+			dragFrame.removeAll();
+			dragFrame.setVisible(false);
+			validate();
+			repaint();
 		}
 
 		@Override

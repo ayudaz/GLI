@@ -22,10 +22,13 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	 * 
 	 */
 	private static final long serialVersionUID = 487458044886830072L;
-	private DropTarget dt;
-	private DropTargetDropEvent theFinalEvent;
+
+	private DropTarget dropTargetListener;
+    private DropTargetDropEvent theFinalEvent;    
+    private MyDropTargetListener myDropTargetListener;
+    
 	private CTasDeCartesColorees controle;
-	private	PCarte pc;
+	private	PTasDeCartes ptas;
 	private JLabel fond;
 
 	public PTasDeCartesColorees(ICTas cTasDeCartes, final String chaine) {
@@ -34,6 +37,9 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		fond = new JLabel (icone) ;
 		add(fond);
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		
+		myDropTargetListener = new MyDropTargetListener();
+		dropTargetListener = new DropTarget(this, myDropTargetListener);
 	}
 	
 	public void c2p_finDnDOK(){
@@ -64,9 +70,9 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 
 		@Override
 		public void dragEnter(DropTargetDragEvent e) {
-			// TODO Vérifier que pc est pas null !!!!!!!!
+			// TODO Vï¿½rifier que pc est pas null !!!!!!!!
 			try {
-				pc = (PCarte)e.getTransferable().getTransferData(null);
+				ptas = (PTasDeCartes) e.getTransferable().getTransferData(null);
 			} catch (UnsupportedFlavorException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -74,12 +80,12 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			controle.p2c_dragEnter(pc.getControle());
+			controle.p2c_dragEnter(ptas.getControle());
 		}
 
 		@Override
 		public void dragExit(DropTargetEvent e) {
-			controle.p2c_dragExit(pc.getControle());		
+			controle.p2c_dragExit(ptas.getControle());		
 		}
 
 		@Override
@@ -90,9 +96,9 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 
 		@Override
 		public void drop(DropTargetDropEvent e) {
-			// TODO le récupérer de PTasDeCarteColorés.
+			// TODO le rï¿½cupï¿½rer de PTasDeCarteColorï¿½s.
 			theFinalEvent = e;
-			controle.p2c_drop(pc.getControle());
+			controle.p2c_drop(ptas.getControle());
 		}
 
 		@Override

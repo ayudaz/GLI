@@ -1,6 +1,10 @@
 package presentation;
 
 import java.awt.Color;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -9,7 +13,7 @@ import controle.CCarte;
 import controle.CTasDeCartes;
 import controle.ICTas;
 
-public class PTasDeCartes extends JPanel implements IPTas {
+public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 
 	/**
 	 * 
@@ -72,4 +76,40 @@ public class PTasDeCartes extends JPanel implements IPTas {
 	public void depiler(PCarte carte) {
 		this.remove(carte);
 	}
+	 @Override
+	    public Object getTransferData( DataFlavor flavor ) throws UnsupportedFlavorException, IOException
+	    {
+	        Object result = null;
+	        if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+	            result = this;
+	        }
+	        return (result);
+	    }
+
+	    @Override
+	    public DataFlavor[] getTransferDataFlavors()
+	    {
+	        DataFlavor data[] = new DataFlavor[1];
+	        try {
+	            data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+	        } catch (java.lang.ClassNotFoundException e) {
+	        }
+	        return (data);
+	    }
+
+	    @Override
+	    public boolean isDataFlavorSupported( DataFlavor flavor )
+	    {
+	        boolean result = false;
+	        if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+	            result = true;
+	        }
+	        return (result);
+	    }
+
+		public CTasDeCartes getControle() {
+			// TODO Auto-generated method stub
+			return (CTasDeCartes) controle;
+		}
+
 }

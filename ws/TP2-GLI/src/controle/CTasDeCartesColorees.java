@@ -41,22 +41,24 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas {
 		presentation.depiler(((CCarte)carte).getPresentation());
 	}
 
-	public void p2c_dragEnter(CCarte cc){
-		if(isEmpilable(cc)){
+	public void p2c_dragEnter(CTasDeCartes cTasDeCartes){
+		if(isEmpilable(cTasDeCartes)){
+			System.out.println("Tas empilable");
 			presentation.showEmpilable();
 		}
 		else{
+			System.out.println("Tas non empilable");
 			presentation.showNonEmpilable();
 		}
 	}
 	
-	public void p2c_dragExit(CCarte cc){
+	public void p2c_dragExit(CTasDeCartes cTasDeCartes){
 		presentation.c2p_showNeutre();
 	}
 	
-	public void p2c_drop(CCarte cc){
-		if(isEmpilable(cc)){
-			empiler(cc);
+	public void p2c_drop(CTasDeCartes cTasDeCartes){
+		if(isEmpilable(cTasDeCartes)){
+			empiler(cTasDeCartes);
 			presentation.c2p_finDnDOK();
 		}
 		else{

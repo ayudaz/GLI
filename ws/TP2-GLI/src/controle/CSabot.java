@@ -6,9 +6,9 @@ import solitaire.application.Sabot;
 import solitaire.application.Tas;
 import solitaire.application.Usine;
 
-public class CSabot extends Sabot {
+public class CSabot extends Sabot{
 	private PSabot presentation;
-	private CCarte enTransit;
+	private CTasDeCartes enTransit;
 
 	public CSabot(String nom, Usine usine){
 		super(nom,usine);
@@ -66,12 +66,12 @@ public class CSabot extends Sabot {
 
 
 	public void p2c_debutDnD(CCarte cc){
-		System.out.println("Ok");
 		try {
-			if(cc == getSommet()){
+			if(cc == (CCarte) getSommet()){
 				depiler();
-				enTransit = cc;
-				presentation.c2p_debutDnDOK(cc.getPresentation());
+				enTransit = new CTasDeCartes("dragInProgress", new CUsine());
+				enTransit.empiler(cc);
+				presentation.c2p_debutDnDOK(enTransit.getPresentation());
 			}
 			else{
 				presentation.c2p_debutDnDKO(cc.getPresentation());
