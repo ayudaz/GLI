@@ -1,10 +1,5 @@
 package presentation;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Frame;
-import java.awt.Point;
-import java.awt.Window;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -66,8 +61,8 @@ public class PSabot extends JPanel{
 		setContraintes();
 		
 		// Pour que le fond du jeu soit visible
-		//setOpaque(true);
-		setBackground(Color.BLACK);
+		setOpaque(false);
+//		setBackground(Color.BLACK);
 		
 		myDragSourceListener = new MyDragSourceListener();
 		myDragGestureListener = new MyDragGestureListener();
@@ -82,6 +77,10 @@ public class PSabot extends JPanel{
 	public void retournerCarte() {
 		setContraintes();
 	}	
+	
+	public void retourner() {
+		setContraintes();
+	}
 	
 	public void setContraintes() {
 		cachees.setContraintes();
@@ -103,13 +102,11 @@ public class PSabot extends JPanel{
 	}
 
 	public void desactiverRetournerSabot() {
-		// TODO Auto-generated method stub
-		
+		cachees.removeMouseListener(rsl);
 	}
 
 	public void desactiverRetournerCarte() {
-		// TODO Auto-generated method stub
-		
+		cachees.removeMouseListener(rcl);
 	}
 	
 	
@@ -287,6 +284,4 @@ public class PSabot extends JPanel{
 		}
 
 	}
-
-	
 }

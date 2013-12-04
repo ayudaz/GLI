@@ -15,7 +15,6 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
@@ -47,7 +46,7 @@ public class PSolitaire extends JPanel {
 	public PSolitaire(CSolitaire controle){
 		this.controle = controle;
 		
-		// Création des trois JPanel
+		// Crï¿½ation des trois JPanel
 		pilesAlternees = new JPanel();
 		pilesColorees = new JPanel();
 		sabot = new JPanel();
@@ -58,7 +57,7 @@ public class PSolitaire extends JPanel {
 		pilesAlternees.setOpaque(false);
 //		pilesAlternees.setBackground(Color.CYAN);
 		
-		// Création des layout manager SpringLayout
+		// Crï¿½ation des layout manager SpringLayout
 		layoutSolitaire = new SpringLayout();
 		layoutColorees = new SpringLayout();
 		layoutSabot = new SpringLayout();
@@ -100,7 +99,7 @@ public class PSolitaire extends JPanel {
 			}
 		}
 		layoutAlternees.putConstraint(SpringLayout.SOUTH, pilesAlternees, 15, SpringLayout.SOUTH, colMax);
-		// répercution des setContraintes
+		// rï¿½percution des setContraintes
 		if(this.sabot.getComponentCount() > 0)
 			((PSabot)this.sabot.getComponent(0)).setContraintes();
 		for (Component col : pilesAlternees.getComponents()) {

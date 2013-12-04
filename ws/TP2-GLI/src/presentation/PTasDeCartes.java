@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import controle.CCarte;
 import controle.CTasDeCartes;
 import controle.ICTas;
 
