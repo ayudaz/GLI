@@ -41,29 +41,45 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas {
 		presentation.depiler(((CCarte)carte).getPresentation());
 	}
 
-	public void p2c_dragEnter(CTasDeCartes cTasDeCartes){
-		if(isEmpilable(cTasDeCartes)){
-			System.out.println("Tas empilable");
-			presentation.showEmpilable();
+	public void p2c_debutDnDDrag(CCarte ccarte) {
+		
+	}
+
+
+	public void p2c_finDropTarget(CTasDeCartes ctas) {
+		// TODO Auto-generated method stub
+		System.out.println("CTAS: "+ctas);
+		if(ctas.getNombre() <= 1){
+			System.out.println("On peut empiler");
+			try {
+				if(isEmpilable(ctas.getSommet())){
+					System.out.println("Et on empile");
+					empiler(ctas.getSommet());
+					presentation.finDnDValide();
+				}
+				else{
+					System.out.println("Mais on empile pas... :(");
+					presentation.finDnDInvalid();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		else{
-			System.out.println("Tas non empilable");
-			presentation.showNonEmpilable();
+			System.out.println("On ne peut pas empiler :'(");
+			presentation.finDnDInvalid();
 		}
+		
 	}
-	
-	public void p2c_dragExit(CTasDeCartes cTasDeCartes){
-		presentation.c2p_showNeutre();
+
+	public void p2c_DragEnter(CTasDeCartes ctas) {
+		// TODO Auto-generated method stub
+		System.out.println("TEST DRAG ENTER");
 	}
-	
-	public void p2c_drop(CTasDeCartes cTasDeCartes){
-		if(isEmpilable(cTasDeCartes)){
-			empiler(cTasDeCartes);
-			presentation.c2p_finDnDOK();
-		}
-		else{
-			presentation.c2p_finDnDKO();
-		}
-		presentation.c2p_showNeutre();
+
+	public void p2c_DragExit(CTasDeCartes ctas) {
+		// TODO Auto-generated method stub
+		
 	}
+
 }

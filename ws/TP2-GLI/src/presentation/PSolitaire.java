@@ -75,14 +75,14 @@ public class PSolitaire extends JPanel {
 		this.add(pilesAlternees);
 		
 		// Contraintes sur l'afichage du solitaire
-		setConstraintes();
+		setContraintes();
 		
 		// Fond du jeu
 		this.bgImg = this.toBufferedImage(Toolkit.getDefaultToolkit().getImage("src/ressources/bg.jpg"));
 		this.bgTexture = new TexturePaint(bgImg,new Rectangle(0, 0, bgImg.getWidth(), bgImg.getHeight()));
 	}
 	
-	public void setConstraintes(){
+	public void setContraintes(){
 		layoutSolitaire.putConstraint(SpringLayout.NORTH, sabot, 20, SpringLayout.NORTH, this);
 		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesColorees, 20, SpringLayout.NORTH, this);
 		layoutSolitaire.putConstraint(SpringLayout.NORTH, pilesAlternees, 20, SpringLayout.SOUTH, pilesColorees);

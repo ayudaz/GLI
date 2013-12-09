@@ -1,44 +1,30 @@
 package presentation;
 
+import java.awt.Cursor;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
-import java.awt.dnd.DragSourceMotionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 
-import controle.CCarte;
 import controle.CSabot;
 
-public class PSabot extends JPanel{
+public class PSabot extends DragAndDrop{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1595830508186217340L;
-	private CSabot controle;
+	//private CSabot controle;
 	private PTasDeCartes cachees;
 	private PTasDeCartes visibles;
 	private SpringLayout layout;
 	private RetournerSabotListener rsl = new RetournerSabotListener();
 	private RetournerCarteListener rcl = new RetournerCarteListener();
 	
-	private MyDragSourceListener myDragSourceListener;
-	private MyDragGestureListener myDragGestureListener;
-	private MyDragSourceMotionListener myDragMotionListener;
-
-	private DragSource ds;
-	private DragGestureEvent theInitialEvent;
-	
-	private JFrame dragFrame;
 	
 	private static final int DECALVISIBLE = 15;
 	
@@ -55,6 +41,8 @@ public class PSabot extends JPanel{
 		add(cachees);
 		add(visibles);
 		cachees.setDxDy(0, 0);
+		Icon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/fond_sabot.png"));
+		cachees.add(new JLabel(icone));
 		visibles.setDxDy(DECALVISIBLE, 0);
 		
 		// Contraintes d'affichage du Sabot
@@ -62,16 +50,12 @@ public class PSabot extends JPanel{
 		
 		// Pour que le fond du jeu soit visible
 		setOpaque(false);
-//		setBackground(Color.BLACK);
 		
-		myDragSourceListener = new MyDragSourceListener();
-		myDragGestureListener = new MyDragGestureListener();
-		myDragMotionListener = new MyDragSourceMotionListener();
-		
-		ds = new DragSource(); 
-		ds.createDefaultDragGestureRecognizer (visibles,DnDConstants.ACTION_MOVE,myDragGestureListener);		
-		ds.addDragSourceMotionListener(myDragMotionListener);
-		
+		elementDrag = this.visibles;               
+        myDragSourceListener = new MyDragSourceListener();
+        dragSource = new DragSource();
+        dragSource.createDefaultDragGestureRecognizer( visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
+        dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );		
 	}
 	
 	public void retournerCarte() {
@@ -110,110 +94,13 @@ public class PSabot extends JPanel{
 	}
 	
 	
-	
-	public void c2p_debutDnDKO(PCarte pc){
-		
-	}
-	
-	public void c2p_debutDnDOK(PTasDeCartes ptas){
-		dragFrame = new JFrame();
-		dragFrame.setExtendedState(JFrame.NORMAL);
-		dragFrame.setUndecorated(true);
-		dragFrame.add(ptas);
-		dragFrame.setVisible(true);
-		dragFrame.pack();
-		ds.startDrag(theInitialEvent, DragSource.DefaultMoveDrop, ptas, myDragSourceListener);
-		validate();
-		repaint();
-
-		System.out.println("Debut DnDOK");
-	}
-	
-	class MyDragGestureListener implements DragGestureListener {
-
-		/**
-		 * 
-		 */
-
-		/**
-		 * @return the theInitialEvent
-		 */
-		public DragGestureEvent getTheInitialEvent() {
-			return theInitialEvent;
-		}
-
-		/* (non-Javadoc)
-		 * @see java.awt.dnd.DragGestureListener#dragGestureRecognized(java.awt.dnd.DragGestureEvent)
-		 */
-		@Override
-		public void dragGestureRecognized(DragGestureEvent e) {
-			theInitialEvent = e;
-			PCarte pc = null;
-			CCarte cc = null;
-			try{
-				pc = (PCarte) visibles.getComponentAt(e.getDragOrigin());
-				cc = pc.getControle();
-			}catch(Exception ex){}
-			
-			controle.p2c_debutDnD(cc);
-		}
-
-	}
-	
-	protected class MyDragSourceMotionListener implements DragSourceMotionListener {
-		public void dragMouseMoved (DragSourceDragEvent event) {
-			int eventX = event.getLocation().x+160;
-			int parentX = getRootPane().getParent().getX();			
-			int eventY = event.getLocation().y+45;
-			int parentY = getRootPane().getParent().getY();
-			dragFrame.setLocation(eventX - parentX, eventY - parentY );
-			repaint();
-		} 
-	}// MyDragSourceMotionListener
-	
-	public class MyDragSourceListener implements DragSourceListener {
-
-		@Override
-		public void dragDropEnd(DragSourceDropEvent e) {
-			// TODO Auto-generated method stub			
-			controle.p2c_finDnD(e.getDropSuccess());
-			System.out.println("DropSucess ? [true/false]"+e.getDropSuccess());
-			dragFrame.removeAll();
-			dragFrame.setVisible(false);
-			validate();
-			repaint();
-		}
-
-		@Override
-		public void dragEnter(DragSourceDragEvent e) {
-			System.out.println("DragEnter");
-		}
-
-		@Override
-		public void dragExit(DragSourceEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void dragOver(DragSourceDragEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void dropActionChanged(DragSourceDragEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-	}
 	public class RetournerSabotListener implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			try {
-				controle.retourner();
+				((CSabot) controle).retourner();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -235,13 +122,13 @@ public class PSabot extends JPanel{
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-
+			setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 
 	}
@@ -251,9 +138,9 @@ public class PSabot extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			try {
-				controle.retournerCarte();
-				controle.retournerCarte();
-				controle.retournerCarte();
+				((CSabot) controle).retournerCarte();
+				((CSabot) controle).retournerCarte();
+				((CSabot) controle).retournerCarte();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -274,12 +161,14 @@ public class PSabot extends JPanel{
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
+			setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 		}
 

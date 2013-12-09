@@ -5,7 +5,7 @@ import solitaire.application.Sabot;
 import solitaire.application.Tas;
 import solitaire.application.Usine;
 
-public class CSabot extends Sabot{
+public class CSabot extends Sabot implements IControleDND{
 	private PSabot presentation;
 	private CTasDeCartes enTransit;
 
@@ -54,16 +54,20 @@ public class CSabot extends Sabot{
 		}
 	}
 
-	public void p2c_debutDnD(CCarte cc){
+
+	public void p2c_debutDnDDrag(CCarte ccarte) {
+		if(ccarte != null){
+			System.out.println("Debut Drag N Drop (CSabot) card");
+		}
 		try {
-			if(cc == (CCarte) getSommet()){
+			if(ccarte == (CCarte) getSommet()){
 				depiler();
 				enTransit = new CTasDeCartes("dragInProgress", new CUsine());
-				enTransit.empiler(cc);
-				presentation.c2p_debutDnDOK(enTransit.getPresentation());
+				enTransit.empiler(ccarte);
+				presentation.c2p_debutDnDValide(enTransit.getPresentation());
 			}
 			else{
-				presentation.c2p_debutDnDKO(cc.getPresentation());
+				//
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -71,9 +75,29 @@ public class CSabot extends Sabot{
 		}
 	}
 
-	public void p2c_finDnD(boolean s){
-		if(!s){
+	@Override
+	public void p2c_finDragSource(boolean dropSuccess) {
+		// TODO Auto-generated method stub
+		if(!dropSuccess){
 			empiler(enTransit);
 		}
+	}
+
+	@Override
+	public void p2c_finDropTarget(CTasDeCartes ctas) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void p2c_DragEnter(CTasDeCartes ctas) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void p2c_DragExit(CTasDeCartes ctas) {
+		// TODO Auto-generated method stub
+		
 	}
 }
