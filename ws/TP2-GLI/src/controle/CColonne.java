@@ -101,15 +101,15 @@ public class CColonne extends Colonne implements IControleDND {
 
 	public void p2c_DragEnter(CTasDeCartes ctas) {
 		// TODO Auto-generated method stub
-		if (isEmpilable(ctas)) {
+		/*if (isEmpilable(ctas)) {
 			presentation.showAcceptTarget(true);
 		} else {
 			presentation.showAcceptTarget(false);
-		}
+		}*/
 	}
 
 	public void p2c_DragExit(CTasDeCartes ctas) {
 		// TODO Auto-generated method stub
-		presentation.setNormalState();
+		//presentation.setNormalState();
 	}
 }

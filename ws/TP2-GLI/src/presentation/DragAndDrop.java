@@ -117,7 +117,7 @@ public class DragAndDrop extends JPanel {
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
 				Transferable transferable = event.getTransferable();
-				System.out.println("DragEnter");
+				
 				if (transferable.isDataFlavorSupported(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType))) {
 					event.acceptDrag(DnDConstants.ACTION_MOVE);
 					pTas = (PTasDeCartes) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
@@ -131,7 +131,7 @@ public class DragAndDrop extends JPanel {
 
 		@Override
 		public void dragExit(DropTargetEvent event) {
-			controle.p2c_DragExit(pTas.getControle());
+			//controle.p2c_DragExit(pTas.getControle());
 		}
 		
 		@Override
@@ -158,17 +158,12 @@ public class DragAndDrop extends JPanel {
 		}
 
 		public void dragMouseMoved (DragSourceDragEvent event) {
-			/*int parentX = getRootPane().getX();
+			int parentX = getRootPane().getX();
             int parentY = getRootPane().getY();
             int eventX = event.getLocation().x + 10;
             int eventY = event.getLocation().y - 15;
             dragFrame.setLocation( eventX - parentX, eventY - parentY );
-            repaint();*/
-			dragFrame.setLocation (event.getLocation ().x
-					- getRootPane ().getParent ().getX (),
-					event.getLocation ().y
-					- getRootPane ().getParent ().getY ()) ;
-			repaint();
+            repaint();
 		} 
 	}
 	

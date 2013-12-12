@@ -74,7 +74,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas {
 
 	public void p2c_DragEnter(CTasDeCartes ctas) {
 		// TODO Auto-generated method stub
-		System.out.println("TEST DRAG ENTER");
+		//System.out.println("TEST DRAG ENTER");
 	}
 
 	public void p2c_DragExit(CTasDeCartes ctas) {

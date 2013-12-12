@@ -57,7 +57,7 @@ public class CSabot extends Sabot implements IControleDND{
 
 	public void p2c_debutDnDDrag(CCarte ccarte) {
 		if(ccarte != null){
-			System.out.println("Debut Drag N Drop (CSabot) card");
+			System.out.println("Debut Drag N Drop");
 		}
 		try {
 			if(ccarte == (CCarte) getSommet()){
