@@ -1,12 +1,13 @@
 package presentation;
 
+import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
 
 import controle.CTasDeCartes;
 import controle.ICTas;
@@ -20,35 +21,17 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 	private int dx;
 	private int dy;
 	private ICTas controle;
-	private SpringLayout layout;
 
 	public PTasDeCartes(ICTas cTasDeCartes) {
 		this.controle = cTasDeCartes;
 		
 		// Cr�ation et assignation du layout manager
-		layout = new SpringLayout();
-		setLayout(layout) ;
-		
-		//ajout des contraintes sur le tas de carte
-		setContraintes();
+		setLayout(null);
+		Dimension d = new Dimension(PCarte.largeur, PCarte.hauteur);
+		setPreferredSize(d);
 		
 		// Pour que le fond du jeu soit visible
 		setOpaque(false);
-//		setBackground(Color.BLUE);
-	}
-	
-	public void setContraintes() {
-		// un tas de carte soit avoir au minimum la taille d'une carte
-		layout.putConstraint(SpringLayout.EAST, this, PCarte.largeur, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.SOUTH, this, PCarte.hauteur, SpringLayout.NORTH, this);
-		int deplacementX, deplacementY;
-		deplacementX = (controle.getNombre() - 1) * dx;
-		deplacementY = (controle.getNombre() - 1) * dy;
-		if(controle.getNombre() > 0){
-			layout.putConstraint(SpringLayout.EAST, this, PCarte.largeur+deplacementX, SpringLayout.WEST, this);
-			layout.putConstraint(SpringLayout.SOUTH, this, PCarte.hauteur+deplacementY, SpringLayout.NORTH, this);
-		}
-		
 	}
 	
 	public void empiler(PCarte carte) {
@@ -56,9 +39,13 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 		int deplacementX, deplacementY;
 		deplacementX = (controle.getNombre() - 1) * dx;
 		deplacementY = (controle.getNombre() - 1) * dy;
-		
-		layout.putConstraint(SpringLayout.WEST, carte, deplacementX, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, carte, deplacementY, SpringLayout.NORTH, this);
+		Insets insets = getInsets();
+		Dimension size = carte.getPreferredSize();
+		carte.setBounds(deplacementX + insets.left, deplacementY + insets.right, size.width, size.height);
+		Dimension dTas = this.getPreferredSize();
+		dTas.width = PCarte.largeur + deplacementX;
+		dTas.height = PCarte.hauteur + deplacementY;
+		this.setPreferredSize(dTas);
 	}
 	
 	/*
@@ -73,6 +60,13 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 
 	public void depiler(PCarte carte) {
 		this.remove(carte);
+		int deplacementX, deplacementY;
+		deplacementX = (controle.getNombre() - 1) * dx;
+		deplacementY = (controle.getNombre() - 1) * dy;
+		Dimension dTas = this.getPreferredSize();
+		dTas.width = PCarte.largeur + deplacementX;
+		dTas.height = PCarte.hauteur + deplacementY;
+		this.setPreferredSize(dTas);
 	}
 	 @Override
 	    public Object getTransferData( DataFlavor flavor ) throws UnsupportedFlavorException, IOException
@@ -106,7 +100,6 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 	    }
 
 		public CTasDeCartes getControle() {
-			// TODO Auto-generated method stub
 			return (CTasDeCartes) controle;
 		}
 

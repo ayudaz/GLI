@@ -3,7 +3,6 @@ package controle;
 import presentation.PColonne;
 import solitaire.application.Carte;
 import solitaire.application.Colonne;
-import solitaire.application.Tas;
 import solitaire.application.Usine;
 
 public class CColonne extends Colonne implements IControleDND {
@@ -92,7 +91,7 @@ public class CColonne extends Colonne implements IControleDND {
 		if (isEmpilable(ctas)){
 			empiler(ctas);
 			presentation.finDnDValide();
-			presentation.setContraintes();
+			presentation.affichage();
 		}
 		else{
 			presentation.finDnDInvalid();

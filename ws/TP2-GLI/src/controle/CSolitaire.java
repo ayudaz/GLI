@@ -39,8 +39,5 @@ public class CSolitaire extends Solitaire {
 	
 	public void traiterJeu(char paramChar){
 		super.traiterJeu(paramChar);
-		presentation.setContraintes();
-		presentation.validate();
-		presentation.repaint();
 	}
 }

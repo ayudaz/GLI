@@ -1,7 +1,5 @@
 package presentation;
 
-import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -29,6 +27,10 @@ import controle.IControleDND;
 
 public class DragAndDrop extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9214215836406254963L;
 	protected DragSource dragSource = null;
 	protected DropTarget dropTarget;
 

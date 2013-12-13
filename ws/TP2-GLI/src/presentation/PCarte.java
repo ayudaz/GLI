@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -13,7 +12,7 @@ import javax.swing.JPanel;
 import controle.CCarte;
 
 /**
- * Composant Présentation d'une carte
+ * Composant Prï¿½sentation d'une carte
  */
 public class PCarte extends JPanel implements Transferable {
 
@@ -22,7 +21,7 @@ public class PCarte extends JPanel implements Transferable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8803764380933046718L;
-	protected CCarte controle; // contrôleur associé
+	protected CCarte controle; // contrï¿½leur associï¿½
 	protected JLabel face, dos;
 	protected ImageIcon icone; // image de la face
 	protected static ImageIcon iconeDos; // image du dos
@@ -53,8 +52,7 @@ public class PCarte extends JPanel implements Transferable {
 
 		// le JPanel
 		setLayout(null);
-		setBackground(Color.yellow);
-		setOpaque(true);
+		setOpaque(false);
 		setSize(face.getSize());
 		setPreferredSize(getSize());
 		setFaceVisible(false);

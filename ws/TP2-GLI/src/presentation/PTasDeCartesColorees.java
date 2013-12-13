@@ -1,5 +1,7 @@
 package presentation;
 
+import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -41,7 +43,9 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		ImageIcon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/" + chaine + ".png"));
 		fond = new JLabel (icone) ;
 		add(fond);
-		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		Insets insets = getInsets();
+		Dimension size = fond.getPreferredSize();
+		fond.setBounds(insets.left, insets.right, size.width, size.height);
 		
 
 		dropTarget = new DropTarget(this, new MyDropTargetListener());

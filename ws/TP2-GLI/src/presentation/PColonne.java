@@ -1,8 +1,8 @@
 package presentation;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
 
 import controle.CColonne;
 
@@ -22,7 +21,7 @@ public class PColonne extends DragAndDrop {
 	private static final long serialVersionUID = 6012710342824704043L;
 	private PTasDeCartes cachees;
 	private PTasDeCartesAlternees visibles;
-	private SpringLayout layout;
+//	private SpringLayout layout;
 	private static final int DECALY = 15;
 	private JPanel successTopPanel;
 	private JPanel errorTopPanel;
@@ -32,25 +31,22 @@ public class PColonne extends DragAndDrop {
 		controle = cc;
 		this.cachees = cachees;
 		this.visibles = visibles;
-		// SpringLayout
-		layout = new SpringLayout();
-		this.setLayout(layout);
+		this.setLayout(null);
 
 		// ajout des composants au panel
 		this.add(cachees);
 		this.cachees.setDxDy(0, DECALY);
 		this.add(visibles, 0);
 		this.visibles.setDxDy(0, DECALY);
-
+		
+		affichage();
+		
 		// ajout du listener de retournement des cartes
 		this.addMouseListener(new RetournerCarteListener());
 
-		// ajoute les contraintes sur la colonne
-		setContraintes();
-
 		// Pour que le fond du jeu soit visible
-		// setOpaque(false);
-		setBackground(Color.BLACK);
+		 setOpaque(false);
+//		setBackground(Color.BLACK);
 		
 		
 		successTopPanel = new JPanel();
@@ -80,42 +76,21 @@ public class PColonne extends DragAndDrop {
 				.addDragSourceMotionListener(new MyDragSourceMotionListener());
 
 	}
-
-	public void setContraintes() {
-		this.cachees.setContraintes();
-		this.visibles.setContraintes();
-		layout.putConstraint(SpringLayout.WEST, this.cachees, 0,
-				SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.NORTH, this.cachees, 0,
-				SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, this.visibles, 0,
-				SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST,
-				this.cachees);
-		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH,
-				this.visibles);
-		
-		if (this.cachees.getComponentCount() == 0) {
-			layout.putConstraint(SpringLayout.NORTH, this.visibles,
-					-PCarte.hauteur, SpringLayout.SOUTH, this.cachees);
-		} else {
-			layout.putConstraint(SpringLayout.NORTH, this.visibles,
-					-PCarte.hauteur + DECALY, SpringLayout.SOUTH, this.cachees);
-		}
-		if (this.visibles.getComponentCount() == 0) {
-			layout.putConstraint(SpringLayout.SOUTH, this, 0,
-					SpringLayout.SOUTH, this.cachees);
-		}
-
-		validate();
-		repaint();
+	
+	public void affichage(){
+		Insets insets = this.getInsets();
+		Dimension sizeCachees = this.cachees.getPreferredSize();
+		this.cachees.setBounds(insets.left, insets.top, sizeCachees.width, sizeCachees.height);
+		Dimension sizeVisible = this.visibles.getPreferredSize();
+		this.visibles.setBounds(insets.left, insets.top+this.cachees.getComponentCount()*DECALY, sizeVisible.width, sizeVisible.height);
+		int nbCarte = this.cachees.getComponentCount() + this.visibles.getComponentCount();
+		Dimension d = new Dimension(PCarte.largeur, PCarte.hauteur + (nbCarte-1)*DECALY);
+		this.setPreferredSize(d);
 	}
 
 	public void empiler(PCarte c) {
 		this.visibles.empiler(c);
-		setContraintes();
-		layout.putConstraint(SpringLayout.NORTH, this.visibles, -PCarte.hauteur
-				+ DECALY, SpringLayout.SOUTH, this.cachees);
+		affichage();
 		
 		if (!((CColonne) controle).isCarteRetournable()) {
 			cacherCachees();
@@ -123,9 +98,8 @@ public class PColonne extends DragAndDrop {
 	}
 
 	public void empiler(PTasDeCartes ptas) {
-		setContraintes();
-		layout.putConstraint(SpringLayout.NORTH, this.visibles, -PCarte.hauteur
-				+ DECALY, SpringLayout.SOUTH, this.cachees);
+		affichage();
+		
 		if (!((CColonne) controle).isCarteRetournable()) {
 			cacherCachees();
 		}
@@ -133,7 +107,8 @@ public class PColonne extends DragAndDrop {
 
 	public void depiler(PCarte c) {
 		this.visibles.depiler(c);
-		setContraintes();
+		affichage();
+		
 		if (!((CColonne) controle).isCarteRetournable()) {
 			cacherCachees();
 		}
@@ -143,24 +118,21 @@ public class PColonne extends DragAndDrop {
 	}
 
 	public void retournerCarte(boolean cacheesVide) {
-		setContraintes();
-		layout.putConstraint(SpringLayout.NORTH, this.visibles, -PCarte.hauteur
-				+ DECALY, SpringLayout.SOUTH, this.cachees);
+		affichage();
+		
 		if (cacheesVide) {
 			cacherCachees();
 		}
-		validate();
-		repaint();
 	}
 
 	public void cacherCachees() {
-		layout.putConstraint(SpringLayout.NORTH, visibles, -PCarte.hauteur,
-				SpringLayout.SOUTH, cachees);
+//		layout.putConstraint(SpringLayout.NORTH, visibles, -PCarte.hauteur,
+//				SpringLayout.SOUTH, cachees);
 	}
 
 	public void cacherVisibles() {
-		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH,
-				cachees);
+//		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH,
+//				cachees);
 	}
 	
 	public void showAcceptTarget(boolean state) {

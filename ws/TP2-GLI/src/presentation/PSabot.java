@@ -1,6 +1,9 @@
 package presentation;
 
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.event.MouseEvent;
@@ -9,7 +12,6 @@ import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.SpringLayout;
 
 import controle.CSabot;
 
@@ -18,10 +20,8 @@ public class PSabot extends DragAndDrop{
 	 * 
 	 */
 	private static final long serialVersionUID = 1595830508186217340L;
-	//private CSabot controle;
 	private PTasDeCartes cachees;
 	private PTasDeCartes visibles;
-	private SpringLayout layout;
 	private RetournerSabotListener rsl = new RetournerSabotListener();
 	private RetournerCarteListener rcl = new RetournerCarteListener();
 	
@@ -34,19 +34,19 @@ public class PSabot extends DragAndDrop{
 		this.visibles = visibles;
 		
 		// Cr�ation et assignation du layout manager
-		layout = new SpringLayout();
-		this.setLayout(layout);
+		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 0));
 		
 		// Ajout des tas cach�es et visibles au panel
 		add(cachees);
 		add(visibles);
-		cachees.setDxDy(0, 0);
+		this.cachees.setDxDy(0, 0);
 		Icon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/fond_sabot.png"));
-		cachees.add(new JLabel(icone));
+		JLabel fond = new JLabel(icone);
+		this.cachees.add(fond);
+		Insets insets = this.cachees.getInsets();
+		Dimension size = fond.getPreferredSize();
+		fond.setBounds(insets.left, insets.right, size.width, size.height);
 		visibles.setDxDy(DECALVISIBLE, 0);
-		
-		// Contraintes d'affichage du Sabot
-		setContraintes();
 		
 		// Pour que le fond du jeu soit visible
 		setOpaque(false);
@@ -59,22 +59,9 @@ public class PSabot extends DragAndDrop{
 	}
 	
 	public void retournerCarte() {
-		setContraintes();
 	}	
 	
 	public void retourner() {
-		setContraintes();
-	}
-	
-	public void setContraintes() {
-		cachees.setContraintes();
-		visibles.setContraintes();
-		layout.putConstraint(SpringLayout.NORTH, cachees, 0, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.NORTH, visibles, 0, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, cachees, 0, SpringLayout.WEST, this);
-		layout.putConstraint(SpringLayout.WEST, visibles, 25, SpringLayout.EAST, cachees);
-		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, visibles);
-		layout.putConstraint(SpringLayout.EAST, this, 20, SpringLayout.EAST, visibles);
 	}
 	
 	public void activerRetournerSabot(){

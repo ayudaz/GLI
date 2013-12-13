@@ -18,16 +18,16 @@ public class TestSolitaire {
 	public static void main(String[] args) {
 		JFrame f = new JFrame ("Test Solitaire");
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		f.setLayout(new FlowLayout()); // au lieu de BorderLayout par d�faut
-		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet p�le
+		f.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		
 		CSolitaire solitaire = new CSolitaire("Solitaire", new CUsine());
 		solitaire.initialiser();
 		
-		f.getContentPane().add(solitaire.getPresentation()) ;
+		f.getContentPane().add(solitaire.getPresentation());
+		f.setPreferredSize(f.getContentPane().getPreferredSize());
 		f.pack();		// dimensionner le cadre
 		f.setLocation(200,100);	// le positionner
-		f.setVisible (true) ;	// et le rendre visible
+		f.setVisible(true);	// et le rendre visible
 
 		solitaire.jouer();
 	}
