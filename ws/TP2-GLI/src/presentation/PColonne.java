@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import listener.RetournerCarteColonneListener;
 import controle.CColonne;
 
 public class PColonne extends DragAndDrop {
@@ -42,7 +43,7 @@ public class PColonne extends DragAndDrop {
 		affichage();
 		
 		// ajout du listener de retournement des cartes
-		this.addMouseListener(new RetournerCarteListener());
+		//cachees.addMouseListener(new RetournerCarteColonneListener(cc));
 
 		// Pour que le fond du jeu soit visible
 		 setOpaque(false);
@@ -135,6 +136,18 @@ public class PColonne extends DragAndDrop {
 //				cachees);
 	}
 	
+	@Override
+	public void finDnDValide() {
+		super.finDnDValide();
+		System.out.println("Fin DND valide");
+		try {
+			((CColonne)controle).retournerCarte();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void showAcceptTarget(boolean state) {
 		//System.out.println("ShowAcceptTarget with state : "+state);
 		if(state){
@@ -149,44 +162,6 @@ public class PColonne extends DragAndDrop {
 		//System.out.println("Normal state");
 		successTopPanel.setVisible(false);
 		errorTopPanel.setVisible(false);		
-	}
-	
-	class RetournerCarteListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			try {
-				((CColonne) controle).retournerCarte();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
 
 }

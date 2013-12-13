@@ -1,13 +1,17 @@
 package controle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import presentation.PTasDeCartesColorees;
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 
-public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas {
+public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas, Subject {
 	
 	private PTasDeCartesColorees presentation;
+	private List<Observer> observers = new ArrayList<Observer>();
 	
 	public CTasDeCartesColorees(String nom, int couleur, Usine usine) {
 		super(nom, couleur, usine);
@@ -47,18 +51,13 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas {
 
 
 	public void p2c_finDropTarget(CTasDeCartes ctas) {
-		// TODO Auto-generated method stub
-		System.out.println("CTAS: "+ctas);
 		if(ctas.getNombre() <= 1){
-			System.out.println("On peut empiler");
 			try {
 				if(isEmpilable(ctas.getSommet())){
-					System.out.println("Et on empile");
 					empiler(ctas.getSommet());
 					presentation.finDnDValide();
 				}
 				else{
-					System.out.println("Mais on empile pas... :(");
 					presentation.finDnDInvalid();
 				}
 			} catch (Exception e) {
@@ -66,20 +65,28 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas {
 			}
 		}
 		else{
-			System.out.println("On ne peut pas empiler :'(");
 			presentation.finDnDInvalid();
-		}
-		
+		}		
 	}
 
 	public void p2c_DragEnter(CTasDeCartes ctas) {
 		// TODO Auto-generated method stub
-		//System.out.println("TEST DRAG ENTER");
 	}
 
 	public void p2c_DragExit(CTasDeCartes ctas) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void notifier() {
+		for(Observer o : observers){
+			o.update();
+		}
 	}
 
 }

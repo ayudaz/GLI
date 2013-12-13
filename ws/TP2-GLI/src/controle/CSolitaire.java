@@ -6,7 +6,7 @@ import solitaire.application.Solitaire;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 
-public class CSolitaire extends Solitaire {
+public class CSolitaire extends Solitaire implements Observer {
 	
 	private PSolitaire presentation;
 
@@ -30,6 +30,7 @@ public class CSolitaire extends Solitaire {
 		
 		for(TasDeCartesColorees tas : this.pilesColorees){
 			presentation.addPileColorees(((CTasDeCartesColorees)tas).getPresentation());
+			((CTasDeCartesColorees)tas).addObserver(this);
 		}
 		
 		for(Colonne col : this.pilesAlternees){
@@ -40,4 +41,16 @@ public class CSolitaire extends Solitaire {
 	public void traiterJeu(char paramChar){
 		super.traiterJeu(paramChar);
 	}
+
+	@Override
+	public void update() {
+		if(gagne()){
+			presentation.afficheMessageGagne();
+		}
+		else{
+			presentation.afficheMessagePerd();
+		}
+	}
+	
+	
 }

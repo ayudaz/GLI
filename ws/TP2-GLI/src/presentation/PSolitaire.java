@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controle.CSolitaire;
@@ -115,5 +116,13 @@ public class PSolitaire extends JPanel {
 		g.drawImage(image, 0, 0, null); 
 		g.dispose(); 
 		return bufferedImage; 
+	}
+
+	public void afficheMessageGagne() {
+		JOptionPane.showMessageDialog(getParent(),"Eggs are not supposed to be green.");
+	}
+
+	public void afficheMessagePerd() {
+		JOptionPane.showMessageDialog(getParent(),"It works !");
 	}
 }

@@ -192,8 +192,6 @@ public class DragAndDrop extends JPanel {
 	public void finDnDValide() {
 		theFinalEvent.acceptDrop(DnDConstants.ACTION_MOVE);
 		theFinalEvent.getDropTargetContext().dropComplete(true);
-		validate();
-		repaint();
 	}
 
 	public void finDnDInvalid() {

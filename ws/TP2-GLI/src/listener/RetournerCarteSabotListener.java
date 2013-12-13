@@ -5,11 +5,11 @@ import java.awt.event.MouseListener;
 
 import controle.CSabot;
 
-public class RetournerCarteListener implements MouseListener {
+public class RetournerCarteSabotListener implements MouseListener {
 	
 	private CSabot controle;
 	
-	public RetournerCarteListener(CSabot controle){
+	public RetournerCarteSabotListener(CSabot controle){
 		this.controle = controle;
 	}
 
