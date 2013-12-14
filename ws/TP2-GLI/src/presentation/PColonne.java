@@ -7,6 +7,9 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import listener.ColonneMouseListener;
@@ -33,9 +36,15 @@ public class PColonne extends DragAndDrop {
 		this.setLayout(null);
 
 		// ajout des composants au panel
-		this.add(cachees);
+		add(this.cachees);
+		add(this.visibles);
 		this.cachees.setDxDy(0, DECALY);
-		this.add(visibles, 0);
+		Icon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/fond_colonne.png"));
+		JLabel fond = new JLabel(icone);
+		this.cachees.add(fond);
+		Insets insets = this.cachees.getInsets();
+		Dimension sizeFond = fond.getPreferredSize();
+		fond.setBounds(insets.left, insets.top, sizeFond.width, sizeFond.height);
 		this.visibles.setDxDy(0, DECALY);
 		
 		affichage();
@@ -76,15 +85,30 @@ public class PColonne extends DragAndDrop {
 	}
 	
 	public void affichage(){
+		int nbCarte = this.cachees.getControle().getNombre() + this.visibles.getControle().getNombre();
 		Insets insets = this.getInsets();
-		Dimension sizeCachees = this.cachees.getPreferredSize();
-		this.cachees.setBounds(insets.left, insets.top, sizeCachees.width, sizeCachees.height);
+		Dimension sizeCachees; 
+		if(nbCarte != 0){
+			sizeCachees = this.cachees.getPreferredSize();
+		}
+		else{
+			sizeCachees = new Dimension(PCarte.largeur, PCarte.hauteur);
+		}
 		Dimension sizeVisible = this.visibles.getPreferredSize();
-		this.visibles.setBounds(insets.left, insets.top+this.cachees.getComponentCount()*DECALY, sizeVisible.width, sizeVisible.height);
-		int nbCarte = this.cachees.getComponentCount() + this.visibles.getComponentCount();
-		Dimension d = new Dimension(PCarte.largeur, PCarte.hauteur + (nbCarte-1)*DECALY);
+		
+		this.cachees.setBounds(insets.left, insets.top, sizeCachees.width, sizeCachees.height);
+		this.visibles.setBounds(insets.left, insets.top+this.cachees.getControle().getNombre()*DECALY, sizeVisible.width, sizeVisible.height);
+		
+		Dimension d;
+		if(nbCarte != 0){
+			d = new Dimension(PCarte.largeur, PCarte.hauteur + (nbCarte-1)*DECALY);
+		}
+		else{
+			d = new Dimension(PCarte.largeur, PCarte.hauteur);
+		}
 		this.setPreferredSize(d);
 		this.setSize(d);
+		repaint();
 	}
 
 	public void empiler(PCarte c) {
@@ -119,12 +143,6 @@ public class PColonne extends DragAndDrop {
 	public void finDnDValide() {
 		super.finDnDValide();
 		System.out.println("Fin DND valide");
-		try {
-//			((CColonne)controle).retournerCarte();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public void showAcceptTarget(boolean state) {

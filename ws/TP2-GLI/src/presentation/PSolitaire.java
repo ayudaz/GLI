@@ -24,7 +24,11 @@ import javax.swing.JPanel;
 
 import listener.ColonneMouseListener;
 import listener.SabotMouseListener;
+import listener.SolitaireClicDroitMouseListener;
+import solitaire.application.Colonne;
+import solitaire.application.Sabot;
 import solitaire.application.TasDeCartesColorees;
+import controle.CSabot;
 import controle.CSolitaire;
 
 /**
@@ -115,6 +119,10 @@ public class PSolitaire extends JPanel {
 		this.pilesColorees.add(pileColorees);
 	}
 	
+	public void setClicDroitMouseListener(CSabot sabot,	Colonne[] colonnes, TasDeCartesColorees[] tasDeCartesColorees) {
+		this.addMouseListener(new SolitaireClicDroitMouseListener(sabot, colonnes, tasDeCartesColorees));
+	}
+	
 	private BufferedImage toBufferedImage(Image image) {	
 		image = new ImageIcon(image).getImage(); 
 
@@ -132,4 +140,6 @@ public class PSolitaire extends JPanel {
 	public void afficheMessageGagne() {
 		JOptionPane.showMessageDialog(getParent(),"Félicitations ! Vous avez gagnez !");
 	}
+
+	
 }

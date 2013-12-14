@@ -69,11 +69,11 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas, 
 		}		
 	}
 
-	public void p2c_DragEnter(CTasDeCartes ctas) {
+	public void p2c_DragEnter(ICTas icTas) {
 		// TODO Auto-generated method stub
 	}
 
-	public void p2c_DragExit(CTasDeCartes ctas) {
+	public void p2c_DragExit(ICTas icTas) {
 		// TODO Auto-generated method stub		
 	}
 

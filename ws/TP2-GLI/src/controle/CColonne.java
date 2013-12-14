@@ -112,7 +112,7 @@ public class CColonne extends Colonne implements IControleDND {
 		}
 	}
 
-	public void p2c_DragEnter(CTasDeCartes ctas) {
+	public void p2c_DragEnter(ICTas ctas) {
 		// TODO Auto-generated method stub
 		/*if (isEmpilable(ctas)) {
 			presentation.showAcceptTarget(true);
@@ -121,7 +121,7 @@ public class CColonne extends Colonne implements IControleDND {
 		}*/
 	}
 
-	public void p2c_DragExit(CTasDeCartes ctas) {
+	public void p2c_DragExit(ICTas ctas) {
 		// TODO Auto-generated method stub
 		//presentation.setNormalState();
 	}

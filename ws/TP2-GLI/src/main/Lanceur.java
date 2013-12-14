@@ -13,6 +13,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
+import listener.AProposActionListener;
+import listener.AideActionListener;
 import listener.ChoixNbCartesActionListener;
 import listener.NouvellePartieActionListener;
 import controle.CSolitaire;
@@ -23,6 +25,7 @@ public class Lanceur extends JFrame {
 	private static final long serialVersionUID = 8666586439406360918L;
 	private JMenuBar menuBar;
 	private JMenu menuParametres;
+	private JMenu menuAide;
 	private CSolitaire solitaire;
 	
 	public Lanceur(){
@@ -30,8 +33,9 @@ public class Lanceur extends JFrame {
 		
 		menuBar = new JMenuBar();
 		menuParametres = new JMenu("Partie");
-		menuParametres.setMnemonic(KeyEvent.VK_ALT);
+		menuAide = new JMenu("?");
 		menuBar.add(menuParametres);
+		menuBar.add(menuAide);
 		
 		JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie");
 		nouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
@@ -52,6 +56,14 @@ public class Lanceur extends JFrame {
 		rbMenuItemNbCartes.addActionListener(new ChoixNbCartesActionListener(3));
 		bgNbCartes.add(rbMenuItemNbCartes);
 		menuParametres.add(rbMenuItemNbCartes);
+		
+		JMenuItem aide = new JMenuItem("Aide");
+		aide.addActionListener(new AideActionListener(this));
+		menuAide.add(aide);
+		
+		JMenuItem aPropos = new JMenuItem("A Propos");
+		aPropos.addActionListener(new AProposActionListener(this));
+		menuAide.add(aPropos);
 		
 		this.setJMenuBar(menuBar);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

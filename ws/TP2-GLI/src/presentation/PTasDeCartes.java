@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import controle.CTasDeCartes;
 import controle.ICTas;
 
 public class PTasDeCartes extends JPanel implements IPTas, Transferable {
@@ -72,9 +71,9 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 	}
 
 
-	public CTasDeCartes getControle() {
+	public ICTas getControle() {
 		// TODO Auto-generated method stub
-		return (CTasDeCartes) controle;
+		return controle;
 	}
 
 	@Override

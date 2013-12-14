@@ -36,6 +36,8 @@ public class CSolitaire extends Solitaire implements Observer {
 		for(Colonne col : this.pilesAlternees){
 			presentation.addColonne(((CColonne)col).getPresentation(), this.pilesColorees);
 		}
+		
+		presentation.setClicDroitMouseListener((CSabot)this.sabot, this.pilesAlternees, this.pilesColorees);
 	}
 	
 	@Override

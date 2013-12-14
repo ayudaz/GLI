@@ -89,12 +89,12 @@ public class CSabot extends Sabot implements IControleDND{
 	}
 
 	@Override
-	public void p2c_DragEnter(CTasDeCartes ctas) {
+	public void p2c_DragEnter(ICTas ctas) {
 		
 	}
 
 	@Override
-	public void p2c_DragExit(CTasDeCartes ctas) {
+	public void p2c_DragExit(ICTas ctas) {
 		
 	}
 }

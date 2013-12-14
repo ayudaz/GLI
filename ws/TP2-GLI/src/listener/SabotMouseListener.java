@@ -24,16 +24,12 @@ public class SabotMouseListener implements MouseListener {
 				CCarte carte = (CCarte) sabot.getSommet();
 				for(TasDeCartesColorees tas : tasDeCartesColorees){
 					if(tas.isEmpilable(carte)){
-						try {
-							sabot.depiler();
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
+						sabot.depiler();
 						tas.empiler(carte);
 					}
 				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
 		}
 	}

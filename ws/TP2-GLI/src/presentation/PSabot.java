@@ -43,8 +43,8 @@ public class PSabot extends DragAndDrop{
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 0));
 		
 		// Ajout des tas cach�es et visibles au panel
-		add(cachees);
-		add(visibles);
+		add(this.cachees);
+		add(this.visibles);
 		this.cachees.setDxDy(0, 0);
 		Icon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/fond_sabot.png"));
 		JLabel fond = new JLabel(icone);

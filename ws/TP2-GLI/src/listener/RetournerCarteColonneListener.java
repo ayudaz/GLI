@@ -35,12 +35,12 @@ public class RetournerCarteColonneListener implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		controle.getPresentation().setCursor(new Cursor(Cursor.HAND_CURSOR));
+//		controle.getPresentation().setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		controle.getPresentation().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//		controle.getPresentation().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 }
