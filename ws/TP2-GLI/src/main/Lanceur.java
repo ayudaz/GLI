@@ -7,10 +7,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.WindowConstants;
 
 import listener.ChoixNbCartesActionListener;
+import listener.NouvellePartieActionListener;
 import controle.CSolitaire;
 import controle.CUsine;
 
@@ -19,13 +21,19 @@ public class Lanceur extends JFrame {
 	private static final long serialVersionUID = 8666586439406360918L;
 	private JMenuBar menuBar;
 	private JMenu menuParametres;
+	private CSolitaire solitaire;
 	
 	public Lanceur(){
 		super("Solitaire");
+		
 		menuBar = new JMenuBar();
 		menuParametres = new JMenu("Partie");
 		menuParametres.setMnemonic(KeyEvent.VK_ALT);
 		menuBar.add(menuParametres);
+		
+		JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie", KeyEvent.VK_F2);
+		nouvellePartie.addActionListener(new NouvellePartieActionListener(this));
+		menuParametres.add(nouvellePartie);
 		
 		ButtonGroup bgNbCartes = new ButtonGroup();
 		JRadioButtonMenuItem rbMenuItemNbCartes = new JRadioButtonMenuItem("Tirer une Carte");
@@ -43,25 +51,27 @@ public class Lanceur extends JFrame {
 		menuParametres.add(rbMenuItemNbCartes);
 		
 		this.setJMenuBar(menuBar);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		setLocation(200,100);	
+		setVisible(true);
+		setResizable(false);
+
+		nouvellePartie();
+	}
+	
+	public void nouvellePartie() {
+		solitaire = new CSolitaire("Solitaire", new CUsine());
+		solitaire.initialiser();
+		setContentPane(solitaire.getPresentation());
+		setPreferredSize(getContentPane().getPreferredSize());
+		pack();	
 	}
 	
 	public static void main(String[] args) {
-		Lanceur frameSolitaire = new Lanceur();
-		frameSolitaire.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frameSolitaire.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		
-		CSolitaire solitaire = new CSolitaire("Solitaire", new CUsine());
-		Thread t = new Thread(solitaire);
-		solitaire.initialiser();
-		
-		frameSolitaire.getContentPane().add(solitaire.getPresentation());
-		frameSolitaire.setPreferredSize(frameSolitaire.getContentPane().getPreferredSize());
-		frameSolitaire.pack();	
-		frameSolitaire.setLocation(200,100);	
-		frameSolitaire.setVisible(true);
-		frameSolitaire.setResizable(false);
-
-		t.start();
+		new Lanceur();
 	}
+
+	
 
 }
