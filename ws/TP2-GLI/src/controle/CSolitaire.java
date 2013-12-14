@@ -26,7 +26,7 @@ public class CSolitaire extends Solitaire implements Observer {
 	public void initialiser(){
 		super.initialiser();
 		
-		presentation.setSabot(((CSabot)this.sabot).getPresentation());
+		presentation.setSabot(((CSabot)this.sabot).getPresentation(), this.pilesColorees);
 		
 		for(TasDeCartesColorees tas : this.pilesColorees){
 			presentation.addPileColorees(((CTasDeCartesColorees)tas).getPresentation());
@@ -34,7 +34,7 @@ public class CSolitaire extends Solitaire implements Observer {
 		}
 		
 		for(Colonne col : this.pilesAlternees){
-			presentation.addColonne(((CColonne)col).getPresentation());
+			presentation.addColonne(((CColonne)col).getPresentation(), this.pilesColorees);
 		}
 	}
 	

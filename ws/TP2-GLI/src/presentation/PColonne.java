@@ -9,6 +9,8 @@ import java.awt.dnd.DropTarget;
 
 import javax.swing.JPanel;
 
+import listener.ColonneMouseListener;
+import listener.RetournerCarteColonneListener;
 import controle.CColonne;
 
 public class PColonne extends DragAndDrop {
@@ -39,7 +41,7 @@ public class PColonne extends DragAndDrop {
 		affichage();
 		
 		// ajout du listener de retournement des cartes
-		//cachees.addMouseListener(new RetournerCarteColonneListener(cc));
+		this.cachees.addMouseListener(new RetournerCarteColonneListener(cc));
 
 		// Pour que le fond du jeu soit visible
 		 setOpaque(false);
@@ -86,21 +88,31 @@ public class PColonne extends DragAndDrop {
 	}
 
 	public void empiler(PCarte c) {
+		if(getControle().isVide()){
+			this.add(visibles, 0);
+		}
 		this.visibles.empiler(c);
 		affichage();
 	}
-
-	public void empiler(PTasDeCartes ptas) {
-//		affichage();
+	
+	public void empiler(PTasDeCartes tas) {
+		if(!getControle().isVide()){
+			this.add(visibles, 0);
+		}
+		affichage();
 	}
 
 	public void depiler(PCarte c) {
 		this.visibles.depiler(c);
+		if(getControle().isVide()){
+			this.remove(visibles);
+		}
 		affichage();
 	}
 
-	public void retournerCarte(boolean cacheesVide) {
+	public void retournerCarte() {
 		affichage();
+		this.add(visibles, 0);
 	}
 	
 	@Override
@@ -108,7 +120,7 @@ public class PColonne extends DragAndDrop {
 		super.finDnDValide();
 		System.out.println("Fin DND valide");
 		try {
-			((CColonne)controle).retournerCarte();
+//			((CColonne)controle).retournerCarte();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,6 +141,14 @@ public class PColonne extends DragAndDrop {
 		//System.out.println("Normal state");
 		successTopPanel.setVisible(false);
 		errorTopPanel.setVisible(false);		
+	}
+
+	public CColonne getControle() {
+		return (CColonne) controle;
+	}
+
+	public void setColonneListener(ColonneMouseListener colonneMouseListener) {
+		visibles.addMouseListener(colonneMouseListener);
 	}
 
 }

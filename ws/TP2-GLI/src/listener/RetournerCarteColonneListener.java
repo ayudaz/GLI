@@ -16,38 +16,31 @@ public class RetournerCarteColonneListener implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		try {
-			System.out.println("RetournerCarteColonneListener Clicked");
 			controle.retournerCarte();
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("RetournerCarteColonneListener Enter");
+		controle.getPresentation().setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		controle.getPresentation().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 }

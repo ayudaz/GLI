@@ -21,10 +21,10 @@ public class PCarte extends JPanel implements Transferable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8803764380933046718L;
-	protected CCarte controle; // contr�leur associ�
+	protected CCarte controle; 
 	protected JLabel face, dos;
-	protected ImageIcon icone; // image de la face
-	protected static ImageIcon iconeDos; // image du dos
+	protected ImageIcon icone; 
+	protected static ImageIcon iconeDos;
 	public static int largeur, hauteur;
 
 	/**

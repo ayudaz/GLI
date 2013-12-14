@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
@@ -9,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
 import listener.ChoixNbCartesActionListener;
@@ -31,7 +33,8 @@ public class Lanceur extends JFrame {
 		menuParametres.setMnemonic(KeyEvent.VK_ALT);
 		menuBar.add(menuParametres);
 		
-		JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie", KeyEvent.VK_F2);
+		JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie");
+		nouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		nouvellePartie.addActionListener(new NouvellePartieActionListener(this));
 		menuParametres.add(nouvellePartie);
 		
@@ -65,7 +68,7 @@ public class Lanceur extends JFrame {
 		solitaire.initialiser();
 		setContentPane(solitaire.getPresentation());
 		setPreferredSize(getContentPane().getPreferredSize());
-		pack();	
+		pack();
 	}
 	
 	public static void main(String[] args) {

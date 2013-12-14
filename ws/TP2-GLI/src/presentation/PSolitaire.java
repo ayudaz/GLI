@@ -18,12 +18,13 @@ import java.awt.TexturePaint;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import listener.ColonneMouseListener;
+import listener.SabotMouseListener;
+import solitaire.application.TasDeCartesColorees;
 import controle.CSolitaire;
 
 /**
@@ -98,13 +99,16 @@ public class PSolitaire extends JPanel {
 
 	/**
 	 * @param sabot the sabot to set
+	 * @param pilesColorees 
 	 */
-	public void setSabot(PSabot sabot) {
+	public void setSabot(PSabot sabot, TasDeCartesColorees[] pilesColorees) {
 		this.sabot.add(sabot);
+		sabot.setSabotMouseListener(new SabotMouseListener(sabot.getControle(), pilesColorees));
 	}
 
-	public void addColonne(PColonne pileAlternee) {
+	public void addColonne(PColonne pileAlternee, TasDeCartesColorees[] pilesColorees) {
 		this.pilesAlternees.add(pileAlternee, gridBagConstraints);
+		pileAlternee.setColonneListener(new ColonneMouseListener(pileAlternee.getControle(), pilesColorees));
 	}
 
 	public void addPileColorees(PTasDeCartesColorees pileColorees) {

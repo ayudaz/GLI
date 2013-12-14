@@ -47,7 +47,7 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 		dTas.width = PCarte.largeur + deplacementX;
 		dTas.height = PCarte.hauteur + deplacementY;
 		this.setPreferredSize(dTas);
-
+		repaint();
 	}
 
 	/*
@@ -68,6 +68,7 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 		dTas.width = PCarte.largeur + deplacementX;
 		dTas.height = PCarte.hauteur + deplacementY;
 		this.setPreferredSize(dTas);
+		repaint();
 	}
 
 

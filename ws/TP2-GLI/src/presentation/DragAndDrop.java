@@ -85,25 +85,21 @@ public class DragAndDrop extends JPanel {
         @Override
         public void dragEnter( DragSourceDragEvent evt )
         {
-        	// TODO Auto-generated method stub
         	controle.p2c_DragEnter(tasEnTransit.getControle());
         }
 
 		@Override
 		public void dragOver(DragSourceDragEvent dsde) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void dropActionChanged(DragSourceDragEvent dsde) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void dragExit(DragSourceEvent dse) {
-			// TODO Auto-generated method stub
         	controle.p2c_DragExit(tasEnTransit.getControle());
 		}
 	}
@@ -112,7 +108,6 @@ public class DragAndDrop extends JPanel {
 		protected PTasDeCartes pTas = null;
 
 		public MyDropTargetListener() {
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override

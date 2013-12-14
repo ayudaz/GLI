@@ -3,6 +3,7 @@ package controle;
 import presentation.PColonne;
 import solitaire.application.Carte;
 import solitaire.application.Colonne;
+import solitaire.application.Tas;
 import solitaire.application.Usine;
 
 public class CColonne extends Colonne implements IControleDND {
@@ -21,12 +22,20 @@ public class CColonne extends Colonne implements IControleDND {
 	public PColonne getPresentation() {
 		return presentation;
 	}
+	
+	@Override
+	public void empiler(Tas tas){
+		super.empiler(tas);
+		this.presentation.empiler(((CTasDeCartes)tas).getPresentation());
+	}
 
+	@Override
 	public void empiler(Carte c) {
 		super.empiler(c);
 		this.presentation.empiler(((CCarte) c).getPresentation());
 	}
 
+	@Override
 	public void depiler() throws Exception {
 		Carte carte;
 		carte = getSommet();
@@ -37,17 +46,12 @@ public class CColonne extends Colonne implements IControleDND {
 	@Override
 	public void retournerCarte() throws Exception {
 		super.retournerCarte();
-		if (this.cachees.isVide()) {
-			presentation.retournerCarte(true);
-		} else {
-			presentation.retournerCarte(false);
-		}
+		presentation.retournerCarte();
 	}
 
 
 	@Override
 	public void p2c_debutDnDDrag(CCarte selectedCarte) {
-		// TODO Auto-generated method stub
 		if(selectedCarte == null){
 			System.out.println("Null card");
 		}
@@ -65,7 +69,7 @@ public class CColonne extends Colonne implements IControleDND {
                                 enTransit.empiler(getCarte(j));
                         }
                         for (int k=0; k<i; k++) {
-                                visibles.depiler();
+                                depiler();
                         }
                         presentation.c2p_debutDnDValide(enTransit.getPresentation());
                 }
@@ -84,15 +88,15 @@ public class CColonne extends Colonne implements IControleDND {
 			System.out.println("En transit : "+enTransit);
 			empiler(enTransit);
 		}
-		else{
-			try {
-				retournerCarte();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("Nombre Cartes visibles DragSource : "+this.visibles.getNombre());
-		}
+//		else{
+//			try {
+//				retournerCarte();
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			System.out.println("Nombre Cartes visibles DragSource : "+this.visibles.getNombre());
+//		}
 	}
 
 	public void p2c_finDropTarget(CTasDeCartes ctas) {

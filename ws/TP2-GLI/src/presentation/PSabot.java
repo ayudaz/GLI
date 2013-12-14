@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 
 import listener.RetournerCarteSabotListener;
 import listener.RetournerSabotListener;
+import listener.SabotMouseListener;
 import controle.CSabot;
 
 public class PSabot extends DragAndDrop{
@@ -94,5 +95,13 @@ public class PSabot extends DragAndDrop{
 	 */
 	public boolean isRetournerSabot() {
 		return retournerSabot;
+	}
+
+	public CSabot getControle() {
+		return (CSabot) controle;
+	}
+
+	public void setSabotMouseListener(SabotMouseListener sabotMouseListener) {
+		this.visibles.addMouseListener(sabotMouseListener);
 	}
 }
