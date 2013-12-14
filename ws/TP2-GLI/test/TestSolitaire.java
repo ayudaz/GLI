@@ -25,9 +25,10 @@ public class TestSolitaire {
 		
 		f.getContentPane().add(solitaire.getPresentation());
 		f.setPreferredSize(f.getContentPane().getPreferredSize());
-		f.pack();		// dimensionner le cadre
-		f.setLocation(200,100);	// le positionner
-		f.setVisible(true);	// et le rendre visible
+		f.pack();	
+		f.setLocation(200,100);	
+		f.setVisible(true);
+		f.setResizable(false);
 
 		solitaire.jouer();
 	}

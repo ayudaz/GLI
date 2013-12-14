@@ -22,8 +22,10 @@ public class PSabot extends DragAndDrop{
 	private static final long serialVersionUID = 1595830508186217340L;
 	private PTasDeCartes cachees;
 	private PTasDeCartes visibles;
-	private RetournerSabotListener rsl = new RetournerSabotListener();
-	private RetournerCarteListener rcl = new RetournerCarteListener();
+	private RetournerSabotListener rsl;
+	private RetournerCarteListener rcl;
+	private boolean retournerCarte;
+	private boolean retournerSabot;
 	
 	
 	private static final int DECALVISIBLE = 15;
@@ -32,6 +34,10 @@ public class PSabot extends DragAndDrop{
 		controle = c;
 		this.cachees = cachees;
 		this.visibles = visibles;
+		this.retournerCarte = true;
+		this.retournerSabot = false;
+		this.rsl = new RetournerSabotListener();
+		this.rcl = new RetournerCarteListener();
 		
 		// Cr�ation et assignation du layout manager
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 0));
@@ -55,29 +61,26 @@ public class PSabot extends DragAndDrop{
         myDragSourceListener = new MyDragSourceListener();
         dragSource = new DragSource();
         dragSource.createDefaultDragGestureRecognizer( visibles, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
-        dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );		
-	}
-	
-	public void retournerCarte() {
-	}	
-	
-	public void retourner() {
+        dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );
+        
+        cachees.addMouseListener(rsl);
+        cachees.addMouseListener(rcl);
 	}
 	
 	public void activerRetournerSabot(){
-		cachees.addMouseListener(rsl);
+		retournerSabot = true;
 	}
 	
 	public void activerRetournerCarte(){
-		cachees.addMouseListener(rcl);
+		retournerCarte = true;
 	}
 
 	public void desactiverRetournerSabot() {
-		cachees.removeMouseListener(rsl);
+		retournerSabot = false;
 	}
 
 	public void desactiverRetournerCarte() {
-		cachees.removeMouseListener(rcl);
+		retournerCarte = false;
 	}
 	
 	
@@ -85,36 +88,32 @@ public class PSabot extends DragAndDrop{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			try {
-				((CSabot) controle).retourner();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if(retournerSabot){
+				try {
+					((CSabot) controle).retourner();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 
@@ -124,37 +123,35 @@ public class PSabot extends DragAndDrop{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			try {
-				((CSabot) controle).retournerCarte();
-				((CSabot) controle).retournerCarte();
-				((CSabot) controle).retournerCarte();
-			} catch (Exception e1) {
-				e1.printStackTrace();
+			if(retournerCarte){
+				try {
+					((CSabot) controle).retournerCarte();
+					((CSabot) controle).retournerCarte();
+					((CSabot) controle).retournerCarte();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 		}

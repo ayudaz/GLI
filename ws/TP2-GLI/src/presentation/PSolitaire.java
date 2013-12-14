@@ -3,6 +3,7 @@
  */
 package presentation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -59,20 +60,18 @@ public class PSolitaire extends JPanel {
 		
 		
 		// Assignation des layout manager aux JPanel
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.setLayout(new BorderLayout(0, 30));
 		pilesColorees.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 15));
 		pilesAlternees.setLayout(new BoxLayout(pilesAlternees, BoxLayout.X_AXIS));
 		
 		// Ajout des composants au Solitaire
 		JPanel haut = new JPanel();
-		haut.setLayout(new BoxLayout(haut, BoxLayout.LINE_AXIS));
+		haut.setLayout(new BorderLayout());
 		haut.setOpaque(false);
-		haut.add(sabot);
-		haut.add(Box.createHorizontalGlue());
-		haut.add(pilesColorees);
-		this.add(haut);
-//		this.add(Box.());
-		this.add(pilesAlternees);
+		haut.add(sabot, BorderLayout.CENTER);
+		haut.add(pilesColorees, BorderLayout.LINE_END);
+		this.add(haut, BorderLayout.PAGE_START);
+		this.add(pilesAlternees, BorderLayout.CENTER);
 		pilesAlternees.add(Box.createRigidArea(new Dimension(30, 0)));
 		Dimension sol = new Dimension(1000, 600);
 		this.setPreferredSize(sol);

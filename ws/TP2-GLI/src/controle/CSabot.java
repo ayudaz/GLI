@@ -39,15 +39,17 @@ public class CSabot extends Sabot implements IControleDND{
 	}
 
 	public void retourner() throws Exception{
-		super.retourner();
-		presentation.retourner();
-		presentation.desactiverRetournerSabot();
-		presentation.activerRetournerCarte();
+		if(isRetournable()){
+			super.retourner();
+		}
+		else{
+			presentation.desactiverRetournerSabot();
+			presentation.activerRetournerCarte();
+		}
 	}
 	
 	public void retournerCarte() throws Exception{
 		super.retournerCarte();
-		presentation.retournerCarte();
 		if(!isCarteRetournable()){
 			presentation.desactiverRetournerCarte();
 			presentation.activerRetournerSabot();
@@ -70,14 +72,12 @@ public class CSabot extends Sabot implements IControleDND{
 				//
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void p2c_finDragSource(boolean dropSuccess) {
-		// TODO Auto-generated method stub
 		if(!dropSuccess){
 			empiler(enTransit);
 		}
@@ -85,19 +85,16 @@ public class CSabot extends Sabot implements IControleDND{
 
 	@Override
 	public void p2c_finDropTarget(CTasDeCartes ctas) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void p2c_DragEnter(CTasDeCartes ctas) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void p2c_DragExit(CTasDeCartes ctas) {
-		// TODO Auto-generated method stub
 		
 	}
 }
