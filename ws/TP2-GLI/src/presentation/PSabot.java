@@ -1,18 +1,17 @@
 package presentation;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import listener.RetournerCarteSabotListener;
+import listener.RetournerSabotListener;
 import controle.CSabot;
 
 public class PSabot extends DragAndDrop{
@@ -23,7 +22,7 @@ public class PSabot extends DragAndDrop{
 	private PTasDeCartes cachees;
 	private PTasDeCartes visibles;
 	private RetournerSabotListener rsl;
-	private RetournerCarteListener rcl;
+	private RetournerCarteSabotListener rcl;
 	private boolean retournerCarte;
 	private boolean retournerSabot;
 	
@@ -36,8 +35,8 @@ public class PSabot extends DragAndDrop{
 		this.visibles = visibles;
 		this.retournerCarte = true;
 		this.retournerSabot = false;
-		this.rsl = new RetournerSabotListener();
-		this.rcl = new RetournerCarteListener();
+		this.rsl = new RetournerSabotListener(c);
+		this.rcl = new RetournerCarteSabotListener(c);
 		
 		// Cr�ation et assignation du layout manager
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 0));
@@ -83,78 +82,17 @@ public class PSabot extends DragAndDrop{
 		retournerCarte = false;
 	}
 	
-	
-	public class RetournerSabotListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			if(retournerSabot){
-				try {
-					((CSabot) controle).retourner();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			setCursor(new Cursor(Cursor.HAND_CURSOR));
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		}
-
+	/**
+	 * @return the retournerCarte
+	 */
+	public boolean isRetournerCarte() {
+		return retournerCarte;
 	}
 
-	public class RetournerCarteListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			if(retournerCarte){
-				try {
-					((CSabot) controle).retournerCarte();
-					((CSabot) controle).retournerCarte();
-					((CSabot) controle).retournerCarte();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
-		}
-
+	/**
+	 * @return the retournerSabot
+	 */
+	public boolean isRetournerSabot() {
+		return retournerSabot;
 	}
 }

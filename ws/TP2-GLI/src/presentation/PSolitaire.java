@@ -9,7 +9,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
 import java.awt.Toolkit;
@@ -38,6 +41,7 @@ public class PSolitaire extends JPanel {
 	private JPanel pilesAlternees;
 	private JPanel pilesColorees;
 	private BufferedImage bgImg;
+	GridBagConstraints gridBagConstraints;
 	private TexturePaint bgTexture;
 	
 	private CSolitaire controle;
@@ -62,7 +66,13 @@ public class PSolitaire extends JPanel {
 		// Assignation des layout manager aux JPanel
 		this.setLayout(new BorderLayout(0, 30));
 		pilesColorees.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 15));
-		pilesAlternees.setLayout(new BoxLayout(pilesAlternees, BoxLayout.X_AXIS));
+		pilesAlternees.setLayout(new GridBagLayout());
+		gridBagConstraints = new GridBagConstraints();
+		gridBagConstraints.gridwidth = 7;
+		gridBagConstraints.gridheight = 1;
+		gridBagConstraints.weighty = 1.0;
+		gridBagConstraints.anchor = GridBagConstraints.PAGE_START;
+		gridBagConstraints.insets = new Insets(20, 30, 0, 30);
 		
 		// Ajout des composants au Solitaire
 		JPanel haut = new JPanel();
@@ -72,7 +82,6 @@ public class PSolitaire extends JPanel {
 		haut.add(pilesColorees, BorderLayout.LINE_END);
 		this.add(haut, BorderLayout.PAGE_START);
 		this.add(pilesAlternees, BorderLayout.CENTER);
-		pilesAlternees.add(Box.createRigidArea(new Dimension(30, 0)));
 		Dimension sol = new Dimension(1000, 600);
 		this.setPreferredSize(sol);
 		
@@ -95,8 +104,7 @@ public class PSolitaire extends JPanel {
 	}
 
 	public void addColonne(PColonne pileAlternee) {
-		this.pilesAlternees.add(pileAlternee);
-		this.pilesAlternees.add(Box.createHorizontalGlue());
+		this.pilesAlternees.add(pileAlternee, gridBagConstraints);
 	}
 
 	public void addPileColorees(PTasDeCartesColorees pileColorees) {

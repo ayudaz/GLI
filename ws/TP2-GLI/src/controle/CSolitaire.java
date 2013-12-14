@@ -38,6 +38,7 @@ public class CSolitaire extends Solitaire implements Observer {
 		}
 	}
 	
+	@Override
 	public void traiterJeu(char paramChar){
 		super.traiterJeu(paramChar);
 	}
@@ -50,6 +51,11 @@ public class CSolitaire extends Solitaire implements Observer {
 		else{
 			presentation.afficheMessagePerd();
 		}
+	}
+	
+	@Override
+	public void run(){
+		super.run();
 	}
 	
 	

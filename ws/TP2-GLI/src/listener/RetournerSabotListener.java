@@ -1,5 +1,6 @@
 package listener;
 
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -15,9 +16,11 @@ public class RetournerSabotListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		try {
-			controle.retourner();
-		} catch (Exception e1) {
+		if(controle.getPresentation().isRetournerSabot()){
+			try {
+				controle.retourner();
+			} catch (Exception e1) {
+			}
 		}
 	}
 
@@ -33,12 +36,12 @@ public class RetournerSabotListener implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-
+		controle.getPresentation().setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-
+		controle.getPresentation().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 }

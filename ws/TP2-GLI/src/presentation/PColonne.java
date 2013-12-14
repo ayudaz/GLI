@@ -6,12 +6,9 @@ import java.awt.Insets;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-import listener.RetournerCarteColonneListener;
 import controle.CColonne;
 
 public class PColonne extends DragAndDrop {
@@ -22,7 +19,6 @@ public class PColonne extends DragAndDrop {
 	private static final long serialVersionUID = 6012710342824704043L;
 	private PTasDeCartes cachees;
 	private PTasDeCartesAlternees visibles;
-//	private SpringLayout layout;
 	private static final int DECALY = 15;
 	private JPanel successTopPanel;
 	private JPanel errorTopPanel;
@@ -46,7 +42,7 @@ public class PColonne extends DragAndDrop {
 		//cachees.addMouseListener(new RetournerCarteColonneListener(cc));
 
 		// Pour que le fond du jeu soit visible
-		 setOpaque(false);
+//		 setOpaque(false);
 //		setBackground(Color.BLACK);
 		
 		
@@ -87,53 +83,25 @@ public class PColonne extends DragAndDrop {
 		int nbCarte = this.cachees.getComponentCount() + this.visibles.getComponentCount();
 		Dimension d = new Dimension(PCarte.largeur, PCarte.hauteur + (nbCarte-1)*DECALY);
 		this.setPreferredSize(d);
+		this.setSize(d);
 	}
 
 	public void empiler(PCarte c) {
 		this.visibles.empiler(c);
 		affichage();
-		
-		if (!((CColonne) controle).isCarteRetournable()) {
-			cacherCachees();
-		}
 	}
 
 	public void empiler(PTasDeCartes ptas) {
-		affichage();
-		
-		if (!((CColonne) controle).isCarteRetournable()) {
-			cacherCachees();
-		}
+//		affichage();
 	}
 
 	public void depiler(PCarte c) {
 		this.visibles.depiler(c);
 		affichage();
-		
-		if (!((CColonne) controle).isCarteRetournable()) {
-			cacherCachees();
-		}
-		if (((CColonne) controle).isVide()) {
-			cacherVisibles();
-		}
 	}
 
 	public void retournerCarte(boolean cacheesVide) {
 		affichage();
-		
-		if (cacheesVide) {
-			cacherCachees();
-		}
-	}
-
-	public void cacherCachees() {
-//		layout.putConstraint(SpringLayout.NORTH, visibles, -PCarte.hauteur,
-//				SpringLayout.SOUTH, cachees);
-	}
-
-	public void cacherVisibles() {
-//		layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH,
-//				cachees);
 	}
 	
 	@Override
