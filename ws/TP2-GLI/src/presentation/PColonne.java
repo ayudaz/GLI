@@ -42,8 +42,7 @@ public class PColonne extends DragAndDrop {
 		//cachees.addMouseListener(new RetournerCarteColonneListener(cc));
 
 		// Pour que le fond du jeu soit visible
-//		 setOpaque(false);
-//		setBackground(Color.BLACK);
+		 setOpaque(false);
 		
 		
 		successTopPanel = new JPanel();
