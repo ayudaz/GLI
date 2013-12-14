@@ -118,10 +118,6 @@ public class PSolitaire extends JPanel {
 	}
 
 	public void afficheMessageGagne() {
-		JOptionPane.showMessageDialog(getParent(),"Eggs are not supposed to be green.");
-	}
-
-	public void afficheMessagePerd() {
-		JOptionPane.showMessageDialog(getParent(),"It works !");
+		JOptionPane.showMessageDialog(getParent(),"Félicitations ! Vous avez gagnez !");
 	}
 }

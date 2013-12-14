@@ -47,9 +47,6 @@ public class CSolitaire extends Solitaire implements Observer {
 		if(gagne()){
 			presentation.afficheMessageGagne();
 		}
-		else{
-			presentation.afficheMessagePerd();
-		}
 	}
 	
 	

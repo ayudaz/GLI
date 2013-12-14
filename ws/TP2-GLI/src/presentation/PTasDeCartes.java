@@ -104,4 +104,8 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 		return (result);
 	}
 
+	public int getDy() {
+		return dy;
+	}
+
 }

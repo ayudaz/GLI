@@ -173,13 +173,19 @@ public class DragAndDrop extends JPanel {
 
 	public void c2p_debutDnDValide(PTasDeCartes ten) {
 		tasEnTransit = ten;
+		int hauteur = PCarte.hauteur;
+		
+		if(ten.getControle().getNombre() > 1){
+			hauteur += (ten.getControle().getNombre() -1) * ten.getDy();
+		}
+		
         dragSource.startDrag (
         		theInitialEvent, DragSource.
         		DefaultMoveNoDrop,
         		ten, myDragSourceListener);
         dragFrame = new JFrame();
         dragFrame.setSize(PCarte.hauteur,PCarte.largeur);
-        dragFrame.setPreferredSize(new Dimension(PCarte.largeur,PCarte.hauteur));
+        dragFrame.setPreferredSize(new Dimension(PCarte.largeur, hauteur));
         dragFrame.add( ten );
         dragFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         dragFrame.setExtendedState( JFrame.MAXIMIZED_BOTH );
