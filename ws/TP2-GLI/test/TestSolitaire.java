@@ -1,10 +1,4 @@
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Rectangle;
-import java.awt.TexturePaint;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.util.prefs.BackingStoreException;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;

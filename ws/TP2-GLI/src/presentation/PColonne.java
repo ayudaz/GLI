@@ -13,6 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import listener.ColonneMouseListener;
+import listener.MyDragGestureListener;
+import listener.MyDragSourceListener;
+import listener.MyDragSourceMotionListener;
+import listener.MyDropTargetListener;
 import listener.RetournerCarteColonneListener;
 import controle.CColonne;
 
@@ -72,13 +76,13 @@ public class PColonne extends DragAndDrop {
 
 		// Elements et listeners pour le DnD
 		elementDrag = this.visibles;
-		dropTarget = new DropTarget(this, new MyDropTargetListener());
-		myDragSourceListener = new MyDragSourceListener();
+		myDropTargetListener = new MyDropTargetListener(controle);
+		dropTarget = new DropTarget(this, myDropTargetListener);
+		myDragSourceListener = new MyDragSourceListener(controle);
+		myDragGestureListener = new MyDragGestureListener(controle, this.visibles);
 		dragSource = new DragSource();
-		dragSource.createDefaultDragGestureRecognizer(this.visibles,
-				DnDConstants.ACTION_MOVE, new MyDragGestureListener());
-		dragSource
-				.addDragSourceMotionListener(new MyDragSourceMotionListener());
+		dragSource.createDefaultDragGestureRecognizer(this.visibles, DnDConstants.ACTION_MOVE, myDragGestureListener);
+		dragSource.addDragSourceMotionListener(new MyDragSourceMotionListener(this));
 
 	}
 

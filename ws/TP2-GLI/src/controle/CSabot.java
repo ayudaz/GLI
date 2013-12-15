@@ -75,6 +75,7 @@ public class CSabot extends Sabot implements IControleDND {
 		if (!dropSuccess) {
 			empiler(enTransit);
 		}
+		presentation.c2p_finDragSource();
 	}
 
 	@Override

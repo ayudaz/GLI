@@ -39,18 +39,14 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	 */
 	private static final long serialVersionUID = 487458044886830072L;
 
-	private DropTarget dropTarget;
 	private DropTargetDropEvent theFinalEvent;
 	private DragGestureEvent theInitialEvent;
 	
 	private DragSource dragSource;
 	private MyDragSourceListener myDragSourceListener;
 	private JFrame dragFrame;
-	private PTasDeCartes tasEnTransit;
-	
 	private CTasDeCartesColorees controle;
 
-	private PTasDeCartes ptas;
 	private JLabel fond;
 
 	private JPanel successDropPanel;
@@ -81,10 +77,7 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		errorDropPanel.setOpaque(true);
 		errorDropPanel.setVisible(false);
 
-		add(successDropPanel);
-		add(errorDropPanel);
-
-		dropTarget = new DropTarget(this, new MyDropTargetListener());
+		new DropTarget(this, new MyDropTargetListener());
 		// Elements et listeners pour le DnD
 		myDragSourceListener = new MyDragSourceListener();
 		dragSource = new DragSource();
@@ -220,7 +213,6 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	}
 	
 	public void c2p_debutDnDValide(PTasDeCartes ten) {
-		tasEnTransit = ten;
 		int hauteur = PCarte.hauteur;
 
 		if (ten.getControle().getNombre() > 1) {
@@ -244,15 +236,19 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 
 	public void showAcceptTarget(boolean state) {
 		if (state) {
+			this.add(successDropPanel);
 			successDropPanel.setVisible(true);
 		} else {
+			this.add(errorDropPanel);
 			errorDropPanel.setVisible(true);
 		}
 	}
 
 	public void setNormalState() {
 		successDropPanel.setVisible(false);
+		this.remove(successDropPanel);
 		errorDropPanel.setVisible(false);
+		this.remove(errorDropPanel);
 	}
 
 	public void finDnDInvalide() {

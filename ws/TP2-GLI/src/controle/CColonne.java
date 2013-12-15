@@ -80,6 +80,7 @@ public class CColonne extends Colonne implements IControleDND {
 		if (!dropSuccess) {
 			empiler(enTransit);
 		}
+		presentation.c2p_finDragSource();
 	}
 
 	@Override

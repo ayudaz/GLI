@@ -10,6 +10,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import listener.MyDragGestureListener;
+import listener.MyDragSourceListener;
+import listener.MyDragSourceMotionListener;
 import listener.RetournerCarteSabotListener;
 import listener.RetournerSabotListener;
 import listener.SabotMouseListener;
@@ -58,12 +61,13 @@ public class PSabot extends DragAndDrop {
 		setOpaque(false);
 
 		elementDrag = this.visibles;
-		myDragSourceListener = new MyDragSourceListener();
+		myDragSourceListener = new MyDragSourceListener(controle);
 		dragSource = new DragSource();
+		myDragGestureListener = new MyDragGestureListener(controle, this.visibles);
 		dragSource.createDefaultDragGestureRecognizer(visibles,
-				DnDConstants.ACTION_MOVE, new MyDragGestureListener());
+				DnDConstants.ACTION_MOVE, myDragGestureListener);
 		dragSource
-				.addDragSourceMotionListener(new MyDragSourceMotionListener());
+				.addDragSourceMotionListener(new MyDragSourceMotionListener(this));
 
 		cachees.addMouseListener(rsl);
 		cachees.addMouseListener(rcl);
