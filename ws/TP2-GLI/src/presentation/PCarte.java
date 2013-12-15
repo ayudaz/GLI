@@ -89,19 +89,16 @@ public class PCarte extends JPanel implements Transferable {
 	@Override
 	public Object getTransferData(DataFlavor arg0)
 			throws UnsupportedFlavorException, IOException {
-		// TODO Auto-generated method stub
 		return this;
 	}
 
 	@Override
 	public DataFlavor[] getTransferDataFlavors() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean isDataFlavorSupported(DataFlavor arg0) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

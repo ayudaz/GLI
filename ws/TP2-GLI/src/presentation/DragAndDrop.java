@@ -35,18 +35,12 @@ public class DragAndDrop extends JPanel {
 	private static final long serialVersionUID = -9214215836406254963L;
 	protected DragSource dragSource = null;
 	protected DropTarget dropTarget;
-
 	protected DragGestureEvent theInitialEvent;
 	protected DropTargetDropEvent theFinalEvent;
-
 	protected MyDragSourceListener myDragSourceListener = null;
-
 	protected PTasDeCartes tasEnTransit;
-
 	protected JFrame dragFrame = null;
-
 	protected IControleDND controle;
-
 	protected JPanel elementDrag;
 
 	public class MyDragGestureListener implements DragGestureListener {
@@ -90,19 +84,16 @@ public class DragAndDrop extends JPanel {
 
 		@Override
 		public void dragOver(DragSourceDragEvent dsde) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void dropActionChanged(DragSourceDragEvent dsde) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void dragExit(DragSourceEvent dse) {
-			// TODO Auto-generated method stub
 		}
 	}
 
@@ -114,6 +105,7 @@ public class DragAndDrop extends JPanel {
 
 		@Override
 		public void dragEnter(DropTargetDragEvent event) {
+			System.out.println("dragEnter");
 			try {
 				Transferable transferable = event.getTransferable();
 
@@ -144,12 +136,10 @@ public class DragAndDrop extends JPanel {
 
 		@Override
 		public void dragOver(DropTargetDragEvent dtde) {
-			// TODO Auto-generated method stub
 		}
 
 		@Override
 		public void dropActionChanged(DropTargetDragEvent dtde) {
-			// TODO Auto-generated method stub
 
 		}
 	}
@@ -157,7 +147,6 @@ public class DragAndDrop extends JPanel {
 	protected class MyDragSourceMotionListener implements
 			DragSourceMotionListener {
 		public MyDragSourceMotionListener() {
-			// TODO Auto-generated constructor stub
 		}
 
 		public void dragMouseMoved(DragSourceDragEvent event) {

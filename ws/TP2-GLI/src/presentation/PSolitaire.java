@@ -95,6 +95,13 @@ public class PSolitaire extends JPanel {
 				bgImg.getWidth(), bgImg.getHeight()));
 	}
 
+	/**
+	 * @return the controle
+	 */
+	public CSolitaire getControle() {
+		return controle;
+	}
+
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setPaint(bgTexture);

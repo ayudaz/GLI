@@ -70,20 +70,20 @@ public class CColonne extends Colonne implements IControleDND {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
+	@Override
 	public void p2c_finDragSource(boolean dropSuccess) {
 		if (!dropSuccess) {
 			empiler(enTransit);
 		}
 	}
 
+	@Override
 	public void p2c_finDropTarget(CTasDeCartes ctas) {
-		// TODO Auto-generated method stub
 		if (isEmpilable(ctas)) {
 			empiler(ctas);
 			presentation.setNormalState();
@@ -95,8 +95,8 @@ public class CColonne extends Colonne implements IControleDND {
 		}
 	}
 
+	@Override
 	public void p2c_DragEnter(ICTas ctas) {
-		// TODO Auto-generated method stub
 		if (isEmpilable(ctas)) {
 			presentation.showAcceptTarget(true);
 		} else {
@@ -104,8 +104,8 @@ public class CColonne extends Colonne implements IControleDND {
 		}
 	}
 
+	@Override
 	public void p2c_DragExit(ICTas ctas) {
-		// TODO Auto-generated method stub
 		presentation.setNormalState();
 	}
 }

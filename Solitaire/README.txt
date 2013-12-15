@@ -40,8 +40,6 @@ Il suffit d'exécuter la classe 'Lanceur.java' du package 'Main'.
 
 - Ce qui fonctionne mal :
 
-	Indiquer qu'il y a des choses qui fonctionnent mal sur Mac (genre le drag & drop qui fonctionne pas du tout... :S) ??? <-------- Est-ce vraiment utile??
-
 
 ========= CHOIX DE CONCEPTION ========
 

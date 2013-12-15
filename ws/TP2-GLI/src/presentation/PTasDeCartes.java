@@ -72,7 +72,6 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 	}
 
 	public ICTas getControle() {
-		// TODO Auto-generated method stub
 		return controle;
 	}
 

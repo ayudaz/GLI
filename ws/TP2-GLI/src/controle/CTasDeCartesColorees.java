@@ -9,10 +9,11 @@ import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 
 public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas,
-		Subject {
+		Subject, IControleDND {
 
 	private PTasDeCartesColorees presentation;
 	private List<Observer> observers = new ArrayList<Observer>();
+	private CTasDeCartes enTransit;
 
 	public CTasDeCartesColorees(String nom, int couleur, Usine usine) {
 		super(nom, couleur, usine);
@@ -48,7 +49,22 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas,
 	}
 
 	public void p2c_debutDnDDrag(CCarte ccarte) {
-
+		try {
+			enTransit = new CTasDeCartes("drag", new CUsine());
+			enTransit.getPresentation().setDxDy(0, 15);
+			enTransit.empiler(getSommet());
+			depiler();
+			presentation.c2p_debutDnDValide(enTransit.getPresentation());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void p2c_finDragSource(boolean dropSuccess) {
+		if (!dropSuccess) {
+			empiler(enTransit);
+		}
 	}
 
 	public void p2c_finDropTarget(CTasDeCartes ctas) {
@@ -58,13 +74,13 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas,
 					empiler(ctas.getSommet());
 					presentation.finDnDValide();
 				} else {
-					presentation.finDnDInvalid();
+					presentation.finDnDInvalide();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
-			presentation.finDnDInvalid();
+			presentation.finDnDInvalide();
 		}
 	}
 
