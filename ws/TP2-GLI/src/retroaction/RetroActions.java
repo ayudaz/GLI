@@ -15,4 +15,5 @@ public class RetroActions {
 	public static RetroAction debutDnDValide = new SonCarte3(new SimpleRetroAction());
 	public static RetroAction clicRetournerCarte = new SonCarte1(new SimpleRetroAction());
 	public static RetroAction clicRetournerSabot = new SonCarte2(new SimpleRetroAction());
+	public static int nbCartes = 3;
 }

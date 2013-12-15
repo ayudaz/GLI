@@ -36,6 +36,7 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas,
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			notifier();
 		}
 	}
 
@@ -75,7 +76,6 @@ public class CTasDeCartesColorees extends TasDeCartesColorees implements ICTas,
 				presentation.showAcceptTarget(false);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

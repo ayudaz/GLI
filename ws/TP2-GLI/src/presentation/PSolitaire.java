@@ -90,8 +90,7 @@ public class PSolitaire extends JPanel {
 		this.setPreferredSize(sol);
 
 		// Fond du jeu
-		this.bgImg = this.toBufferedImage(Toolkit.getDefaultToolkit().getImage(
-				"src/ressources/bg.jpg"));
+		this.bgImg = this.toBufferedImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("bg.jpg")));
 		this.bgTexture = new TexturePaint(bgImg, new Rectangle(0, 0,
 				bgImg.getWidth(), bgImg.getHeight()));
 	}
