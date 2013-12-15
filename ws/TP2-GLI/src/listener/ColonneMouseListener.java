@@ -4,11 +4,9 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import presentation.PCarte;
 import solitaire.application.TasDeCartesColorees;
 import controle.CCarte;
 import controle.CColonne;
-import controle.CTasDeCartesColorees;
 
 public class ColonneMouseListener implements MouseListener {
 	

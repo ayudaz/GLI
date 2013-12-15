@@ -3,8 +3,6 @@ package listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JRadioButtonMenuItem;
-
 public class ChoixNbCartesActionListener implements ActionListener {
 	
 	private int nbCartes;

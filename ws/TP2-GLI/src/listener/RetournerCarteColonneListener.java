@@ -1,9 +1,9 @@
 package listener;
 
-import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import retroaction.RetroActions;
 import controle.CColonne;
 
 public class RetournerCarteColonneListener implements MouseListener {
@@ -21,6 +21,7 @@ public class RetournerCarteColonneListener implements MouseListener {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		RetroActions.clicRetournerCarte.faireRetroAction();
 	}
 
 	@Override
@@ -35,12 +36,12 @@ public class RetournerCarteColonneListener implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-//		controle.getPresentation().setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-//		controle.getPresentation().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		
 	}
 
 }

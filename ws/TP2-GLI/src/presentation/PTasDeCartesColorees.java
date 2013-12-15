@@ -5,22 +5,21 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
-import java.io.IOException;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+<<<<<<< Updated upstream
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
+=======
+>>>>>>> Stashed changes
 
-import presentation.DragAndDrop.MyDropTargetListener;
 import controle.CTasDeCartes;
 import controle.CTasDeCartesColorees;
 import controle.ICTas;

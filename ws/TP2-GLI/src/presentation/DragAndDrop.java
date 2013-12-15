@@ -23,6 +23,7 @@ import java.awt.dnd.DropTargetListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import retroaction.RetroActions;
 import controle.CCarte;
 import controle.CTasDeCartes;
 import controle.IControleDND;
@@ -191,15 +192,18 @@ public class DragAndDrop extends JPanel {
         dragFrame.setVisible( true );
         dragFrame.pack();
         repaint();
+        RetroActions.debutDnDValide.faireRetroAction();
 	}
 	
 	public void finDnDValide() {
 		theFinalEvent.acceptDrop(DnDConstants.ACTION_MOVE);
 		theFinalEvent.getDropTargetContext().dropComplete(true);
+		RetroActions.finDnDValide.faireRetroAction();
 	}
 
 	public void finDnDInvalid() {
 		theFinalEvent.rejectDrop();
+		RetroActions.finDnDInvalid.faireRetroAction();
 	}
 
 }

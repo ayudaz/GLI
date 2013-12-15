@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import retroaction.RetroActions;
 import controle.CSabot;
 
 public class RetournerSabotListener implements MouseListener {
@@ -21,6 +22,7 @@ public class RetournerSabotListener implements MouseListener {
 				controle.retourner();
 			} catch (Exception e1) {
 			}
+			RetroActions.clicRetournerSabot.faireRetroAction();
 		}
 	}
 

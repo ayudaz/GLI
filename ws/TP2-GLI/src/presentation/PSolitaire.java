@@ -26,7 +26,6 @@ import listener.ColonneMouseListener;
 import listener.SabotMouseListener;
 import listener.SolitaireClicDroitMouseListener;
 import solitaire.application.Colonne;
-import solitaire.application.Sabot;
 import solitaire.application.TasDeCartesColorees;
 import controle.CSabot;
 import controle.CSolitaire;

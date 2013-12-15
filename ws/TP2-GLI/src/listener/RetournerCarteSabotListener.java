@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import retroaction.RetroActions;
 import controle.CSabot;
 
 public class RetournerCarteSabotListener implements MouseListener {
@@ -23,6 +24,7 @@ public class RetournerCarteSabotListener implements MouseListener {
 				for(int i=0; i<nbCartes; i++){
 					controle.retournerCarte();
 				}
+				RetroActions.clicRetournerCarte.faireRetroAction();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

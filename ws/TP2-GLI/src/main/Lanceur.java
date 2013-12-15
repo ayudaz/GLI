@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,8 +15,10 @@ import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
 import listener.AProposActionListener;
+import listener.AfficherLesMessagesActionListener;
 import listener.AideActionListener;
 import listener.ChoixNbCartesActionListener;
+import listener.JouerLesSonsActionListener;
 import listener.NouvellePartieActionListener;
 import controle.CSolitaire;
 import controle.CUsine;
@@ -56,6 +59,16 @@ public class Lanceur extends JFrame {
 		rbMenuItemNbCartes.addActionListener(new ChoixNbCartesActionListener(3));
 		bgNbCartes.add(rbMenuItemNbCartes);
 		menuParametres.add(rbMenuItemNbCartes);
+		
+		JCheckBoxMenuItem cbMenuItem = new JCheckBoxMenuItem("Jouer les sons");
+		cbMenuItem.setSelected(true);
+		cbMenuItem.addActionListener(new JouerLesSonsActionListener());
+		menuParametres.add(cbMenuItem);
+		
+		cbMenuItem = new JCheckBoxMenuItem("Afficher les messages");
+		cbMenuItem.setSelected(true);
+		cbMenuItem.addActionListener(new AfficherLesMessagesActionListener());
+		menuParametres.add(cbMenuItem);
 		
 		JMenuItem aide = new JMenuItem("Aide");
 		aide.addActionListener(new AideActionListener(this));
