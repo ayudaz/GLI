@@ -14,11 +14,7 @@ import java.awt.dnd.DropTargetListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-<<<<<<< Updated upstream
 import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
-=======
->>>>>>> Stashed changes
 
 import controle.CTasDeCartes;
 import controle.CTasDeCartesColorees;

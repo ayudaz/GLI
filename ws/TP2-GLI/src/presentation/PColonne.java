@@ -108,18 +108,18 @@ public class PColonne extends DragAndDrop {
 		this.setPreferredSize(d);
 		this.setSize(d);
 		
-		if(this.visibles.getControle().getNombre() > 0){
-			this.visibles.setComponentZOrder(successDropPanel, 0);
-			this.visibles.setComponentZOrder(errorDropPanel, 0);
-		}
-		else if(this.cachees.getControle().getNombre() > 0){
-			this.visibles.setComponentZOrder(successDropPanel, 0);
-			this.visibles.setComponentZOrder(errorDropPanel, 0);
-		}
-		else{
-			this.visibles.setComponentZOrder(successDropPanel, 0);
-			this.visibles.setComponentZOrder(errorDropPanel, 0);
-		}
+//		if(this.visibles.getControle().getNombre() > 0){
+//			this.visibles.setComponentZOrder(successDropPanel, 0);
+//			this.visibles.setComponentZOrder(errorDropPanel, 0);
+//		}
+//		else if(this.cachees.getControle().getNombre() > 0){
+//			this.visibles.setComponentZOrder(successDropPanel, 0);
+//			this.visibles.setComponentZOrder(errorDropPanel, 0);
+//		}
+//		else{
+//			this.visibles.setComponentZOrder(successDropPanel, 0);
+//			this.visibles.setComponentZOrder(errorDropPanel, 0);
+//		}
 		
 		repaint();
 	}
@@ -160,16 +160,20 @@ public class PColonne extends DragAndDrop {
 	
 	public void showAcceptTarget(boolean state) {
 		if(state){
+			this.visibles.add(successDropPanel, 0);
 			successDropPanel.setVisible(true);
 		}
 		else{
+			this.visibles.add(errorDropPanel, 0);
 			errorDropPanel.setVisible(true);
 		}
 	}
 	
 	public void setNormalState(){
 		successDropPanel.setVisible(false);
+		this.visibles.remove(successDropPanel);
 		errorDropPanel.setVisible(false);		
+		this.visibles.remove(errorDropPanel);
 	}
 
 	public CColonne getControle() {
