@@ -25,8 +25,8 @@ public class PColonne extends DragAndDrop {
 	private PTasDeCartes cachees;
 	private PTasDeCartesAlternees visibles;
 	private static final int DECALY = 15;
-	private JPanel successTopPanel;
-	private JPanel errorTopPanel;
+	private JPanel successDropPanel;
+	private JPanel errorDropPanel;
 	
 	public PColonne(CColonne cc, PTasDeCartes cachees,
 			PTasDeCartesAlternees visibles) {
@@ -34,6 +34,20 @@ public class PColonne extends DragAndDrop {
 		this.cachees = cachees;
 		this.visibles = visibles;
 		this.setLayout(null);
+
+		successDropPanel = new JPanel();
+		successDropPanel.setBackground(new Color(.0f, .7f, .0f, .7f));
+		successDropPanel.setPreferredSize(new Dimension(PCarte.largeur, 600));
+		successDropPanel.setSize(new Dimension(PCarte.largeur, 600));
+		successDropPanel.setOpaque(true);
+		successDropPanel.setVisible(false);
+
+		errorDropPanel = new JPanel();
+		errorDropPanel.setBackground(new Color(.8f, .0f, .0f, .7f));
+		errorDropPanel.setPreferredSize(new Dimension(PCarte.largeur, 600));
+		errorDropPanel.setSize(new Dimension(PCarte.largeur, 600));
+		errorDropPanel.setOpaque(true);
+		errorDropPanel.setVisible(false);
 
 		// ajout des composants au panel
 		add(this.cachees);
@@ -47,30 +61,13 @@ public class PColonne extends DragAndDrop {
 		fond.setBounds(insets.left, insets.top, sizeFond.width, sizeFond.height);
 		this.visibles.setDxDy(0, DECALY);
 		
-		affichage();
+		affichage();		
 		
 		// ajout du listener de retournement des cartes
 		this.cachees.addMouseListener(new RetournerCarteColonneListener(cc));
 
 		// Pour que le fond du jeu soit visible
 		 setOpaque(false);
-		
-		
-		successTopPanel = new JPanel();
-        successTopPanel.setBackground(new Color(.0f, .7f, .0f, .7f));
-        successTopPanel.setPreferredSize(new Dimension(PCarte.largeur, 600));
-        successTopPanel.setSize(new Dimension(PCarte.largeur, 600));
-        successTopPanel.setOpaque(true);
-        successTopPanel.setVisible(false);
-        this.add(successTopPanel,0);
-        
-        errorTopPanel = new JPanel();
-        errorTopPanel.setBackground(new Color(.8f, .0f, .0f, .7f));
-        errorTopPanel.setPreferredSize(new Dimension(PCarte.largeur, 600));
-        errorTopPanel.setSize(new Dimension(PCarte.largeur, 600));
-        errorTopPanel.setOpaque(true);
-        errorTopPanel.setVisible(false);
-        this.add(errorTopPanel,0);
         
 		//Elements et listeners pour le DnD
 		elementDrag = this.visibles;
@@ -85,6 +82,8 @@ public class PColonne extends DragAndDrop {
 	}
 	
 	public void affichage(){
+		System.out.println("Affichage");
+		
 		int nbCarte = this.cachees.getControle().getNombre() + this.visibles.getControle().getNombre();
 		Insets insets = this.getInsets();
 		Dimension sizeCachees; 
@@ -108,6 +107,20 @@ public class PColonne extends DragAndDrop {
 		}
 		this.setPreferredSize(d);
 		this.setSize(d);
+		
+		if(this.visibles.getControle().getNombre() > 0){
+			this.visibles.setComponentZOrder(successDropPanel, 0);
+			this.visibles.setComponentZOrder(errorDropPanel, 0);
+		}
+		else if(this.cachees.getControle().getNombre() > 0){
+			this.visibles.setComponentZOrder(successDropPanel, 0);
+			this.visibles.setComponentZOrder(errorDropPanel, 0);
+		}
+		else{
+			this.visibles.setComponentZOrder(successDropPanel, 0);
+			this.visibles.setComponentZOrder(errorDropPanel, 0);
+		}
+		
 		repaint();
 	}
 
@@ -142,23 +155,21 @@ public class PColonne extends DragAndDrop {
 	@Override
 	public void finDnDValide() {
 		super.finDnDValide();
-		System.out.println("Fin DND valide");
+		setNormalState();
 	}
 	
 	public void showAcceptTarget(boolean state) {
-		//System.out.println("ShowAcceptTarget with state : "+state);
 		if(state){
-			successTopPanel.setVisible(true);
+			successDropPanel.setVisible(true);
 		}
 		else{
-			errorTopPanel.setVisible(true);
+			errorDropPanel.setVisible(true);
 		}
 	}
 	
 	public void setNormalState(){
-		//System.out.println("Normal state");
-		successTopPanel.setVisible(false);
-		errorTopPanel.setVisible(false);		
+		successDropPanel.setVisible(false);
+		errorDropPanel.setVisible(false);		
 	}
 
 	public CColonne getControle() {

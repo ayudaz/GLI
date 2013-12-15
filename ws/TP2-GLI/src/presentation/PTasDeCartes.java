@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.datatransfer.DataFlavor;
@@ -20,6 +21,8 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 	private int dx;
 	private int dy;
 	private ICTas controle;
+	private JPanel successDropPanel;
+	private JPanel errorDropPanel;
 
 	public PTasDeCartes(ICTas cTasDeCartes) {
 		this.controle = cTasDeCartes;
@@ -28,7 +31,7 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 		setLayout(null);
 		Dimension d = new Dimension(PCarte.largeur, PCarte.hauteur);
 		setPreferredSize(d);
-		
+
 		// Pour que le fond du jeu soit visible
 		setOpaque(false);
 	}
@@ -38,10 +41,11 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 		int deplacementX, deplacementY;
 		deplacementX = (controle.getNombre() - 1) * dx;
 		deplacementY = (controle.getNombre() - 1) * dy;
-		
+
 		Insets insets = getInsets();
 		Dimension size = carte.getPreferredSize();
-		carte.setBounds(deplacementX + insets.left, deplacementY + insets.right, size.width, size.height);
+		carte.setBounds(deplacementX + insets.left,
+				deplacementY + insets.right, size.width, size.height);
 		Dimension dTas = this.getPreferredSize();
 		dTas.width = PCarte.largeur + deplacementX;
 		dTas.height = PCarte.hauteur + deplacementY;
@@ -70,14 +74,14 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 		repaint();
 	}
 
-
 	public ICTas getControle() {
 		// TODO Auto-generated method stub
 		return controle;
 	}
 
 	@Override
-	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+	public Object getTransferData(DataFlavor flavor)
+			throws UnsupportedFlavorException, IOException {
 		Object result = null;
 		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
 			result = this;

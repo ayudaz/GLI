@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.datatransfer.DataFlavor;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
 import presentation.DragAndDrop.MyDropTargetListener;
@@ -37,6 +39,9 @@ public class PTasDeCartesColorees extends PTasDeCartes {
     private	PTasDeCartes ptas;
 	private JLabel fond;
 
+	private JPanel successDropPanel;
+	private JPanel errorDropPanel;
+	
 	public PTasDeCartesColorees(ICTas cTasDeCartes, final String chaine) {
 		super(cTasDeCartes);
 		controle = (CTasDeCartesColorees) cTasDeCartes;
@@ -48,6 +53,23 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		fond.setBounds(insets.left, insets.right, size.width, size.height);
 		
 
+		successDropPanel = new JPanel();
+		successDropPanel.setBackground(new Color(.0f, .7f, .0f, .8f));
+		successDropPanel.setPreferredSize(new Dimension(PCarte.largeur, 600));
+		successDropPanel.setSize(new Dimension(PCarte.largeur, 600));
+		successDropPanel.setOpaque(true);
+		successDropPanel.setVisible(false);
+
+		errorDropPanel = new JPanel();
+		errorDropPanel.setBackground(new Color(.8f, .0f, .0f, .8f));
+		errorDropPanel.setPreferredSize(new Dimension(PCarte.largeur, 600));
+		errorDropPanel.setSize(new Dimension(PCarte.largeur, 600));
+		errorDropPanel.setOpaque(true);
+		errorDropPanel.setVisible(false);
+		
+		add(successDropPanel);
+		add(errorDropPanel);
+		
 		dropTarget = new DropTarget(this, new MyDropTargetListener());
 	}
 	
@@ -64,6 +86,7 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 				Transferable transferable = event.getTransferable();
 				
 				if (transferable.isDataFlavorSupported(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType))) {
+					System.out.println("DragEnter");
 					event.acceptDrag(DnDConstants.ACTION_MOVE);
 					pTas = (PTasDeCartes) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
 					controle.p2c_DragEnter(pTas.getControle());
@@ -98,10 +121,25 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 	}
 	
 	public void finDnDValide() {
+		setNormalState();
 		theFinalEvent.acceptDrop(DnDConstants.ACTION_MOVE);
 		theFinalEvent.getDropTargetContext().dropComplete(true);
 		validate();
 		repaint();
+	}
+	
+	public void showAcceptTarget(boolean state) {
+		if(state){
+			successDropPanel.setVisible(true);
+		}
+		else{
+			errorDropPanel.setVisible(true);
+		}
+	}
+	
+	public void setNormalState(){
+		successDropPanel.setVisible(false);
+		errorDropPanel.setVisible(false);		
 	}
 
 	public void finDnDInvalid() {

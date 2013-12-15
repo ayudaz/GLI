@@ -1,5 +1,7 @@
 package presentation;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -82,25 +84,26 @@ public class DragAndDrop extends JPanel {
             repaint();
         }
 
-        @Override
-        public void dragEnter( DragSourceDragEvent evt )
-        {
-        	controle.p2c_DragEnter(tasEnTransit.getControle());
-        }
+		@Override
+		public void dragEnter(DragSourceDragEvent dsde) {
+			dsde.getDragSourceContext().setCursor(new Cursor (Cursor.MOVE_CURSOR)) ;
+		}
 
 		@Override
 		public void dragOver(DragSourceDragEvent dsde) {
+			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void dropActionChanged(DragSourceDragEvent dsde) {
+			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void dragExit(DragSourceEvent dse) {
-        	controle.p2c_DragExit(tasEnTransit.getControle());
+			// TODO Auto-generated method stub
 		}
 	}
 
@@ -128,7 +131,7 @@ public class DragAndDrop extends JPanel {
 
 		@Override
 		public void dragExit(DropTargetEvent event) {
-			//controle.p2c_DragExit(pTas.getControle());
+			controle.p2c_DragExit(pTas.getControle());
 		}
 		
 		@Override
@@ -157,8 +160,8 @@ public class DragAndDrop extends JPanel {
 		public void dragMouseMoved (DragSourceDragEvent event) {
 			int parentX = getRootPane().getX();
             int parentY = getRootPane().getY();
-            int eventX = event.getLocation().x + 10;
-            int eventY = event.getLocation().y - 15;
+            int eventX = event.getLocation().x + 5;
+            int eventY = event.getLocation().y + 15;
             dragFrame.setLocation( eventX - parentX, eventY - parentY );
             repaint();
 		} 
@@ -166,7 +169,7 @@ public class DragAndDrop extends JPanel {
 	
 	
 
-	public void c2p_debutDnDValide(PTasDeCartes ten) {
+	public void c2p_debutDnDValide(PTasDeCartes ten) {        
 		tasEnTransit = ten;
 		int hauteur = PCarte.hauteur;
 		
@@ -181,7 +184,7 @@ public class DragAndDrop extends JPanel {
         dragFrame = new JFrame();
         dragFrame.setSize(PCarte.hauteur,PCarte.largeur);
         dragFrame.setPreferredSize(new Dimension(PCarte.largeur, hauteur));
-        dragFrame.add( ten );
+        dragFrame.add( ten, 0 );
         dragFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         dragFrame.setExtendedState( JFrame.MAXIMIZED_BOTH );
         dragFrame.setUndecorated( true );
@@ -189,7 +192,7 @@ public class DragAndDrop extends JPanel {
         dragFrame.pack();
         repaint();
 	}
-
+	
 	public void finDnDValide() {
 		theFinalEvent.acceptDrop(DnDConstants.ACTION_MOVE);
 		theFinalEvent.getDropTargetContext().dropComplete(true);
