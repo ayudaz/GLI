@@ -16,14 +16,13 @@ import controle.CCarte;
  */
 public class PCarte extends JPanel implements Transferable {
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8803764380933046718L;
-	protected CCarte controle; 
+	protected CCarte controle;
 	protected JLabel face, dos;
-	protected ImageIcon icone; 
+	protected ImageIcon icone;
 	protected static ImageIcon iconeDos;
 	public static int largeur, hauteur;
 

@@ -7,16 +7,16 @@ import java.awt.event.MouseListener;
 import controle.CSabot;
 
 public class RetournerSabotListener implements MouseListener {
-	
+
 	public CSabot controle;
-	
-	public RetournerSabotListener(CSabot controle){
+
+	public RetournerSabotListener(CSabot controle) {
 		this.controle = controle;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(controle.getPresentation().isRetournerSabot()){
+		if (controle.getPresentation().isRetournerSabot()) {
 			try {
 				controle.retourner();
 			} catch (Exception e1) {
@@ -26,7 +26,7 @@ public class RetournerSabotListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+
 	}
 
 	@Override

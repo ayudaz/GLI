@@ -5,53 +5,48 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
-import java.io.IOException;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
 
-import presentation.DragAndDrop.MyDropTargetListener;
 import controle.CTasDeCartes;
 import controle.CTasDeCartesColorees;
 import controle.ICTas;
 
 public class PTasDeCartesColorees extends PTasDeCartes {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 487458044886830072L;
 
 	private DropTarget dropTarget;
-    private DropTargetDropEvent theFinalEvent;
-    private CTasDeCartesColorees controle;
-    
-    private	PTasDeCartes ptas;
+	private DropTargetDropEvent theFinalEvent;
+	private CTasDeCartesColorees controle;
+
+	private PTasDeCartes ptas;
 	private JLabel fond;
 
 	private JPanel successDropPanel;
 	private JPanel errorDropPanel;
-	
+
 	public PTasDeCartesColorees(ICTas cTasDeCartes, final String chaine) {
 		super(cTasDeCartes);
 		controle = (CTasDeCartesColorees) cTasDeCartes;
-		ImageIcon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/" + chaine + ".png"));
-		fond = new JLabel (icone) ;
+		ImageIcon icone = new ImageIcon(ClassLoader.getSystemResource("cartes/"
+				+ chaine + ".png"));
+		fond = new JLabel(icone);
 		add(fond);
 		Insets insets = getInsets();
 		Dimension size = fond.getPreferredSize();
 		fond.setBounds(insets.left, insets.right, size.width, size.height);
-		
 
 		successDropPanel = new JPanel();
 		successDropPanel.setBackground(new Color(.0f, .7f, .0f, .8f));
@@ -66,13 +61,13 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		errorDropPanel.setSize(new Dimension(PCarte.largeur, 600));
 		errorDropPanel.setOpaque(true);
 		errorDropPanel.setVisible(false);
-		
+
 		add(successDropPanel);
 		add(errorDropPanel);
-		
+
 		dropTarget = new DropTarget(this, new MyDropTargetListener());
 	}
-	
+
 	protected class MyDropTargetListener implements DropTargetListener {
 		protected PTasDeCartes pTas = null;
 
@@ -84,11 +79,13 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
 				Transferable transferable = event.getTransferable();
-				
-				if (transferable.isDataFlavorSupported(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType))) {
-					System.out.println("DragEnter");
+
+				if (transferable.isDataFlavorSupported(new DataFlavor(
+						DataFlavor.javaJVMLocalObjectMimeType))) {
 					event.acceptDrag(DnDConstants.ACTION_MOVE);
-					pTas = (PTasDeCartes) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+					pTas = (PTasDeCartes) transferable
+							.getTransferData(new DataFlavor(
+									DataFlavor.javaJVMLocalObjectMimeType));
 					controle.p2c_DragEnter(pTas.getControle());
 				}
 
@@ -110,16 +107,16 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		@Override
 		public void dragOver(DropTargetDragEvent dtde) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void dropActionChanged(DropTargetDragEvent dtde) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
-	
+
 	public void finDnDValide() {
 		setNormalState();
 		theFinalEvent.acceptDrop(DnDConstants.ACTION_MOVE);
@@ -127,24 +124,22 @@ public class PTasDeCartesColorees extends PTasDeCartes {
 		validate();
 		repaint();
 	}
-	
+
 	public void showAcceptTarget(boolean state) {
-		if(state){
+		if (state) {
 			successDropPanel.setVisible(true);
-		}
-		else{
+		} else {
 			errorDropPanel.setVisible(true);
 		}
 	}
-	
-	public void setNormalState(){
+
+	public void setNormalState() {
 		successDropPanel.setVisible(false);
-		errorDropPanel.setVisible(false);		
+		errorDropPanel.setVisible(false);
 	}
 
 	public void finDnDInvalid() {
 		theFinalEvent.rejectDrop();
 	}
 
-	
 }
