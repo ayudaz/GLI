@@ -22,11 +22,11 @@ public class CColonne extends Colonne implements IControleDND {
 	public PColonne getPresentation() {
 		return presentation;
 	}
-	
+
 	@Override
-	public void empiler(Tas tas){
+	public void empiler(Tas tas) {
 		super.empiler(tas);
-		this.presentation.empiler(((CTasDeCartes)tas).getPresentation());
+		this.presentation.empiler(((CTasDeCartes) tas).getPresentation());
 	}
 
 	@Override
@@ -49,28 +49,25 @@ public class CColonne extends Colonne implements IControleDND {
 		presentation.retournerCarte();
 	}
 
-
 	@Override
 	public void p2c_debutDnDDrag(CCarte selectedCarte) {
-		if(selectedCarte == null){
-			System.out.println("Null card");
-		}
 		try {
-			for (int i=1; i <= visibles.getNombre(); i++) {
-                Carte carte = visibles.getCarte(i);
-                System.out.println("Carte "+i+" : "+((CCarte) carte));
-                if (carte == selectedCarte) {
-                        enTransit = new CTasDeCartes("drag", new CUsine());
-                        enTransit.getPresentation().setDxDy(0, 15);
-                        
-                        for (int j=i; j >= 1; j--) {
-                                enTransit.empiler(getCarte(j));
-                        }
-                        for (int k=0; k<i; k++) {
-                                depiler();
-                        }
-                        presentation.c2p_debutDnDValide(enTransit.getPresentation());
-                }
+			for (int i = 1; i <= visibles.getNombre(); i++) {
+				Carte carte = visibles.getCarte(i);
+
+				if (carte == selectedCarte) {
+					enTransit = new CTasDeCartes("drag", new CUsine());
+					enTransit.getPresentation().setDxDy(0, 15);
+
+					for (int j = i; j >= 1; j--) {
+						enTransit.empiler(getCarte(j));
+					}
+					for (int k = 0; k < i; k++) {
+						depiler();
+					}
+					presentation
+							.c2p_debutDnDValide(enTransit.getPresentation());
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -80,22 +77,21 @@ public class CColonne extends Colonne implements IControleDND {
 	}
 
 	public void p2c_finDragSource(boolean dropSuccess) {
-		if(!dropSuccess){
+		if (!dropSuccess) {
 			empiler(enTransit);
 		}
 	}
 
 	public void p2c_finDropTarget(CTasDeCartes ctas) {
 		// TODO Auto-generated method stub
-		if (isEmpilable(ctas)){
+		if (isEmpilable(ctas)) {
 			empiler(ctas);
 			presentation.setNormalState();
 			presentation.finDnDValide();
 			presentation.affichage();
-		}
-		else{
+		} else {
 			presentation.setNormalState();
-			presentation.finDnDInvalid();
+			presentation.finDnDInvalide();
 		}
 	}
 
@@ -110,7 +106,6 @@ public class CColonne extends Colonne implements IControleDND {
 
 	public void p2c_DragExit(ICTas ctas) {
 		// TODO Auto-generated method stub
-		//System.out.println("DragExit CColonne");
 		presentation.setNormalState();
 	}
 }

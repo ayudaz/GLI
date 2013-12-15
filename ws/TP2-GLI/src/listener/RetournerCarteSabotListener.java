@@ -8,20 +8,20 @@ import retroaction.RetroActions;
 import controle.CSabot;
 
 public class RetournerCarteSabotListener implements MouseListener {
-	
+
 	private CSabot controle;
 	private static int nbCartes;
-	
-	public RetournerCarteSabotListener(CSabot controle){
+
+	public RetournerCarteSabotListener(CSabot controle) {
 		this.controle = controle;
 		nbCartes = 3;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(controle.getPresentation().isRetournerCarte()){
+		if (controle.getPresentation().isRetournerCarte()) {
 			try {
-				for(int i=0; i<nbCartes; i++){
+				for (int i = 0; i < nbCartes; i++) {
 					controle.retournerCarte();
 				}
 				RetroActions.clicRetournerCarte.faireRetroAction();
@@ -59,7 +59,8 @@ public class RetournerCarteSabotListener implements MouseListener {
 	}
 
 	/**
-	 * @param nbCartes the nbCartes to set
+	 * @param nbCartes
+	 *            the nbCartes to set
 	 */
 	public static void setNbCartes(int nbCartes) {
 		RetournerCarteSabotListener.nbCartes = nbCartes;

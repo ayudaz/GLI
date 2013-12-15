@@ -5,13 +5,15 @@ import solitaire.application.Sabot;
 import solitaire.application.Tas;
 import solitaire.application.Usine;
 
-public class CSabot extends Sabot implements IControleDND{
+public class CSabot extends Sabot implements IControleDND {
 	private PSabot presentation;
 	private CTasDeCartes enTransit;
 
-	public CSabot(String nom, Usine usine){
-		super(nom,usine);
-		presentation = new PSabot(this, ((CTasDeCartes)cachees).getPresentation(), ((CTasDeCartes)visibles).getPresentation());
+	public CSabot(String nom, Usine usine) {
+		super(nom, usine);
+		presentation = new PSabot(this,
+				((CTasDeCartes) cachees).getPresentation(),
+				((CTasDeCartes) visibles).getPresentation());
 	}
 
 	/**
@@ -21,54 +23,46 @@ public class CSabot extends Sabot implements IControleDND{
 		return presentation;
 	}
 
-	public void setReserve(Tas t){
+	public void setReserve(Tas t) {
 		super.setReserve(t);
-		if(isCarteRetournable()){
+		if (isCarteRetournable()) {
 			presentation.activerRetournerCarte();
-		}
-		else{
+		} else {
 			presentation.desactiverRetournerCarte();
 
-			if(isRetournable()){
+			if (isRetournable()) {
 				presentation.activerRetournerSabot();
-			}
-			else{
+			} else {
 				presentation.desactiverRetournerSabot();
 			}
 		}
 	}
 
-	public void retourner() throws Exception{
-		if(isRetournable()){
+	public void retourner() throws Exception {
+		if (isRetournable()) {
 			super.retourner();
-		}
-		else{
+		} else {
 			presentation.desactiverRetournerSabot();
 			presentation.activerRetournerCarte();
 		}
 	}
-	
-	public void retournerCarte() throws Exception{
+
+	public void retournerCarte() throws Exception {
 		super.retournerCarte();
-		if(!isCarteRetournable()){
+		if (!isCarteRetournable()) {
 			presentation.desactiverRetournerCarte();
 			presentation.activerRetournerSabot();
 		}
 	}
 
-
 	public void p2c_debutDnDDrag(CCarte ccarte) {
-		if(ccarte != null){
-			System.out.println("Debut Drag N Drop");
-		}
 		try {
-			if(ccarte == (CCarte) getSommet()){
+			if ((ccarte == (CCarte) getSommet()) && (ccarte != null)) {
 				depiler();
 				enTransit = new CTasDeCartes("dragInProgress", new CUsine());
 				enTransit.empiler(ccarte);
 				presentation.c2p_debutDnDValide(enTransit.getPresentation());
-			}
-			else{
+			} else {
 				//
 			}
 		} catch (Exception e) {
@@ -78,23 +72,25 @@ public class CSabot extends Sabot implements IControleDND{
 
 	@Override
 	public void p2c_finDragSource(boolean dropSuccess) {
-		if(!dropSuccess){
+		if (!dropSuccess) {
 			empiler(enTransit);
 		}
 	}
 
 	@Override
 	public void p2c_finDropTarget(CTasDeCartes ctas) {
-		
+
 	}
 
 	@Override
-	public void p2c_DragEnter(ICTas ctas) {
-		
+	public void p2c_DragEnter(ICTas icTas) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public void p2c_DragExit(ICTas ctas) {
-		
+	public void p2c_DragExit(ICTas icTas) {
+		// TODO Auto-generated method stub
+
 	}
 }

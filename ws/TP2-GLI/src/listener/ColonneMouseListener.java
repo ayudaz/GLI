@@ -9,22 +9,23 @@ import controle.CCarte;
 import controle.CColonne;
 
 public class ColonneMouseListener implements MouseListener {
-	
+
 	private CColonne colonne;
 	private TasDeCartesColorees[] tasDeCartesColorees;
-	
-	public ColonneMouseListener(CColonne colonne, TasDeCartesColorees[] pilesColorees){
+
+	public ColonneMouseListener(CColonne colonne,
+			TasDeCartesColorees[] pilesColorees) {
 		this.colonne = colonne;
 		this.tasDeCartesColorees = pilesColorees;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getClickCount() == 2){
-			 try {
+		if (e.getClickCount() == 2) {
+			try {
 				CCarte carte = (CCarte) colonne.getSommet();
-				for(TasDeCartesColorees tas : tasDeCartesColorees){
-					if(tas.isEmpilable(carte)){
+				for (TasDeCartesColorees tas : tasDeCartesColorees) {
+					if (tas.isEmpilable(carte)) {
 						try {
 							colonne.depiler();
 						} catch (Exception e1) {

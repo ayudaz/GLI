@@ -49,23 +49,22 @@ public class DragAndDrop extends JPanel {
 
 	protected JPanel elementDrag;
 
-	
 	public class MyDragGestureListener implements DragGestureListener {
-		
+
 		@Override
 		public void dragGestureRecognized(DragGestureEvent e) {
 			theInitialEvent = e;
 			PCarte pc = null;
 			CCarte cc = null;
-			try{
+			try {
 				pc = (PCarte) elementDrag.getComponentAt(e.getDragOrigin());
 				cc = pc.getControle();
-			}catch(Exception ex){}
-			
+			} catch (Exception ex) {
+			}
+
 			controle.p2c_debutDnDDrag(cc);
 		}
-		
-		
+
 		/**
 		 * @return the theInitialEvent
 		 */
@@ -73,32 +72,32 @@ public class DragAndDrop extends JPanel {
 			return theInitialEvent;
 		}
 	}
-	
+
 	public class MyDragSourceListener implements DragSourceListener {
 		@Override
-        public void dragDropEnd( DragSourceDropEvent event )
-        {
+		public void dragDropEnd(DragSourceDropEvent event) {
 			controle.p2c_finDragSource(event.getDropSuccess());
-            dragFrame.setVisible( false );
-            validate();
-            repaint();
-        }
+			dragFrame.setVisible(false);
+			validate();
+			repaint();
+		}
 
 		@Override
 		public void dragEnter(DragSourceDragEvent dsde) {
-			dsde.getDragSourceContext().setCursor(new Cursor (Cursor.MOVE_CURSOR)) ;
+			dsde.getDragSourceContext().setCursor(
+					new Cursor(Cursor.MOVE_CURSOR));
 		}
 
 		@Override
 		public void dragOver(DragSourceDragEvent dsde) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void dropActionChanged(DragSourceDragEvent dsde) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
@@ -117,10 +116,13 @@ public class DragAndDrop extends JPanel {
 		public void dragEnter(DropTargetDragEvent event) {
 			try {
 				Transferable transferable = event.getTransferable();
-				
-				if (transferable.isDataFlavorSupported(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType))) {
+
+				if (transferable.isDataFlavorSupported(new DataFlavor(
+						DataFlavor.javaJVMLocalObjectMimeType))) {
 					event.acceptDrag(DnDConstants.ACTION_MOVE);
-					pTas = (PTasDeCartes) transferable.getTransferData(new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType));
+					pTas = (PTasDeCartes) transferable
+							.getTransferData(new DataFlavor(
+									DataFlavor.javaJVMLocalObjectMimeType));
 					controle.p2c_DragEnter(pTas.getControle());
 				}
 
@@ -133,7 +135,7 @@ public class DragAndDrop extends JPanel {
 		public void dragExit(DropTargetEvent event) {
 			controle.p2c_DragExit(pTas.getControle());
 		}
-		
+
 		@Override
 		public void drop(DropTargetDropEvent dtde) {
 			theFinalEvent = dtde;
@@ -148,59 +150,56 @@ public class DragAndDrop extends JPanel {
 		@Override
 		public void dropActionChanged(DropTargetDragEvent dtde) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
 
-	protected class MyDragSourceMotionListener implements DragSourceMotionListener {
+	protected class MyDragSourceMotionListener implements
+			DragSourceMotionListener {
 		public MyDragSourceMotionListener() {
 			// TODO Auto-generated constructor stub
 		}
 
-		public void dragMouseMoved (DragSourceDragEvent event) {
+		public void dragMouseMoved(DragSourceDragEvent event) {
 			int parentX = getRootPane().getX();
-            int parentY = getRootPane().getY();
-            int eventX = event.getLocation().x + 5;
-            int eventY = event.getLocation().y + 15;
-            dragFrame.setLocation( eventX - parentX, eventY - parentY );
-            repaint();
-		} 
+			int parentY = getRootPane().getY();
+			int eventX = event.getLocation().x + 5;
+			int eventY = event.getLocation().y + 15;
+			dragFrame.setLocation(eventX - parentX, eventY - parentY);
+			repaint();
+		}
 	}
-	
-	
 
-	public void c2p_debutDnDValide(PTasDeCartes ten) {        
+	public void c2p_debutDnDValide(PTasDeCartes ten) {
 		tasEnTransit = ten;
 		int hauteur = PCarte.hauteur;
-		
-		if(ten.getControle().getNombre() > 1){
-			hauteur += (ten.getControle().getNombre() -1) * ten.getDy();
+
+		if (ten.getControle().getNombre() > 1) {
+			hauteur += (ten.getControle().getNombre() - 1) * ten.getDy();
 		}
-		
-        dragSource.startDrag (
-        		theInitialEvent, DragSource.
-        		DefaultMoveNoDrop,
-        		ten, myDragSourceListener);
-        dragFrame = new JFrame();
-        dragFrame.setSize(PCarte.hauteur,PCarte.largeur);
-        dragFrame.setPreferredSize(new Dimension(PCarte.largeur, hauteur));
-        dragFrame.add( ten, 0 );
-        dragFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        dragFrame.setExtendedState( JFrame.MAXIMIZED_BOTH );
-        dragFrame.setUndecorated( true );
-        dragFrame.setVisible( true );
-        dragFrame.pack();
-        repaint();
+
+		dragSource.startDrag(theInitialEvent, DragSource.DefaultMoveNoDrop,
+				ten, myDragSourceListener);
+		dragFrame = new JFrame();
+		dragFrame.setSize(PCarte.hauteur, PCarte.largeur);
+		dragFrame.setPreferredSize(new Dimension(PCarte.largeur, hauteur));
+		dragFrame.add(ten, 0);
+		dragFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		dragFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		dragFrame.setUndecorated(true);
+		dragFrame.setVisible(true);
+		dragFrame.pack();
+		repaint();
         RetroActions.debutDnDValide.faireRetroAction();
 	}
-	
+
 	public void finDnDValide() {
 		theFinalEvent.acceptDrop(DnDConstants.ACTION_MOVE);
 		theFinalEvent.getDropTargetContext().dropComplete(true);
 		RetroActions.finDnDValide.faireRetroAction();
 	}
 
-	public void finDnDInvalid() {
+	public void finDnDInvalide() {
 		theFinalEvent.rejectDrop();
 		RetroActions.finDnDInvalid.faireRetroAction();
 	}

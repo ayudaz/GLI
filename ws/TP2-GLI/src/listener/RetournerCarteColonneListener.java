@@ -7,10 +7,10 @@ import retroaction.RetroActions;
 import controle.CColonne;
 
 public class RetournerCarteColonneListener implements MouseListener {
-	
+
 	public CColonne controle;
-	
-	public RetournerCarteColonneListener(CColonne controle){
+
+	public RetournerCarteColonneListener(CColonne controle) {
 		this.controle = controle;
 	}
 	

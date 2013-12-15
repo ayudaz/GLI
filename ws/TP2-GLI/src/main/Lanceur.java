@@ -30,33 +30,38 @@ public class Lanceur extends JFrame {
 	private JMenu menuParametres;
 	private JMenu menuAide;
 	private CSolitaire solitaire;
-	
-	public Lanceur(){
+
+	public Lanceur() {
 		super("Solitaire");
-		
+
 		menuBar = new JMenuBar();
 		menuParametres = new JMenu("Partie");
 		menuAide = new JMenu("?");
 		menuBar.add(menuParametres);
 		menuBar.add(menuAide);
-		
+
 		JMenuItem nouvellePartie = new JMenuItem("Nouvelle Partie");
-		nouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		nouvellePartie.addActionListener(new NouvellePartieActionListener(this));
+		nouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+				ActionEvent.CTRL_MASK));
+		nouvellePartie
+				.addActionListener(new NouvellePartieActionListener(this));
 		menuParametres.add(nouvellePartie);
-		
+
 		ButtonGroup bgNbCartes = new ButtonGroup();
-		JRadioButtonMenuItem rbMenuItemNbCartes = new JRadioButtonMenuItem("Tirer une Carte");
+		JRadioButtonMenuItem rbMenuItemNbCartes = new JRadioButtonMenuItem(
+				"Tirer une Carte");
 		rbMenuItemNbCartes.setSelected(false);
 		rbMenuItemNbCartes.setMnemonic(KeyEvent.VK_1);
-		rbMenuItemNbCartes.addActionListener(new ChoixNbCartesActionListener(1));
+		rbMenuItemNbCartes
+				.addActionListener(new ChoixNbCartesActionListener(1));
 		bgNbCartes.add(rbMenuItemNbCartes);
 		menuParametres.add(rbMenuItemNbCartes);
-		
+
 		rbMenuItemNbCartes = new JRadioButtonMenuItem("Tirer trois Cartes");
 		rbMenuItemNbCartes.setSelected(true);
 		rbMenuItemNbCartes.setMnemonic(KeyEvent.VK_3);
-		rbMenuItemNbCartes.addActionListener(new ChoixNbCartesActionListener(3));
+		rbMenuItemNbCartes
+				.addActionListener(new ChoixNbCartesActionListener(3));
 		bgNbCartes.add(rbMenuItemNbCartes);
 		menuParametres.add(rbMenuItemNbCartes);
 		
@@ -73,21 +78,21 @@ public class Lanceur extends JFrame {
 		JMenuItem aide = new JMenuItem("Aide");
 		aide.addActionListener(new AideActionListener(this));
 		menuAide.add(aide);
-		
+
 		JMenuItem aPropos = new JMenuItem("A Propos");
 		aPropos.addActionListener(new AProposActionListener(this));
 		menuAide.add(aPropos);
-		
+
 		this.setJMenuBar(menuBar);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		setLocation(200,100);	
+		setLocation(200, 100);
 		setVisible(true);
 		setResizable(false);
 
 		nouvellePartie();
 	}
-	
+
 	public void nouvellePartie() {
 		solitaire = new CSolitaire("Solitaire", new CUsine());
 		solitaire.initialiser();
@@ -95,11 +100,9 @@ public class Lanceur extends JFrame {
 		setPreferredSize(getContentPane().getPreferredSize());
 		pack();
 	}
-	
+
 	public static void main(String[] args) {
 		new Lanceur();
 	}
-
-	
 
 }

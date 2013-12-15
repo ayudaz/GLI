@@ -7,14 +7,14 @@ import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 
 public class CSolitaire extends Solitaire implements Observer {
-	
+
 	private PSolitaire presentation;
 
 	public CSolitaire(String nom, Usine usine) {
 		super(nom, usine);
 		this.presentation = new PSolitaire(this);
 	}
-	
+
 	/**
 	 * @return the presentation
 	 */
@@ -23,39 +23,42 @@ public class CSolitaire extends Solitaire implements Observer {
 	}
 
 	@Override
-	public void initialiser(){
+	public void initialiser() {
 		super.initialiser();
-		
-		presentation.setSabot(((CSabot)this.sabot).getPresentation(), this.pilesColorees);
-		
-		for(TasDeCartesColorees tas : this.pilesColorees){
-			presentation.addPileColorees(((CTasDeCartesColorees)tas).getPresentation());
-			((CTasDeCartesColorees)tas).addObserver(this);
+
+		presentation.setSabot(((CSabot) this.sabot).getPresentation(),
+				this.pilesColorees);
+
+		for (TasDeCartesColorees tas : this.pilesColorees) {
+			presentation.addPileColorees(((CTasDeCartesColorees) tas)
+					.getPresentation());
+			((CTasDeCartesColorees) tas).addObserver(this);
 		}
-		
-		for(Colonne col : this.pilesAlternees){
-			presentation.addColonne(((CColonne)col).getPresentation(), this.pilesColorees);
+
+		for (Colonne col : this.pilesAlternees) {
+			presentation.addColonne(((CColonne) col).getPresentation(),
+					this.pilesColorees);
 		}
-		
-		presentation.setClicDroitMouseListener((CSabot)this.sabot, this.pilesAlternees, this.pilesColorees);
+
+		presentation.setClicDroitMouseListener((CSabot) this.sabot,
+				this.pilesAlternees, this.pilesColorees);
 	}
-	
+
 	@Override
-	public void traiterJeu(char paramChar){
+	public void traiterJeu(char paramChar) {
 		super.traiterJeu(paramChar);
 	}
 
 	@Override
 	public void update() {
-		if(gagne()){
+		if (gagne()) {
 			presentation.afficheMessageGagne();
 		}
 	}
-	
+
 	@Override
-	public void run(){
+	public void run() {
 		super.run();
 	}
-	
-	
+
 }

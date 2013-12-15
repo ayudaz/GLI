@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.datatransfer.DataFlavor;
@@ -21,8 +20,6 @@ public class PTasDeCartes extends JPanel implements IPTas, Transferable {
 	private int dx;
 	private int dy;
 	private ICTas controle;
-	private JPanel successDropPanel;
-	private JPanel errorDropPanel;
 
 	public PTasDeCartes(ICTas cTasDeCartes) {
 		this.controle = cTasDeCartes;

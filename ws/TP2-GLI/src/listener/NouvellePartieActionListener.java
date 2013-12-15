@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import main.Lanceur;
 
 public class NouvellePartieActionListener implements ActionListener {
-	
+
 	private Lanceur lanceur;
 
 	public NouvellePartieActionListener(Lanceur lanceur) {
